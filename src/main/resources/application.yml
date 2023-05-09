@@ -1,0 +1,48 @@
+#port 수정
+server:
+  port: 9090
+
+#DB Connection
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: jpa
+    password: jpa
+   
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    database: oracle
+    database-platform: org.hibernate.dialect.Oracle10gDialect
+
+  thymeleaf:
+    cache: false
+#  mvc:
+#    static-path-pattern: /static/**
+logging.level:
+  org:
+    hibernate:
+      SQL: debug
+      type: trace
+
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
