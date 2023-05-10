@@ -7,8 +7,8 @@ spring:
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:xe
     driver-class-name: oracle.jdbc.OracleDriver
-    username: jpa
-    password: jpa
+    username: planner
+    password: planner
    
   jpa:
     hibernate:
@@ -17,8 +17,11 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-    database: oracle
-    database-platform: org.hibernate.dialect.Oracle10gDialect
+        dialect: org.hibernate.dialect.Oracle10gDialect
+#    database: oracle
+#    database-platform: org.hibernate.dialect.Oracle10gDialect
+    defer-datasource-initialization: true
+
   devtools:
     livereload:
       enabled: true
@@ -26,6 +29,10 @@ spring:
       enabled: true
   thymeleaf:
     cache: false
+  sql:
+    init:
+      mode: always
+
 #  mvc:
 #    static-path-pattern: /static/**
 logging.level:
