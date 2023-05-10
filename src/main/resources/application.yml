@@ -19,7 +19,11 @@ spring:
         format_sql: true
     database: oracle
     database-platform: org.hibernate.dialect.Oracle10gDialect
-
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
   thymeleaf:
     cache: false
 #  mvc:
