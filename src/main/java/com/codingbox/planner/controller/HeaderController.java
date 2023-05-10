@@ -28,9 +28,24 @@ public class HeaderController {
         return "contact";
     }
 
-    @GetMapping("/blogDetails")
-    public String blogDetails() {
-        return "blogdetails";
+//    @GetMapping("/blogDetails")
+//    public String blogDetails() {
+//        return "blogdetails";
+//    }
+
+    @GetMapping("/blog")
+    public String blog() {
+        return "blog";
+    }
+
+    @GetMapping("/elements")
+    public String elements() {
+        return "elements";
+    }
+
+    @GetMapping("/listing_details")
+    public String listing_details() {
+        return "listing_details";
     }
 
 }

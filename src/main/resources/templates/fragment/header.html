@@ -21,13 +21,16 @@
                   <li><a th:href="@{/}">Home</a></li>
                   <li><a th:href="@{/header/about}">About</a></li>
                   <li><a th:href="@{/header/category}">Categories</a></li>
-                  <li><a th:href="@{/header/listing}">Listing</a></li>
-                  <li><a href="#">Page</a>
+                  <li><a th:href="@{/header/listing}">Listing</a>
                     <ul class="submenu">
-                      <li><a href="../blog.html">Blog</a></li>
+                     <li><a th:href="@{/header/listing_details}">Listing details</a></li>
+                    </ul>
+                  </li>
+                  <li><a th:href="@{/header/blog}">Blog</a>
+                    <ul class="submenu">
+<!--                      <li><a th:href="@{/header/blog}">Blog</a></li>-->
                       <li><a th:href="@{/header/blogDetails}">Blog Details</a></li>
-                      <li><a href="../elements.html">Element</a></li>
-                      <li><a href="../listing_details.html">Listing details</a></li>
+                      <li><a th:href="@{/header/elements}">Element</a></li>
                     </ul>
                   </li>
                   <li><a th:href="@{/header/contact}">Contact</a></li>
