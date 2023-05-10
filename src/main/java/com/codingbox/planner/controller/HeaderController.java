@@ -27,4 +27,9 @@ public class HeaderController {
     public String contact() {
         return "contact";
     }
+
+    @GetMapping("/blogDetails")
+    public String blogDetails() {
+        return "blogdetails";
+    }
 }
