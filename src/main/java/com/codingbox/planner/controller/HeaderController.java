@@ -32,4 +32,5 @@ public class HeaderController {
     public String blogDetails() {
         return "blogdetails";
     }
+
 }
