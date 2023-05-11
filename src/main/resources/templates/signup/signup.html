@@ -59,72 +59,74 @@
 					<h3 class="mb-20" style ="text-align: center">Sign up</h3>
 					<form action="#">
 						<div class="mt-10">
-							<input type="text" name="id" placeholder="아이디를 입력하세요"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = '아이디를 입력하세요'" required
+							<input type="text" name="id" placeholder="Please enter a ID"
+								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a ID'" required
 								   class="single-input" style="width: 650px; float:left;">
-							<input type="submit" value="중복확인" style="float: right">
+							<input type="submit" value="Check" style="float: right">
 
 						</div>
 						</br></br></br>
 						<div >
-							<input type="password" name="password" placeholder="비밀번호를 입력하세요"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호를 입력하세요'" required
+							<input type="password" name="password" placeholder="Please enter a password"
+								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a password'" required
 								   class="single-input">
 
 						</div>
 						</br>
 						<div >
-							<input type="password" name="password" placeholder="비밀번호를 한 번 더 입력하세요"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호를 한 번 더 입력하세요'" required
+							<input type="password" name="password" placeholder="Enter your password one more time"
+								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your password one more time'" required
 								   class="single-input">
 
 						</div>
 						</br>
 						<div class="mt-10">
-							<input type="text" name="name" placeholder="이름을 입력하세요"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = '이름을 입력하세요'" required
+							<input type="text" name="name" placeholder="Please enter a name"
+								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a name'" required
 								   class="single-input">
 						</div>
 						</br>
 						<div class="mt-10">
-							<input type="email" name="email" placeholder="이메일을 입력하세요"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일을 입력하세요'" required
+							<input type="email" name="email" placeholder="Please enter a email" style="width: 650px; float:left;"
+								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a email'" required
 								   class="single-input">
+							<input type="submit" value="Check" style="float: right">
 
 						</div>
-						</br>
+						</br></br></br>
 						<div class="">
 							<div class="icon"><i class="" aria-hidden="true"></i></div>
-							<input type="text" style="width: 650px; float:left;" name="phone" placeholder="-없이 연락처를 입력하세요" onfocus="this.placeholder = ''"
-								   onblur="this.placeholder = '-없이 연락처를 입력하세요'" required class="single-input">
-
-							<input type="submit" value="중복확인" style="float: right">
+							<input type="text" name="phone" placeholder="Please enter a contact number without -" onfocus="this.placeholder = ''"
+								   onblur="this.placeholder = 'Please enter a contact number without - '" required class="single-input">
 
 						</div>
-						</br></br></br></br>
+						</br>
 						<div class="">
 
-							<div class="form-select" id="default-select">
-							<select>
-								<option value=" 1">성별</option>
-								<option value="1">남자</option>
-								<option value="1">여자</option>
-							</select>
+							<div class="form-select" id="default-select" style="text-align:center">
+							<h5>GENDER</h5>
+							<label><input type="radio" name="gender" value="Male">Male</label>
+
+							<label><input type="radio" name="gender" value="Female">Female</label>
+
 							</div>
+							<br><br>
+
+
 						</div>
 						<br>
 						<div class="" style="text-align:center">
-							<h5>생년월일</h5>
-							<input style="width: 300px; height: 40px;" type="date" >
+							<h5>Birth Date</h5>
+							<input style="width: 300px; height: 40px;" type="date" value="1995-08-11" >
 
 						</div>
 						</br></br></br>
 						<div style="text-align: center;">
-							<input type="submit" value="회원가입"style=" width:  770px; height: 50px;">
+							<input type="submit" value="Sign Up"style=" width:  770px; height: 50px;">
 						</div>
 						</br>
 						<div style="text-align: center;">
-							<input type="submit" value="취소" style=" width:  770px;  height: 50px;">
+							<input type="submit" value="Cancle" style=" width:  770px;  height: 50px;">
 						</div>
 					</form>
 				</div>
