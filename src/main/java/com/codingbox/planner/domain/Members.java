@@ -1,5 +1,6 @@
 package com.codingbox.planner.domain;
 
+import com.codingbox.planner.domain.enums.MemberGender;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,8 +31,9 @@ public class Members {
     @Column(name = "MEMBER_BIRTH")
     private String birth;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "MEMBER_GENDER")
-    private String gender;
+    private MemberGender gender;
 
     @OneToOne
     @JoinColumn(name = "STATE_ID")
