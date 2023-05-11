@@ -8,7 +8,7 @@
           <!-- Logo -->
           <div class="col-xl-2 col-lg-2 col-md-1">
             <div class="logo">
-              <a th:href="home.html">
+              <a th:href="@{/}">
                 <img src="/assets/img/logo/logo.png" alt="">
               </a>
             </div>
@@ -35,7 +35,7 @@
                   </li>
                   <li><a th:href="@{/header/contact}">Contact</a></li>
                   <li class="add-list"><a href="../listing_details.html"><i class="ti-plus"></i> add Listing</a></li>
-                  <li class="login"><a href="#"><i class="ti-user"></i> Sign in or Register</a></li>
+                  <li class="login"><a href="#" th:href="@{/login/login}"><i class="ti-user"></i> Sign in </a></li>
                 </ul>
               </nav>
             </div>
