@@ -21,6 +21,25 @@
     <link rel="stylesheet" href="/assets/css/nice-select.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+    <style>
+
+    .select-form {
+      display: flex;
+    }
+
+    .select-itms {
+      display: flex;
+    }
+
+    .select-itms select1 {
+      margin-right: 0px;
+    }
+
+    .select-itms select2 {
+    width: auto; /* 가로 길이를 원하는 값으로 조정하세요 */
+    }
+    </style>
 </head>
 
    <body>
@@ -73,43 +92,31 @@
 <!--                                    <a href="#">Search</a>-->
 <!--                                </div>	-->
 <!--                            </form>-->
-                            <div class="row">
-                                <div class="col-12">
-                                    <form class="form">
-                                        <div class="row mb-2">
-<!--                                            <div class="col-sm-12 col-md-6 mb-3 mb-lg-0 col-lg-4">-->
-<!--                                                <select name="destination" id="destination" class="form-control custom-select">-->
-<!--                                                    <option value="">Destination</option>-->
-<!--                                                    <option value="Peru">Peru</option>-->
-<!--                                                    <option value="Japan">Japan</option>-->
-<!--                                                    <option value="Thailand">Thailand</option>-->
-<!--                                                    <option value="Brazil">Brazil</option>-->
-<!--                                                    <option value="United States">United States</option>-->
-<!--                                                    <option value="Israel">Israel</option>-->
-<!--                                                    <option value="China">China</option>-->
-<!--                                                    <option value="Russia">Russia</option>-->
-<!--                                                </select>-->
+                            <form action="#" class="search-box search-box2">
 
-<!--                                                <div>-->
-<!--                                                    <input type="text" class="form-control datepicker" name="daterange">-->
-<!--                                                </div>-->
-<!--                                                <div>-->
-<!--                                                    <input type="text" class="form-control datepicker" name="daterange">-->
-<!--                                                </div>-->
-
-<!--                                                <input type="text" class="form-control" name="numOfPeople" placeholder="# of People">-->
-
-<!--                                                <input type="submit" class="btn btn-primary btn-block" value="Search">-->
-<!--                                                <label class="control control&#45;&#45;checkbox mt-3">-->
-<!--                                                    <span class="caption">Save this search</span>-->
-<!--                                                    <input type="checkbox" name="saveSearch" checked="checked" />-->
-<!--                                                    <div class="control__indicator"></div>-->
-<!--                                                </label>-->
-<!--                                            </div>-->
-                                        </div>
-                                    </form>
+                                <div class="select-form">
+                                    <div class="select-itms">
+                                        <select name="select" id="select1">
+                                            <option value="All">All Location</option>
+                                            <option value="hotel">Busan</option>
+                                            <option value="nightlife">Seoul</option>
+                                            <option value="cultureplace">Yeosu</option>
+                                            <option value="restaurant">...</option>
+                                        </select>
+                                        <select name="select" id="select2">
+                                            <option value="All">All Catagories</option>
+                                            <option value="hotel">Living Hotel</option>
+                                            <option value="nightlife">Night Life</option>
+                                            <option value="cultureplace">Culture Place</option>
+                                            <option value="restaurant">Restaurant</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                                <!-- Search box -->
+                                <div class="search-form">
+                                    <a th:href="@{/header/listing_details}">Search</a>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
@@ -141,7 +148,7 @@
                             </div>
                             <div class="location-details">
                                 <p>YEOSU</p>
-                                <a href="#" class="location-btn">65 <i class="ti-plus"></i> Location</a>
+                                <a href="#" th:href="@{/header/listing}" class="location-btn">65 <i class="ti-plus"></i> Location</a>
                             </div>
                         </div>
                     </div>
@@ -154,7 +161,7 @@
                             </div>
                             <div class="location-details">
                                 <p>BUSAN</p>
-                                <a href="#" class="location-btn">60 <i class="ti-plus"></i> Location</a>
+                                <a href="#" th:href="@{/header/listing}" class="location-btn">60 <i class="ti-plus"></i> Location</a>
                             </div>
                         </div>
                     </div>
@@ -166,7 +173,7 @@
                             </div>
                             <div class="location-details">
                                 <p>GYEONGJU</p>
-                                <a href="#" class="location-btn">50 <i class="ti-plus"></i> Location</a>
+                                <a href="#" th:href="@{/header/listing}" class="location-btn">50 <i class="ti-plus"></i> Location</a>
                             </div>
                         </div>
                     </div>
