@@ -57,35 +57,45 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<h3 class="mb-20" style ="text-align: center">Sign up</h3>
-					<form action="#">
+					<form name="signupform" id="signupform" action="#" method="post">
 						<div class="mt-10">
 							<input type="text" name="id" placeholder="Please enter a ID"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a ID'" required
-								   class="single-input" style="width: 650px; float:left;">
+								   class="single-input" style="width: 650px; float:left;"
+								   pattern="[a-z0-9]{4,12}" title="4~12자 영어소문자, 숫자만 가능합니다.">
 							<input type="submit" value="Check" style="float: right">
-
 						</div>
+
 						</br></br></br>
-						<div >
-							<input type="password" name="password" placeholder="Please enter a password"
+
+						<div>
+							<input type="password" name="password" id="password" placeholder="Please enter a password"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a password'" required
-								   class="single-input">
+								   class="single-input"
+								   pattern="(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,24}$" title="8~24자 영문대소문자, 숫자, 특수문자 혼합해서 넣어주세요">
 
 						</div>
+
 						</br>
-						<div >
-							<input type="password" name="password" placeholder="Enter your password one more time"
+
+						<div>
+							<input type="password" name="password_chk" id="password_chk" placeholder="Enter your password one more time"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your password one more time'" required
 								   class="single-input">
-
+							<span id="password-error" style="color: tomato;"></span>
 						</div>
+
 						</br>
+
 						<div class="mt-10">
 							<input type="text" name="name" placeholder="Please enter a name"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a name'" required
-								   class="single-input">
+								   class="single-input"
+								   maxlength="8" title="8자까지 가능합니다.">
 						</div>
+
 						</br>
+
 						<div class="mt-10">
 							<input type="email" name="email" placeholder="Please enter a email" style="width: 650px; float:left;"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a email'" required
@@ -97,36 +107,35 @@
 						<div class="">
 							<div class="icon"><i class="" aria-hidden="true"></i></div>
 							<input type="text" name="phone" placeholder="Please enter a contact number without -" onfocus="this.placeholder = ''"
-								   onblur="this.placeholder = 'Please enter a contact number without - '" required class="single-input">
+								   onblur="this.placeholder = 'Please enter a contact number without - '" required class="single-input"
+								   pattern="[0-9]{11}" title="11자 이내 숫자만 가능합니다">
 
 						</div>
 						</br>
 						<div class="">
-
 							<div class="form-select" id="default-select" style="text-align:center">
-							<h5>GENDER</h5>
-							<label><input type="radio" name="gender" value="Male">Male</label>
-
-							<label><input type="radio" name="gender" value="Female">Female</label>
-
+								<h5>GENDER</h5>
+								<label><input type="radio" name="gender" value="Male" required>Male</label>
+								<label><input type="radio" name="gender" value="Female" required>Female</label>
 							</div>
+
 							<br><br>
-
-
 						</div>
+
 						<br>
+
 						<div class="" style="text-align:center">
 							<h5>Birth Date</h5>
-							<input style="width: 300px; height: 40px;" type="date" value="1995-08-11" >
-
+							<input style="width: 300px; height: 40px;" type="date" required>
 						</div>
+
 						</br></br></br>
 						<div style="text-align: center;">
-							<input type="submit" value="Sign Up"style=" width:  770px; height: 50px;">
+							<input type="submit" value="Sign Up" style=" width:  770px; height: 50px;">
 						</div>
 						</br>
 						<div style="text-align: center;">
-							<input type="submit" value="Cancle" style=" width:  770px;  height: 50px;">
+							<input type="submit" value="Cancle" style=" width:  770px;  height: 50px;" onclick="validatePassword(e)">
 						</div>
 					</form>
 				</div>
@@ -143,7 +152,38 @@
 </div>
 
 <!-- JS here -->
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
 
+	var passwordInput = document.getElementById("password");
+	var confirmPasswordInput = document.getElementById("password_chk");
+	var passwordError = document.getElementById("password-error");
+
+	confirmPasswordInput.addEventListener("input", function () {
+		if (confirmPasswordInput.value !== passwordInput.value) {
+			passwordError.textContent = "패스워드가 일치하지 않습니다.";
+		} else {
+			passwordError.textContent = "패스워드가 일치합니다.";
+		}
+	});
+
+	$(function() {
+		$("#signupform").submit(function(e) {
+
+			e.preventDefault();
+
+			if (confirmPasswordInput.value !== passwordInput.value) {
+				alert("패스워드를 확인해주세요");
+				return false; // 제출을 막음
+			}
+
+			let frm = document.signupform;
+			frm.submit();
+	})
+	});
+
+
+</script>
 <!-- All JS Custom Plugins Link Here here -->
 <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 <!-- Jquery, Popper, Bootstrap -->
