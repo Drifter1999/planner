@@ -21,50 +21,49 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<title>Sign up</title>
 	<script>
-		function idCheck() {
-			var id = $('#id').val();
-			if (id === "") {
-				alert("아이디를 입력해주세요.");
-				return;
-			}
-			$.ajax({
-				url: 'idCheck.jsp',
-				type: 'post',
-				data: {'id': id},
-				success: function (result) {
-					if (result.trim() === "true") {
-						alert("사용 가능한 아이디입니다.");
-					} else {
-						alert("이미 사용 중인 아이디입니다.");
+		$(document).ready(function() {
+			// 아이디 중복 체크
+			$("#checkId").click(function() {
+				var userId = $("#userId").val();
+				$.ajax({
+					type: "GET",
+					url: "checkId.jsp",
+					data: {"userId": userId},
+					dataType: "json",
+					success: function(data) {
+						if (data.result == "success") {
+							alert("사용 가능한 아이디입니다.");
+						} else {
+							alert("이미 사용중인 아이디입니다.");
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("서버와의 통신에 실패하였습니다.");
 					}
-				},
-				error: function () {
-					alert("오류가 발생하였습니다.");
-				}
+				});
 			});
-		}
-		function emailCheck() {
-			var email = $('#email').val();
-			if (email === "") {
-				alert("이메일을 입력해주세요.");
-				return;
-			}
-			$.ajax({
-				url: 'emailCheck.jsp',
-				type: 'post',
-				data: {'email': email},
-				success: function (result) {
-					if (result.trim() === "true") {
-						alert("사용 가능한 이메일입니다.");
-					} else {
-						alert("이미 사용 중인 이메일입니다.");
+
+			// 이메일 중복 체크
+			$("#checkEmail").click(function() {
+				var email = $("#email").val();
+				$.ajax({
+					type: "GET",
+					url: "checkEmail.jsp",
+					data: {"email": email},
+					dataType: "json",
+					success: function(data) {
+						if (data.result == "success") {
+							alert("사용 가능한 이메일입니다.");
+						} else {
+							alert("이미 사용중인 이메일입니다.");
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("서버와의 통신에 실패하였습니다.");
 					}
-				},
-				error: function () {
-					alert("오류가 발생하였습니다.");
-				}
+				});
 			});
-		}
+		});
 	</script>
 </head>
 <body>
@@ -105,11 +104,13 @@
 					<h3 class="mb-20" style ="text-align: center">Sign up</h3>
 					<form name="signupform" id="signupform" action="#" method="post">
 						<div class="mt-10">
-							<input type="text"id="id" name="id" placeholder="Please enter a ID"
+
+							<input type="text" id="userId" name="userId" placeholder="Please enter a ID"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a ID'" required
 								   class="single-input" style="width: 650px; float:left;"
 								   pattern="[a-z0-9]{4,12}" title="4~12자 영어소문자, 숫자만 가능합니다.">
 							<input type="button" onclick="idCheck()" value="Check" style="float: right">
+							<div id="idCheckMsg"></div>
 
 						</div>
 
@@ -144,6 +145,7 @@
 						</br>
 
 						<div class="mt-10">
+
 							<input type="email" id="email" name="email" placeholder="Please enter a email" style="width: 650px; float:left;"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a email'" required
 								   class="single-input">
@@ -230,7 +232,7 @@
 
 			let frm = document.signupform;
 			frm.submit();
-	})
+		})
 	});
 
 
