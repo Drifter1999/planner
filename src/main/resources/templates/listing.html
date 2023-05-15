@@ -242,9 +242,8 @@
                                 <div class="col-lg-6 " th:each="data : ${ApiArr}">
                                     <div class="single-listing mb-30" >
                                         <div class="list-img">
-                                            <!--<img src="/assets/img/gallery/list1.png" alt="">-->
-                                            <img th:src="${data.firstimage}" alt="">
-                                            <!-- <span>Open</span> -->
+                                            <img th:if="${data.firstimage} != ''" th:src="${data.firstimage}" alt="">
+                                            <img th:unless="${data.firstimage} != ''" src="/assets/img/gallery/none.png" alt="">
                                         </div>
                                         <div class="list-caption">
                                             <span>Open</span>
@@ -252,8 +251,17 @@
                                             <p th:text="${data.addr1}"></p>
                                             <div class="list-footer">
                                                 <ul>
-                                                    <li>+10 278 367 9823</li>
-                                                    <li>contact@midnight.com</li>
+                                                    <th:block th:switch="${data.contenttypeid}">
+                                                        <li th:case="'12'">관광지</li>
+                                                        <li th:case="'14'">문화시설</li>
+                                                        <li th:case="'15'">축제공연행사</li>
+                                                        <li th:case="'25'">여행코스</li>
+                                                        <li th:case="'28'">레포츠</li>
+                                                        <li th:case="'32'">숙박</li>
+                                                        <li th:case="'38'">쇼핑</li>
+                                                        <li th:case="'39'">음식점</li>
+                                                    </th:block>
+                                                    <li th:text="'수정일 : ' + ${data.modifiedtime}"></li>
                                                 </ul>
                                             </div>
                                         </div>

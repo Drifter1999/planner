@@ -22,7 +22,6 @@ public class ListingService {
     public List<ApiDTO> getApiResponse(String area, String content) {
 
         String API_URL = new OpenAPI().createSearchKeywordURL(area, content);
-        System.out.println(API_URL);
         try {
             URL url = new URL(API_URL);
 // HTTP Header 객체 생성 및 설정
