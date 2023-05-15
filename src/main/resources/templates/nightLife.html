@@ -1,4 +1,4 @@
-<!doctype html>
+hotel.html<!doctype html>
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
@@ -36,33 +36,18 @@
     #startDate {
     background-color: #FFF;
     border: 1px solid #CCCCCC;
-    padding: 1px;
+    padding: 16.5px;
     color: #333333;
     width = 120%;
     }
     #endDate {
     background-color: #FFF;
     border: 1px solid #CCCCCC;
-    padding: 1px;
+    padding: 16.5px;
     color: #333333;
      width = 120%;
-    }
+}
 
-    .select-form {
-      display: flex;
-    }
-
-    .select-itms {
-      display: flex;
-    }
-
-    .select-itms select {
-      margin-right: 10px;
-    }
-
-    .select-itms select {
-    width: auto; /* 가로 길이를 원하는 값으로 조정하세요 */
-    }
 
     </style>
 
@@ -97,17 +82,15 @@
                     </div>
                     <!--Hero form -->
                     <form action="#" class="search-box search-box2">
-
+                        <div class="date-form">
+                            <input id="startDate" name="startDate" type="date">
+                        </div>
+                        <div class="date-form">
+                            <input id="endDate" name="endDate" type="date">
+                        </div>
                         <div class="select-form">
                             <div class="select-itms">
                                 <select name="select" id="select1">
-                                    <option value="All">All Location</option>
-                                    <option value="hotel">Busan</option>
-                                    <option value="nightlife">Seoul</option>
-                                    <option value="cultureplace">Yeosu</option>
-                                    <option value="restaurant">...</option>
-                                </select>
-                                <select name="select" id="select2">
                                     <option value="All">All Catagories</option>
                                     <option value="hotel">Living Hotel</option>
                                     <option value="nightlife">Night Life</option>
@@ -144,12 +127,6 @@
                         <!-- single one -->
                         <div class="single-listing">
                             <!-- input -->
-                            <div class="input-form">
-                                <input id="startDate" name="startDate" type="date" placeholder="출발일">
-                            </div>
-                            <div class="input-form">
-                                <input id="endDate" name="endDate" type="date" placeholder="도착일">
-                            </div>
                             <div class="input-form">
                                 <input type="text" placeholder="What are you finding?">
                             </div>
@@ -246,7 +223,7 @@
                                             <!-- <span>Open</span> -->
                                         </div>
                                         <div class="list-caption">
-                                            <span>Add</span>
+                                            <span>Open</span>
                                             <h3><a href="listing_details.html">Saintmartine</a></h3>
                                             <p>700/D, Kings road, Green lane, 85/ London</p>
                                             <div class="list-footer">
@@ -265,7 +242,7 @@
                                             <!-- <span>Open</span> -->
                                         </div>
                                         <div class="list-caption">
-                                            <span>Add</span>
+                                            <span>Open</span>
                                             <h3><a href="listing_details.html">Saintmartine</a></h3>
                                             <p>700/D, Kings road, Green lane, 85/ London</p>
                                             <div class="list-footer">
@@ -284,7 +261,7 @@
                                             <!-- <span>Open</span> -->
                                         </div>
                                         <div class="list-caption">
-                                            <span>Add</span>
+                                            <span>Open</span>
                                             <h3><a href="listing_details.html">Saintmartine</a></h3>
                                             <p>700/D, Kings road, Green lane, 85/ London</p>
                                             <div class="list-footer">
@@ -303,7 +280,7 @@
                                             <!-- <span>Open</span> -->
                                         </div>
                                         <div class="list-caption">
-                                            <span>Add</span>
+                                            <span>Open</span>
                                             <h3><a href="listing_details.html">Saintmartine</a></h3>
                                             <p>700/D, Kings road, Green lane, 85/ London</p>
                                             <div class="list-footer">
@@ -322,7 +299,7 @@
                                             <!-- <span>Open</span> -->
                                         </div>
                                         <div class="list-caption">
-                                            <span>Add</span>
+                                            <span>Open</span>
                                             <h3><a href="listing_details.html">Saintmartine</a></h3>
                                             <p>700/D, Kings road, Green lane, 85/ London</p>
                                             <div class="list-footer">
@@ -341,7 +318,7 @@
                                             <!-- <span>Open</span> -->
                                         </div>
                                         <div class="list-caption">
-                                            <span>Add</span>
+                                            <span>Open</span>
                                             <h3><a href="listing_details.html">Saintmartine</a></h3>
                                             <p>700/D, Kings road, Green lane, 85/ London</p>
                                             <div class="list-footer">
@@ -427,29 +404,6 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="/assets/js/plugins.js"></script>
 <script src="/assets/js/main.js"></script>
-<!-- 일정 -->
-$("#txtDate").daterangepicker({
-    locale: {
-    "separator": " ~ ",                     // 시작일시와 종료일시 구분자
-    "format": 'YYYY-MM-DD HH:mm:ss',     // 일시 노출 포맷
-    "applyLabel": "확인",                    // 확인 버튼 텍스트
-    "cancelLabel": "취소",                   // 취소 버튼 텍스트
-    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-    },
-    timePicker: true,                        // 시간 노출 여부
-    showDropdowns: true,                     // 년월 수동 설정 여부
-    autoApply: true,                         // 확인/취소 버튼 사용여부
-    timePicker24Hour: true,                  // 24시간 노출 여부(ex> true : 23:50, false : PM 11:50)
-    timePickerSeconds: true,                 // 초 노출 여부
-    singleDatePicker: true                   // 하나의 달력 사용 여부
-});
-
-$("#txtDate").on('show.daterangepicker', function (ev, picker) {
-    $(".yearselect").css("float", "left");
-    $(".monthselect").css("float", "right");
-    $(".cancelBtn").css("float", "right");
-});
 
 </body>
 </html>
