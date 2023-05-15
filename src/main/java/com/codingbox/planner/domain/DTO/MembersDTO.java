@@ -1,24 +1,19 @@
 package com.codingbox.planner.domain.DTO;
 
-import com.codingbox.planner.domain.MemberState;
-import com.codingbox.planner.domain.Party;
-import com.codingbox.planner.domain.Schedule;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.codingbox.planner.domain.enums.MemberGender;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class MembersDTO {
+    private String id;
     private String pw;
     private String name;
     private String phone;
     private String email;
     private String birth;
-    private String gender;
+    private MemberGender gender;
+
 }

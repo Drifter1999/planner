@@ -20,51 +20,51 @@
 	<link rel="stylesheet" href="assets/css/nice-select.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<title>Sign up</title>
-	<script>
-		$(document).ready(function() {
-			// 아이디 중복 체크
-			$("#checkId").click(function() {
-				var userId = $("#userId").val();
-				$.ajax({
-					type: "GET",
-					url: "checkId.jsp",
-					data: {"userId": userId},
-					dataType: "json",
-					success: function(data) {
-						if (data.result == "success") {
-							alert("사용 가능한 아이디입니다.");
-						} else {
-							alert("이미 사용중인 아이디입니다.");
-						}
-					},
-					error: function(xhr, status, error) {
-						alert("서버와의 통신에 실패하였습니다.");
-					}
-				});
-			});
+<!--	<script>-->
+<!--	&lt;!&ndash;	$(document).ready(function() {&ndash;&gt;-->
+<!--	&lt;!&ndash;		// 아이디 중복 체크&ndash;&gt;-->
+<!--	&lt;!&ndash;		$("#checkId").click(function() {&ndash;&gt;-->
+<!--	&lt;!&ndash;			var userId = $("#userId").val();&ndash;&gt;-->
+<!--	&lt;!&ndash;			$.ajax({&ndash;&gt;-->
+<!--	&lt;!&ndash;				type: "GET",&ndash;&gt;-->
+<!--	&lt;!&ndash;				url: "checkId.jsp",&ndash;&gt;-->
+<!--	&lt;!&ndash;				data: {"userId": userId},&ndash;&gt;-->
+<!--	&lt;!&ndash;				dataType: "json",&ndash;&gt;-->
+<!--	&lt;!&ndash;				success: function(data) {&ndash;&gt;-->
+<!--	&lt;!&ndash;					if (data.result == "success") {&ndash;&gt;-->
+<!--	&lt;!&ndash;						alert("사용 가능한 아이디입니다.");&ndash;&gt;-->
+<!--	&lt;!&ndash;					} else {&ndash;&gt;-->
+<!--	&lt;!&ndash;						alert("이미 사용중인 아이디입니다.");&ndash;&gt;-->
+<!--	&lt;!&ndash;					}&ndash;&gt;-->
+<!--	&lt;!&ndash;				},&ndash;&gt;-->
+<!--	&lt;!&ndash;				error: function(xhr, status, error) {&ndash;&gt;-->
+<!--	&lt;!&ndash;					alert("서버와의 통신에 실패하였습니다.");&ndash;&gt;-->
+<!--	&lt;!&ndash;				}&ndash;&gt;-->
+<!--	&lt;!&ndash;			});&ndash;&gt;-->
+<!--	&lt;!&ndash;		});&ndash;&gt;-->
 
-			// 이메일 중복 체크
-			$("#checkEmail").click(function() {
-				var email = $("#email").val();
-				$.ajax({
-					type: "GET",
-					url: "checkEmail.jsp",
-					data: {"email": email},
-					dataType: "json",
-					success: function(data) {
-						if (data.result == "success") {
-							alert("사용 가능한 이메일입니다.");
-						} else {
-							alert("이미 사용중인 이메일입니다.");
-						}
-					},
-					error: function(xhr, status, error) {
-						alert("서버와의 통신에 실패하였습니다.");
-					}
-				});
-			});
-		});
-	</script>
+<!--	&lt;!&ndash;		// 이메일 중복 체크&ndash;&gt;-->
+<!--	&lt;!&ndash;		$("#checkEmail").click(function() {&ndash;&gt;-->
+<!--	&lt;!&ndash;			var email = $("#email").val();&ndash;&gt;-->
+<!--	&lt;!&ndash;			$.ajax({&ndash;&gt;-->
+<!--	&lt;!&ndash;				type: "GET",&ndash;&gt;-->
+<!--	&lt;!&ndash;				url: "checkEmail.jsp",&ndash;&gt;-->
+<!--	&lt;!&ndash;				data: {"email": email},&ndash;&gt;-->
+<!--	&lt;!&ndash;				dataType: "json",&ndash;&gt;-->
+<!--	&lt;!&ndash;				success: function(data) {&ndash;&gt;-->
+<!--	&lt;!&ndash;					if (data.result == "success") {&ndash;&gt;-->
+<!--	&lt;!&ndash;						alert("사용 가능한 이메일입니다.");&ndash;&gt;-->
+<!--	&lt;!&ndash;					} else {&ndash;&gt;-->
+<!--	&lt;!&ndash;						alert("이미 사용중인 이메일입니다.");&ndash;&gt;-->
+<!--	&lt;!&ndash;					}&ndash;&gt;-->
+<!--	&lt;!&ndash;				},&ndash;&gt;-->
+<!--	&lt;!&ndash;				error: function(xhr, status, error) {&ndash;&gt;-->
+<!--	&lt;!&ndash;					alert("서버와의 통신에 실패하였습니다.");&ndash;&gt;-->
+<!--	&lt;!&ndash;				}&ndash;&gt;-->
+<!--	&lt;!&ndash;			});&ndash;&gt;-->
+<!--	&lt;!&ndash;		});&ndash;&gt;-->
+<!--	&lt;!&ndash;	});&ndash;&gt;-->
+<!--	&lt;!&ndash;</script>&ndash;&gt;-->
 </head>
 <body>
 <!-- Preloader Start -->
@@ -102,10 +102,10 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
 					<h3 class="mb-20" style ="text-align: center">Sign up</h3>
-					<form name="signupform" id="signupform" action="#" method="post">
+					<form name="signupform" id="signupform" method="post" action="/signup" >
 						<div class="mt-10">
 
-							<input type="text" id="userId" name="userId" placeholder="Please enter a ID"
+							<input type="text" id="id" name="id" placeholder="Please enter a ID"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a ID'" required
 								   class="single-input" style="width: 650px; float:left;"
 								   pattern="[a-z0-9]{4,12}" title="4~12자 영어소문자, 숫자만 가능합니다.">
@@ -117,7 +117,7 @@
 						</br></br></br>
 
 						<div>
-							<input type="password" name="password" id="password" placeholder="Please enter a password"
+							<input type="password" name="pw" id="pw" placeholder="Please enter a password"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a password'" required
 								   class="single-input"
 								   pattern="(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,24}$" title="8~24자 영문대소문자, 숫자, 특수문자 혼합해서 넣어주세요">
@@ -175,12 +175,13 @@
 
 						<div class="" style="text-align:center">
 							<h5>Birth Date</h5>
-							<input style="width: 300px; height: 40px;" type="date" required>
+							<input style="width: 300px; height: 40px;" type="date" name="birth" required>
 						</div>
 
 						</br></br></br>
 						<div style="text-align: center;">
-							<input class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit" value="Sign Up" style=" width:  770px; height: 50px;">
+							<button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" style=" width:  770px; height: 50px;">Sign Up</button>
+<!--							<input class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit" value="Sign Up" style=" width:  770px; height: 50px;">-->
 						</div>
 						</br>
 						<div style="text-align: center;">
@@ -201,42 +202,42 @@
 </div>
 
 <!-- JS here -->
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script>
-	function idCheck() {
-	}
-	function emailCheck() {
-	}
+<!--<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+<!--<script>-->
+<!--	function idCheck() {-->
+<!--	}-->
+<!--	function emailCheck() {-->
+<!--	}-->
 
-	var passwordInput = document.getElementById("password");
-	var confirmPasswordInput = document.getElementById("password_chk");
-	var passwordError = document.getElementById("password-error");
+<!--	var passwordInput = document.getElementById("password");-->
+<!--	var confirmPasswordInput = document.getElementById("password_chk");-->
+<!--	var passwordError = document.getElementById("password-error");-->
 
-	confirmPasswordInput.addEventListener("input", function () {
-		if (confirmPasswordInput.value !== passwordInput.value) {
-			passwordError.textContent = "패스워드가 일치하지 않습니다.";
-		} else {
-			passwordError.textContent = "패스워드가 일치합니다.";
-		}
-	});
+<!--	confirmPasswordInput.addEventListener("input", function () {-->
+<!--		if (confirmPasswordInput.value !== passwordInput.value) {-->
+<!--			passwordError.textContent = "패스워드가 일치하지 않습니다.";-->
+<!--		} else {-->
+<!--			passwordError.textContent = "패스워드가 일치합니다.";-->
+<!--		}-->
+<!--	});-->
 
-	$(function() {
-		$("#signupform").submit(function(e) {
+<!--	$(function() {-->
+<!--		$("#signupform").submit(function(e) {-->
 
-			e.preventDefault();
+<!--			e.preventDefault();-->
 
-			if (confirmPasswordInput.value !== passwordInput.value) {
-				alert("패스워드를 확인해주세요");
-				return false; // 제출을 막음
-			}
+<!--			if (confirmPasswordInput.value !== passwordInput.value) {-->
+<!--				alert("패스워드를 확인해주세요");-->
+<!--				return false; // 제출을 막음-->
+<!--			}-->
 
-			let frm = document.signupform;
-			frm.submit();
-		})
-	});
+<!--			let frm = document.signupform;-->
+<!--			frm.submit();-->
+<!--		})-->
+<!--	});-->
 
 
-</script>
+<!--</script>-->
 <!-- All JS Custom Plugins Link Here here -->
 <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
 <!-- Jquery, Popper, Bootstrap -->

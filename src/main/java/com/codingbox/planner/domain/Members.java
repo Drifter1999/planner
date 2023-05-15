@@ -1,8 +1,7 @@
 package com.codingbox.planner.domain;
 
 import com.codingbox.planner.domain.enums.MemberGender;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Members {
     @Id
     @Column(name = "MEMBER_ID")
@@ -31,6 +31,9 @@ public class Members {
     @Column(name = "MEMBER_BIRTH")
     private String birth;
 
+    @Column(name = "MEMBER_ROLE")
+    private String role;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "MEMBER_GENDER")
     private MemberGender gender;
@@ -44,4 +47,16 @@ public class Members {
 
     @OneToMany(mappedBy = "membersToParty")
     private List<Party> parties = new ArrayList<>();
+
+    @Builder
+    public Members(String id, String pw, String name, String phone, String email, String birth, MemberGender gender, String role){
+        this.id = id;
+        this.pw = pw;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.birth = birth;
+        this.gender = gender;
+        this.role = role;
+    }
 }
