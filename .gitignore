@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 src/main/resources/static/assets
 src/main/resources/static/Doc
+src/main/com/codingbox/planner/openAPI
 
 ### STS ###
 .apt_generated
