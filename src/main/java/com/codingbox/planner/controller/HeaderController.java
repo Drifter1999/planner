@@ -67,4 +67,9 @@ public class HeaderController {
         return "listing_details";
     }
 
+    @GetMapping("/Calendar")
+    public String Calendar() {
+        return "Calendar";
+    }
+
 }
