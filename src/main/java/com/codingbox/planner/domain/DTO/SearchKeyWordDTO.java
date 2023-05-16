@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApiDTO {
+public class SearchKeyWordDTO {
     private String addr1;
     private String addr2;
     private String areacode;
@@ -23,7 +23,6 @@ public class ApiDTO {
     private String pyrhtDivCd;
     private String mapx;
     private String mapy;
-
     private String mlevel;
     private String modifiedtime;
     private String sigungucode;

@@ -1,19 +1,21 @@
 package com.codingbox.planner.parser;
 
-import com.codingbox.planner.domain.DTO.ApiDTO;
+import com.codingbox.planner.domain.DTO.AreaDTO;
+import com.codingbox.planner.domain.DTO.SearchKeyWordDTO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParsingToList {
-    public List<ApiDTO> createArray (JSONArray jsonArr) throws ParseException {
-        List<ApiDTO> resultList = new ArrayList<>();
+    public List<SearchKeyWordDTO> createArray (JSONArray jsonArr) throws ParseException {
+        List<SearchKeyWordDTO> resultList = new ArrayList<>();
         for (int i = 0 ; i < jsonArr.size() ; i++){
-            ApiDTO data = new ApiDTO();
+            SearchKeyWordDTO data = new SearchKeyWordDTO();
             JSONParser parser = new JSONParser();
             JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
 
@@ -41,5 +43,22 @@ public class ParsingToList {
             resultList.add(data);
         }
         return resultList;
+    }
+
+    public List<AreaDTO> findAreaArray(JSONArray jsonArr) throws ParseException {
+        List<AreaDTO> areaArr = new ArrayList<AreaDTO>();
+
+        for (int i = 0 ; i < jsonArr.size(); i++) {
+            AreaDTO data = new AreaDTO();
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
+
+            data.setCode(String.valueOf(jsonObj.get("code")));
+            data.setName(String.valueOf(jsonObj.get("name")));
+            data.setRnum(Integer.parseInt(String.valueOf(jsonObj.get("rnum"))));
+
+            areaArr.add(data);
+        }
+        return areaArr;
     }
 }

@@ -1,6 +1,6 @@
 package com.codingbox.planner.controller;
 
-import com.codingbox.planner.domain.DTO.ApiDTO;
+import com.codingbox.planner.domain.DTO.SearchKeyWordDTO;
 import com.codingbox.planner.service.ListingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/header")
 @RequiredArgsConstructor
 public class HeaderController {
-    private final ListingService openApiServiceGangWon;
+    private final ListingService listingService;
 
     @GetMapping("/about")
     public String about() {
@@ -24,12 +24,14 @@ public class HeaderController {
 
     @GetMapping("/category")
     public String category() {
+
+
         return "category";
     }
 
     @GetMapping("/listing")
     public String listing(Model model) throws JsonProcessingException {
-        List<ApiDTO> ApiArr = openApiServiceGangWon.getApiResponse("강원", "관광지");
+        List<SearchKeyWordDTO> ApiArr = listingService.getApiResponse("강원", "관광지");
         model.addAttribute("ApiArr", ApiArr);
 
         return "listing";
