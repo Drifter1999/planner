@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Travel schedule</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/slicknav.css">
+    <link rel="stylesheet" href="/assets/css/flaticon.css">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/nice-select.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <style>
+        #calendar-container {
+            margin-top : 100px;
+            margin-bottom: 220px;
+        }
+    </style>
+</head>
+<body>
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="assets/img/logo/loder.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+<div>
+<header>
+    <div th:insert="~{fragment/header :: header}"></div>
+</header>
+
+    <!-- Hero Start-->
+    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>일정</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Hero End -->
+</div>
+<main>
+    <section>
+        <div class="container">
+            <div id="calendar-container">
+                <h1>여행 일정 검색하기</h1>
+                <table id="calendar">
+                    <tbody id="calendar-body"></tbody>
+                </table>
+                <div id="selected-date-container">
+                    <label for="selected-date">여행 시작일</label>
+                    <input type="text" id="selected-date" readonly>
+                </div>
+                <a id="search-button" th:href="@{/header/Calendar/schedule(selectedDate=${selectedDate})}" style="color: black;">Search</a>
+
+            </div>
+        </div>
+    </section>
+
+    <div id="schedule-container" class="areas-facilities">
+        <!-- Your schedule content will be dynamically generated here -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="script.js"></script>
+    <script>
+        $(function () {
+            $("#selected-date").datepicker();
+        });
+        $(document).ready(function() {
+  // 검색 버튼 클릭 이벤트 핸들러
+  $('#search-button').click(function(e) {
+    e.preventDefault();
+
+    // 여행 일정 정보를 불러오는 AJAX 요청
+    $.ajax({
+      url: '/get-schedule', // 여행 일정 정보를 불러오는 엔드포인트 URL
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {
+        // 여행 일정 정보를 성공적으로 불러왔을 때 실행되는 콜백 함수
+        // response 변수에 서버로부터 받은 응답 데이터가 저장되어 있음
+
+        // 여행 일정 정보를 가공하고 표시하는 로직을 작성하세요.
+        // 예시: 받은 데이터를 순회하며 동적으로 HTML을 생성하여 #schedule-container에 추가합니다.
+
+        // 예시 코드
+        var scheduleContainer = $('#schedule-container');
+        scheduleContainer.empty(); // 기존 내용 삭제
+
+        // 받은 데이터를 순회하며 동적으로 HTML 생성
+        for (var i = 0; i < response.length; i++) {
+          var schedule = response[i];
+          var scheduleHTML = '<div class="schedule-item">' +
+            '<h2>' + schedule.title + '</h2>' +
+            '<p>' + schedule.description + '</p>' +
+            '</div>';
+
+          scheduleContainer.append(scheduleHTML);
+        }
+      },
+      error: function(xhr, status, error) {
+        // AJAX 요청이 실패했을 때 실행되는 콜백 함수
+        console.log('Error:', error);
+      }
+    });
+  });
+});
+
+    </script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.slicknav.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/wow.min.js"></script>
+    <script src="/assets/js/animated.headline.js"></script>
+    <script src="/assets/js/jquery.magnific-popup.js"></script>
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/jquery.sticky.js"></script>
+    <script src="/assets/js/contact.js"></script>
+    <script src="/assets/js/jquery.form.js"></script>
+    <script src="/assets/js/jquery.validate.min.js"></script>
+    <script src="/assets/js/mail-script.js"></script>
+    <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/daterangepicker.js"></script>
+</main>
+
+<footer>
+    <div th:insert="~{fragment/footer1 :: footer1}"></div>
+</footer>
+<!-- Scroll Up -->
+<div id="back-top" >
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+</body>
+</html>
+

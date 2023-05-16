@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상세 일정</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>상세 일정</h1>
+
+<div id="schedule-container">
+  <!-- 상세 일정 내용을 동적으로 추가할 영역 -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  // Get the selected date from the URL query parameter
+  var urlParams = new URLSearchParams(window.location.search);
+  var selectedDate = urlParams.get('selectedDate');
+
+  // AJAX request to retrieve itinerary information
+  $.ajax({
+    url: '/get-schedule', // endpoint URL to retrieve itinerary information
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {
+      // Callback function that is executed when travel itinerary information is successfully loaded
+      // The response data received from the server is stored in the response variable
+
+      // Filter the itinerary information based on the selected date
+      var filteredData = response.filter(function(schedule) {
+        return schedule.date === selectedDate;
+      });
+
+      // Write the logic to process and display the filtered itinerary information.
+      // Example: Loop through the filtered data and dynamically create HTML and add it to #schedule-container.
+
+      // Example code
+      var scheduleContainer = $('#schedule-container');
+      scheduleContainer.empty(); // Delete the old content
+
+      // Loop through the filtered data and dynamically create HTML
+      for (var i = 0; i < filteredData.length; i++) {
+        var schedule = filteredData[i];
+        var scheduleHTML = '<div class="schedule-item">' +
+          '<h2>' + schedule.title + '</h2>' +
+          '<p>' + schedule.description + '</p>' +
+          '</div>';
+
+        scheduleContainer.append(scheduleHTML);
+      }
+    },
+    error: function(xhr, status, error) {
+      // Callback function to be executed when AJAX request fails
+      console.log('Error:', error);
+    }
+  });
+});
+</script>
+
+</body>
+</html>
