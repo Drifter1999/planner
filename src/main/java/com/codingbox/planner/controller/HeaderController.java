@@ -1,13 +1,16 @@
 package com.codingbox.planner.controller;
 
+import com.codingbox.planner.domain.DTO.AreaDTO;
 import com.codingbox.planner.domain.DTO.SearchKeyWordDTO;
 import com.codingbox.planner.service.ListingService;
+import com.codingbox.planner.service.MultiSelectService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -16,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class HeaderController {
     private final ListingService listingService;
+    private final MultiSelectService multiSelectService;
 
     @GetMapping("/about")
     public String about() {
@@ -23,8 +27,9 @@ public class HeaderController {
     }
 
     @GetMapping("/category")
-    public String category() {
-
+    public String category(Model model) {
+        List<AreaDTO> ApiArr = multiSelectService.getApiAreaResponse();
+        model.addAttribute("ApiArr", ApiArr);
 
         return "category";
     }
