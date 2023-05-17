@@ -37,9 +37,6 @@ public class MultiSelectService {
             JSONArray jsonArr = (JSONArray) Parsed.get("item");
 
             List<AreaDTO> result = new ParsingToList().findAreaArray(jsonArr);
-
-            System.out.println(result);
-
             return result;
 
         }catch (Exception e) {

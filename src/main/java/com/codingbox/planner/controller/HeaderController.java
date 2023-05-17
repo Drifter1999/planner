@@ -30,13 +30,15 @@ public class HeaderController {
     public String category(Model model) {
         List<AreaDTO> ApiArr = multiSelectService.getApiAreaResponse();
         model.addAttribute("ApiArr", ApiArr);
-
         return "category";
     }
 
     @GetMapping("/listing")
-    public String listing(Model model) throws JsonProcessingException {
-        List<SearchKeyWordDTO> ApiArr = listingService.getApiResponse("강원", "관광지");
+    public String listing(@RequestParam("area") String area,
+            @RequestParam("content") String content,
+            Model model) throws JsonProcessingException {
+
+        List<SearchKeyWordDTO> ApiArr = listingService.getApiResponse(area, content);
         model.addAttribute("ApiArr", ApiArr);
 
         return "listing";

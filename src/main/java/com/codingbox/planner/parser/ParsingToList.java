@@ -61,4 +61,63 @@ public class ParsingToList {
         }
         return areaArr;
     }
+
+    public List<String> AreaJsonArray (String province) {
+        List<String> Area = new ArrayList<String>();
+        String[] StringArea = new String[0];
+        switch (province) {
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            case "4":
+                break;
+            case "5":
+                break;
+            case "6":
+                break;
+            case "7":
+                break;
+            case "8":
+                break;
+            case "31":
+                StringArea = new String[]{"수원", "성남", "의정부", "안양", "부천", "광명", "평택", "동두천", "안산", "고양", "과천", "구리", "남양주", "오산", "시흥", "군포", "의왕", "하남", "용인", "파주", "이천", "안성", "김포", "화성", "광주", "양주", "포천", "여주"};
+                break;
+            case "32":
+                StringArea = new String[]{"춘천", "원주", "강릉", "동해", "태백", "속초", "삼척"};
+                break;
+            case "33":
+                StringArea = new String[]{"청주", "충주", "제천"};
+                break;
+            case "34":
+                StringArea = new String[]{"천안", "공주", "보령", "아산", "서산", "논산", "계룡", "당진"};
+                break;
+            case "35":
+                StringArea = new String[]{"포항", "경주", "김천", "안동", "구미", "영주", "영천", "상주", "문경", "경산"};
+                break;
+            case "36":
+                StringArea = new String[]{"창원", "진주", "통영", "사천", "김해", "밀양", "거제", "양산"};
+                break;
+            case "37":
+                StringArea = new String[]{"전주", "군산", "익산", "정읍", "남원", "김제"};
+                break;
+            case "38":
+                StringArea = new String[]{"목포", "여수", "순천", "나주", "광양"};
+                break;
+            case "39":
+                StringArea = new String[]{"제주", "서귀포"};
+                break;
+            default:
+                System.out.println("Province 값 오류");
+                break;
+        }
+
+        for (int i = 0 ; i < StringArea.length ; i++ ) {
+            Area.add(StringArea[i]);
+        }
+
+        return Area;
+    }
 }

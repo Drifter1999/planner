@@ -116,6 +116,7 @@
         </div>
         <!--Hero End -->
 
+        <!-- Area Setting-->
         <div class="popular-location section-padding30">
             <div class="container">
                 <div class="row">
@@ -127,74 +128,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="seoul" value="1" onclick="getCityLists(this)">서울</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="incheon" value="2" onclick="getCityLists(this)">인천</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="Gyeonggi" value="31" onclick="getCityLists(this)">경기도</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="gangwondo" value="32" onclick="getCityLists(this)">강원도</button>
-                    </div>
-                    <br>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="chungcheongnamdo" value="34" onclick="getCityLists(this)">충청남도</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="chungcheongbukdo" value="33" onclick="getCityLists(this)">충청북도</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="jeollabukdo" value="37" onclick="getCityLists(this)">전라북도</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="jeollanamdo" value="38" onclick="getCityLists(this)">전라남도</button>
-                    </div>
-                    <br>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="sejong" value="8" onclick="getCityLists(this)">세종</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="daejeon" value="3" onclick="getCityLists(this)">대전</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="daegu" value="4" onclick="getCityLists(this)">대구</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="ulsan" value="7" onclick="getCityLists(this)">울산</button>
-                    </div>
-                    <br>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="busan" value="6" onclick="getCityLists(this)">부산</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="gwangju" value="5" onclick="getCityLists(this)">광주</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="gyeongsangbukdo" value="35" onclick="getCityLists(this)">경상북도</button>
-                    </div>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="gyeongsangnamdo" value="36" onclick="getCityLists(this)">경상남도</button>
-                    </div>
-                    <br>
-                    <div class="buttons-container">
-                        <button class="button-arounder" id="jeju" value="39" onclick="getCityLists(this)">제주도</button>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div id="productList">
-
+                    <div class="buttons-container" th:each="area : ${ApiArr}">
+                        <button class="button-arounder"
+                                th:value="${area.code}"
+                                th:text="${area.name}"
+                                onclick="getCityLists(this)"></button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="popular-location section-padding30">
+            <div class="container" >
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle text-center mb-80" id="CategoryText" style="display: none;">
+                            <span>Choose a place</span>
+                            <h2>Locations</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="citiesList">
+
+                </div>
+            </div>
+        </div>
+
+
         <!-- Categories Area Start -->
-        <div class="categories-area section-padding30">
+        <div class="categories-area section-padding30" style="display: none" id="ContentList">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -205,248 +167,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-bed"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="@{/header/listing}" th:href="@{/header/listing}">숙박</a></h5>
-                                <p>당신이 원하는 지역에 있는 편안하고 매력적인 숙박시설에서 즐기세요. </p>
-                                <a href="#" th:href="@{/header/listing}">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-drink"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#" th:href="@{/header/listing}">레저 스포츠</a></h5>
-                                <p>"흥겨운 여행을 떠나 다양한 레저 스포츠 현장을 만나보세요.</p>
-                                <a href="#" th:href="@{/header/listing}">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-home"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#" th:href="@{/header/listing}">관광지</a></h5>
-                                <p>그림 같은 해변에서 장엄한 산에 이르기까지 당신이 원하는 여행자에게 즐겨보세요</p>
-                                <a href="#" th:href="@{/header/listing}">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat text-center mb-50">
-                            <div class="cat-icon">
-                                <span class="flaticon-food"></span>
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="#" th:href="@{/header/listing}">음식점</a></h5>
-                                <p>정통 풍미, 우아한 분위기, 완벽한 서비스가 결합된 다이닝 경험에 빠져보세요.</p>
-                                <a href="#" th:href="@{/header/listing}">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-<!--                    <div class="col-lg-3 col-md-6 col-sm-6">-->
-<!--                        <div class="single-cat text-center mb-50">-->
-<!--                            <div class="cat-icon">-->
-<!--                                <span class="flaticon-drink"></span>-->
-<!--                            </div>-->
-<!--                            <div class="cat-cap">-->
-<!--                                <h5><a href="#">Night Life</a></h5>-->
-<!--                                <p>Must explain your how this keind denoun pleasure</p>-->
-<!--                                <a href="#">View Details</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-3 col-md-6 col-sm-6">-->
-<!--                        <div class="single-cat text-center mb-50">-->
-<!--                            <div class="cat-icon">-->
-<!--                                <span class="flaticon-bed"></span>-->
-<!--                            </div>-->
-<!--                            <div class="cat-cap">-->
-<!--                                <h5><a href="#">Leving Hotel</a></h5>-->
-<!--                                <p>Must explain your how this keind denoun pleasure</p>-->
-<!--                                <a href="#">View Details</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-3 col-md-6 col-sm-6">-->
-<!--                        <div class="single-cat text-center mb-50">-->
-<!--                            <div class="cat-icon">-->
-<!--                                <span class="flaticon-food"></span>-->
-<!--                            </div>-->
-<!--                            <div class="cat-cap">-->
-<!--                                <h5><a href="#">Resturent</a></h5>-->
-<!--                                <p>Must explain your how this keind denoun pleasure</p>-->
-<!--                                <a href="#">View Details</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-3 col-md-6 col-sm-6">-->
-<!--                        <div class="single-cat text-center mb-50">-->
-<!--                            <div class="cat-icon">-->
-<!--                                <span class="flaticon-drink"></span>-->
-<!--                            </div>-->
-<!--                            <div class="cat-cap">-->
-<!--                                <h5><a href="#">Night Life</a></h5>-->
-<!--                                <p>Must explain your how this keind denoun pleasure</p>-->
-<!--                                <a href="#">View Details</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-                 </div>
+                <div class="row" id="content">
+
+                </div>
             </div>
         </div>
-        <!-- Categories Area End -->
-<!--        &lt;!&ndash; Services Area Start &ndash;&gt;-->
-<!--        <div class="services-area pt-150 pb-150 section-bg" data-background="/assets/img/gallery/section_bg02.jpg">-->
-<!--            <div class="container">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-lg-12">-->
-<!--                        &lt;!&ndash; Section Tittle &ndash;&gt;-->
-<!--                        <div class="section-tittle section-tittle2 text-center mb-80">-->
-<!--                            <span>Easy to explore</span>-->
-<!--                            <h2>How It Works</h2>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="row justify-content-between">-->
-<!--                    <div class="col-lg-3 col-md-6">-->
-<!--                        <div class="single-services text-center mb-50">-->
-<!--                            <div class="services-icon">-->
-<!--                                <span class="flaticon-list"></span>-->
-<!--                            </div>-->
-<!--                            <div class="services-cap">-->
-<!--                                <h5><a href="#">1. Choose a Category</a></h5>-->
-<!--                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>-->
-<!--                            </div>-->
-<!--                            &lt;!&ndash; Shpape &ndash;&gt;-->
-<!--                            <img class="shape1 d-none d-lg-block" src="/assets/img/icon/serices1.png" alt="">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-3 col-md-6">-->
-<!--                        <div class="single-services text-center mb-50">-->
-<!--                            <div class="services-icon">-->
-<!--                                <span class="flaticon-problem"></span>-->
-<!--                            </div>-->
-<!--                            <div class="services-cap">-->
-<!--                                <h5><a href="#">2. what you want</a></h5>-->
-<!--                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>-->
-<!--                            </div>-->
-<!--                            <img class="shape2 d-none d-lg-block" src="/assets/img/icon/serices2.png" alt="">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-3 col-md-6">-->
-<!--                        <div class="single-services text-center mb-50">-->
-<!--                            <div class="services-icon">-->
-<!--                                <span class="flaticon-respect"></span>-->
-<!--                            </div>-->
-<!--                            <div class="services-cap">-->
-<!--                                <h5><a href="#">3. Go out & Explore</a></h5>-->
-<!--                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Services Area End &ndash;&gt;-->
-        <!-- Popular Locations Start -->
-        <!--<div class="popular-location section-padding30">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        &lt;!&ndash; Section Tittle &ndash;&gt;
-                        <div class="section-tittle text-center mb-80">
-                            <span>Most visited places</span>
-                            <h2>Popular Locations</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="/assets/img/gallery/location1.jpg" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>New York</p>
-                                <a href="#" class="location-btn">65 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="/assets/img/gallery/location2.jpg" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>Paris</p>
-                                <a href="#" class="location-btn">60 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="/assets/img/gallery/location3.jpg" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>Rome</p>
-                                <a href="#" class="location-btn">50 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="/assets/img/gallery/location4.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>Italy</p>
-                                <a href="#" class="location-btn">28 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="/assets/img/gallery/location5.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>Nepal</p>
-                                <a href="#" class="location-btn">99 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="single-location mb-30">
-                            <div class="location-img">
-                                <img src="/assets/img/gallery/location6.png" alt="">
-                            </div>
-                            <div class="location-details">
-                                <p>indonesia</p>
-                                <a href="#" class="location-btn">78 <i class="ti-plus"></i> Location</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        <!-- Popular Locations End -->
-
     </main>
     <footer>
         <div th:insert="~{fragment/footer1 :: footer1}"></div>
     </footer>
+
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
@@ -487,21 +217,156 @@
         <script src="/assets/js/main.js"></script>
         <script>
             function getCityLists(selector) {
+
                 var val = selector.value;
-                console.log("val" + val);
-                var xhr = new XMLHttpRequest();
-                var url = "cities?province="+val
-                console.log("url" + url);
-                xhr.open("GET", url, true);
-                xhr.onreadystatechange = function () {
-                  if (xhr.readyState == 4 && xhr.status == 200){
-                      alert("Ajax Result : "+xhr.responseText);
-                      var cities = JSON.parse(xhr.responseText);
-                  }
-                };
-                xhr.send();
+                var categoryText = document.getElementById("CategoryText");
+                var ContentList = document.getElementById("ContentList");
+
+                if (val.length > 1){
+
+                    var xhr = new XMLHttpRequest();
+                    var url = "/cities?province="+val
+                    xhr.open("GET", url, true);
+                    xhr.send();
+                    xhr.onreadystatechange = function () {
+                      if (xhr.readyState == 4 && xhr.status == 200){
+                          const str = xhr.responseText.split(",");
+                          categoryText.style.display = "block";
+                          var container = document.getElementById("citiesList");
+                          container.innerHTML="";
+
+                          for (var i = 0; i < str.length; i++) {
+                              var locationDiv = document.createElement("div");
+                              locationDiv.className = "col-lg-4 col-md-6 col-sm-6";
+
+                              var singleLocationDiv = document.createElement("div");
+                              singleLocationDiv.className = "single-location mb-30";
+
+                              var locationImgDiv = document.createElement("div");
+                              locationImgDiv.className = "location-img";
+
+                              var img = document.createElement("img");
+                              img.src = "/assets/img/gallery/location1.jpg";
+                              img.alt = "";
+
+                              var locationDetailsDiv = document.createElement("div");
+                              locationDetailsDiv.className = "location-details";
+
+                              var p = document.createElement("p");
+                              var NewStr = str[i].replace(/[\[\]"]/g, '');
+                              p.textContent = NewStr;
+
+                              var button = document.createElement("button");
+                              button.className = "location-btn";
+                              button.textContent = "시설 찾기";
+                              button.value=str[i];
+                              button.addEventListener("click", function (selector){
+                                  getContentLists(this)
+                              });
+                              button.style.width= "80%";
+
+                              locationDetailsDiv.appendChild(p);
+                              locationDetailsDiv.appendChild(button);
+
+                              locationImgDiv.appendChild(img);
+
+                              singleLocationDiv.appendChild(locationImgDiv);
+                              singleLocationDiv.appendChild(locationDetailsDiv);
+
+                              locationDiv.appendChild(singleLocationDiv);
+
+                              container.appendChild(locationDiv);
+
+                          }
+
+                      }
+                    };
+                }else {
+                    var container = document.getElementById("citiesList");
+                    container.innerHTML="";
+                    ContentList.innerHTML="";
+                    categoryText.style.display = "none";
+                    ContentList.style.display = "none";
+                }
             }
 
+            function getContentLists(selector){
+
+                var ContentList = document.getElementById("ContentList");
+                var str = selector.value.replace(/[\[\]"]/g, '');
+
+                var contentList = [
+                    {
+                        contentIcon : "flaticon-travel",
+                        content : "관광지",
+                        contentExplain : "그림 같은 해변에서 장엄한 산에 이르기까지 당신이 원하는 여행자에게 즐겨보세요"
+                    },
+                    {
+                        contentIcon : "flaticon-respect",
+                        content : "레포츠",
+                        contentExplain: "흥겨운 여행을 떠나 다양한 레저 스포츠 현장을 만나보세요."
+                    },
+                    {
+                        contentIcon : "flaticon-home",
+                        content : "숙박",
+                        contentExplain : "당신이 원하는 지역에 있는 편안하고 매력적인 숙박시설에서 즐기세요."
+                    },
+                    {
+                        contentIcon : "flaticon-food",
+                        content : "음식점",
+                        contentExplain: "정통 풍미, 우아한 분위기, 완벽한 서비스가 결합된 다이닝 경험에 빠져보세요."}
+                ];
+                var container = document.getElementById("content");
+                container.innerHTML="";
+                for (var i = 0 ; i < contentList.length ; i++) {
+                    var colDiv = document.createElement("div");
+                    colDiv.className = "col-lg-3 col-md-6 col-sm-6";
+
+                    var singleCatDiv = document.createElement("div");
+                    singleCatDiv.className = "single-cat text-center mb-50";
+
+                    var catIconDiv = document.createElement("div");
+                    catIconDiv.className = "cat-icon";
+
+                    var spanIcon = document.createElement("span");
+                    spanIcon.className = contentList[i].contentIcon;
+
+                    var catCapDiv = document.createElement("div");
+                    catCapDiv.className = "cat-cap";
+
+                    var heading = document.createElement("h5");
+                    var link = document.createElement("a");
+                    link.href = "#";
+                    link.textContent = contentList[i].content;
+                    heading.appendChild(link);
+
+                    var paragraph = document.createElement("p");
+                    paragraph.textContent = contentList[i].contentExplain;
+
+                    var viewDetailsLink = document.createElement("a");
+                    viewDetailsLink.href = "/header/listing?"
+                        + "area=" + encodeURIComponent(str)
+                        + "&content=" + encodeURIComponent(contentList[i].content);
+                    viewDetailsLink.textContent = "View Details";
+
+
+                    catCapDiv.appendChild(heading);
+                    catCapDiv.appendChild(paragraph);
+                    catCapDiv.appendChild(viewDetailsLink);
+
+                    catIconDiv.appendChild(spanIcon);
+
+                    singleCatDiv.appendChild(catIconDiv);
+                    singleCatDiv.appendChild(catCapDiv);
+
+                    colDiv.appendChild(singleCatDiv);
+
+                    container.appendChild(colDiv);
+
+                }
+
+                ContentList.style.display = "block";
+            }
         </script>
     </body>
 </html>
