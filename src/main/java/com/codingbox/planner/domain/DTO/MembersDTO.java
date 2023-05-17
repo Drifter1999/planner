@@ -8,7 +8,8 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
 public class MembersDTO {
-    private String id;
+
+    private String userId;
     private String pw;
     private String name;
     private String phone;

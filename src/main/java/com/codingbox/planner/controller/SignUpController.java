@@ -2,6 +2,7 @@ package com.codingbox.planner.controller;
 
 import com.codingbox.planner.Repository.MemberRepository;
 import com.codingbox.planner.domain.Members;
+// import com.codingbox.planner.service.PrincipalDetails;
 import com.codingbox.planner.service.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

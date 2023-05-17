@@ -14,7 +14,7 @@ import java.util.List;
 public class Members {
     @Id
     @Column(name = "MEMBER_ID")
-    private String id;
+    private String userId;
 
     @Column(name = "MEMBER_PW")
     private String pw;
@@ -50,7 +50,7 @@ public class Members {
 
     @Builder
     public Members(String id, String pw, String name, String phone, String email, String birth, MemberGender gender, String role){
-        this.id = id;
+        this.userId = id;
         this.pw = pw;
         this.name = name;
         this.phone = phone;

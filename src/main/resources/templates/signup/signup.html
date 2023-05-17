@@ -20,51 +20,40 @@
 	<link rel="stylesheet" href="assets/css/nice-select.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<title>Sign up</title>
-<!--	<script>-->
-<!--	&lt;!&ndash;	$(document).ready(function() {&ndash;&gt;-->
-<!--	&lt;!&ndash;		// 아이디 중복 체크&ndash;&gt;-->
-<!--	&lt;!&ndash;		$("#checkId").click(function() {&ndash;&gt;-->
-<!--	&lt;!&ndash;			var userId = $("#userId").val();&ndash;&gt;-->
-<!--	&lt;!&ndash;			$.ajax({&ndash;&gt;-->
-<!--	&lt;!&ndash;				type: "GET",&ndash;&gt;-->
-<!--	&lt;!&ndash;				url: "checkId.jsp",&ndash;&gt;-->
-<!--	&lt;!&ndash;				data: {"userId": userId},&ndash;&gt;-->
-<!--	&lt;!&ndash;				dataType: "json",&ndash;&gt;-->
-<!--	&lt;!&ndash;				success: function(data) {&ndash;&gt;-->
-<!--	&lt;!&ndash;					if (data.result == "success") {&ndash;&gt;-->
-<!--	&lt;!&ndash;						alert("사용 가능한 아이디입니다.");&ndash;&gt;-->
-<!--	&lt;!&ndash;					} else {&ndash;&gt;-->
-<!--	&lt;!&ndash;						alert("이미 사용중인 아이디입니다.");&ndash;&gt;-->
-<!--	&lt;!&ndash;					}&ndash;&gt;-->
-<!--	&lt;!&ndash;				},&ndash;&gt;-->
-<!--	&lt;!&ndash;				error: function(xhr, status, error) {&ndash;&gt;-->
-<!--	&lt;!&ndash;					alert("서버와의 통신에 실패하였습니다.");&ndash;&gt;-->
-<!--	&lt;!&ndash;				}&ndash;&gt;-->
-<!--	&lt;!&ndash;			});&ndash;&gt;-->
-<!--	&lt;!&ndash;		});&ndash;&gt;-->
+	<script>
 
-<!--	&lt;!&ndash;		// 이메일 중복 체크&ndash;&gt;-->
-<!--	&lt;!&ndash;		$("#checkEmail").click(function() {&ndash;&gt;-->
-<!--	&lt;!&ndash;			var email = $("#email").val();&ndash;&gt;-->
-<!--	&lt;!&ndash;			$.ajax({&ndash;&gt;-->
-<!--	&lt;!&ndash;				type: "GET",&ndash;&gt;-->
-<!--	&lt;!&ndash;				url: "checkEmail.jsp",&ndash;&gt;-->
-<!--	&lt;!&ndash;				data: {"email": email},&ndash;&gt;-->
-<!--	&lt;!&ndash;				dataType: "json",&ndash;&gt;-->
-<!--	&lt;!&ndash;				success: function(data) {&ndash;&gt;-->
-<!--	&lt;!&ndash;					if (data.result == "success") {&ndash;&gt;-->
-<!--	&lt;!&ndash;						alert("사용 가능한 이메일입니다.");&ndash;&gt;-->
-<!--	&lt;!&ndash;					} else {&ndash;&gt;-->
-<!--	&lt;!&ndash;						alert("이미 사용중인 이메일입니다.");&ndash;&gt;-->
-<!--	&lt;!&ndash;					}&ndash;&gt;-->
-<!--	&lt;!&ndash;				},&ndash;&gt;-->
-<!--	&lt;!&ndash;				error: function(xhr, status, error) {&ndash;&gt;-->
-<!--	&lt;!&ndash;					alert("서버와의 통신에 실패하였습니다.");&ndash;&gt;-->
-<!--	&lt;!&ndash;				}&ndash;&gt;-->
-<!--	&lt;!&ndash;			});&ndash;&gt;-->
-<!--	&lt;!&ndash;		});&ndash;&gt;-->
-<!--	&lt;!&ndash;	});&ndash;&gt;-->
-<!--	&lt;!&ndash;</script>&ndash;&gt;-->
+		function checkUserId(selector) {
+			var userId = document.getElementById("Id").value;
+			if (userId.includes(" ")) {
+				alert("공백은 입력하실 수 없습니다.");
+				return;
+			}
+			var xhr = new XMLHttpRequest();
+			var url = "/checkUserId?result=" + userId;
+			xhr.open("GET", url, true);
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					var result = JSON.parse(xhr.responseText);
+					// 여기까지는 작동 여부 확인완료
+					console.log("AJAX Response:", result);
+					if (result) {
+						alert("사용 가능한 아이디입니다.");
+					} else {
+						alert("이미 사용 중인 아이디입니다.");
+					}
+				}
+			};
+			xhr.send();
+
+		}
+
+
+
+
+
+	</script>
+
+
 </head>
 <body>
 <!-- Preloader Start -->
@@ -105,12 +94,12 @@
 					<form name="signupform" id="signupform" method="post" action="/signup" >
 						<div class="mt-10">
 
-							<input type="text" id="id" name="id" placeholder="Please enter a ID"
+							<input type="text" id="Id" name="userId" placeholder="Please enter a ID"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a ID'" required
 								   class="single-input" style="width: 650px; float:left;"
-								   pattern="[a-z0-9]{4,12}" title="4~12자 영어소문자, 숫자만 가능합니다.">
-							<input type="button" onclick="idCheck()" value="Check" style="float: right">
-							<div id="idCheckMsg"></div>
+								   pattern="[a-z0-9]{4,12}" title="4~12자 영어소문자, 숫자만 가능합니다." >
+							<input type="button" id="userId"  onclick="checkUserId(this)" value="Check" style="float: right">
+
 
 						</div>
 
@@ -146,10 +135,10 @@
 
 						<div class="mt-10">
 
-							<input type="email" id="email" name="email" placeholder="Please enter a email" style="width: 650px; float:left;"
+							<input type="email" id="email" name="email" placeholder="Please enter a email"
 								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a email'" required
 								   class="single-input">
-							<input type="button" onclick="idCheck()" value="Check" style="float: right">
+
 
 						</div>
 						</br></br></br>
