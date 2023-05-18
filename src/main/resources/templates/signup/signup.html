@@ -22,12 +22,15 @@
 	<title>Sign up</title>
 	<script>
 
-		function checkUserId(selector) {
+		function checkUserId(selecor) {
 			var userId = document.getElementById("Id").value;
-			if (userId.includes(" ")) {
-				alert("공백은 입력하실 수 없습니다.");
+
+			if (userId.trim() === "") {
+				alert("아이디를 입력해주세요.");
 				return;
 			}
+
+
 			var xhr = new XMLHttpRequest();
 			var url = "/checkUserId?result=" + userId;
 			xhr.open("GET", url, true);

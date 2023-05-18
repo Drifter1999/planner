@@ -1,10 +1,12 @@
 package com.codingbox.planner.controller;
 
-import com.codingbox.planner.Repository.MemberRepository;
+import com.codingbox.planner.repository.MemberRepository;
 import com.codingbox.planner.domain.Members;
 // import com.codingbox.planner.service.PrincipalDetails;
+import com.codingbox.planner.service.MemberService;
 import com.codingbox.planner.service.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SignUpController {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private MemberService memberService;
 
 //    @GetMapping({"", "/"})
 //    public String index() {
@@ -60,4 +63,5 @@ public class SignUpController {
         return "members";
 
     }
+
 }
