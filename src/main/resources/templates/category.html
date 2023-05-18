@@ -156,7 +156,7 @@
 
 
         <!-- Categories Area Start -->
-        <div class="categories-area section-padding30" style="display: none" id="ContentList">
+        <div class="categories-area section-padding30" style="display: none;" id="ContentList">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -221,7 +221,7 @@
                 var val = selector.value;
                 var categoryText = document.getElementById("CategoryText");
                 var ContentList = document.getElementById("ContentList");
-
+                var containerContent = document.getElementById("content");
                 if (val.length > 1){
 
                     var xhr = new XMLHttpRequest();
@@ -232,8 +232,10 @@
                       if (xhr.readyState == 4 && xhr.status == 200){
                           const str = xhr.responseText.split(",");
                           categoryText.style.display = "block";
+                          ContentList.style.display = "none";
                           var container = document.getElementById("citiesList");
                           container.innerHTML="";
+                          containerContent.innerHTML="";
 
                           for (var i = 0; i < str.length; i++) {
                               var locationDiv = document.createElement("div");
@@ -278,15 +280,86 @@
                               container.appendChild(locationDiv);
 
                           }
-
                       }
                     };
                 }else {
-                    var container = document.getElementById("citiesList");
-                    container.innerHTML="";
-                    ContentList.innerHTML="";
+                    console.log("그냥 시 도착 : " + selector.textContent);
+                    var citiesList = document.getElementById("citiesList");
+
+                    citiesList.innerHTML="";
+                    containerContent.innerHTML="";
                     categoryText.style.display = "none";
-                    ContentList.style.display = "none";
+                    ContentList.style.display = "none"
+
+                    var contentList = [
+                        {
+                            contentIcon : "flaticon-travel",
+                            content : "관광지",
+                            contentExplain : "그림 같은 해변에서 장엄한 산에 이르기까지 당신이 원하는 여행자에게 즐겨보세요"
+                        },
+                        {
+                            contentIcon : "flaticon-respect",
+                            content : "레포츠",
+                            contentExplain: "흥겨운 여행을 떠나 다양한 레저 스포츠 현장을 만나보세요."
+                        },
+                        {
+                            contentIcon : "flaticon-home",
+                            content : "숙박",
+                            contentExplain : "당신이 원하는 지역에 있는 편안하고 매력적인 숙박시설에서 즐기세요."
+                        },
+                        {
+                            contentIcon : "flaticon-food",
+                            content : "음식점",
+                            contentExplain: "정통 풍미, 우아한 분위기, 완벽한 서비스가 결합된 다이닝 경험에 빠져보세요."}
+                    ];
+
+                    for (var i = 0 ; i < contentList.length ; i++) {
+                        var colDiv = document.createElement("div");
+                        colDiv.className = "col-lg-3 col-md-6 col-sm-6";
+
+                        var singleCatDiv = document.createElement("div");
+                        singleCatDiv.className = "single-cat text-center mb-50";
+
+                        var catIconDiv = document.createElement("div");
+                        catIconDiv.className = "cat-icon";
+
+                        var spanIcon = document.createElement("span");
+                        spanIcon.className = contentList[i].contentIcon;
+
+                        var catCapDiv = document.createElement("div");
+                        catCapDiv.className = "cat-cap";
+
+                        var heading = document.createElement("h5");
+                        var link = document.createElement("a");
+                        link.href = "#";
+                        link.textContent = contentList[i].content;
+                        heading.appendChild(link);
+
+                        var paragraph = document.createElement("p");
+                        paragraph.textContent = contentList[i].contentExplain;
+
+                        var viewDetailsLink = document.createElement("a");
+                        viewDetailsLink.href = "/header/listing?"
+                            + "area=" + encodeURIComponent(selector.textContent)
+                            + "&content=" + encodeURIComponent(contentList[i].content);
+                        viewDetailsLink.textContent = "View Details";
+
+
+                        catCapDiv.appendChild(heading);
+                        catCapDiv.appendChild(paragraph);
+                        catCapDiv.appendChild(viewDetailsLink);
+
+                        catIconDiv.appendChild(spanIcon);
+
+                        singleCatDiv.appendChild(catIconDiv);
+                        singleCatDiv.appendChild(catCapDiv);
+
+                        colDiv.appendChild(singleCatDiv);
+
+                        containerContent.appendChild(colDiv);
+
+                    }
+                    ContentList.style.display = "block";
                 }
             }
 
@@ -316,8 +389,10 @@
                         content : "음식점",
                         contentExplain: "정통 풍미, 우아한 분위기, 완벽한 서비스가 결합된 다이닝 경험에 빠져보세요."}
                 ];
-                var container = document.getElementById("content");
+
+                const container = document.getElementById("content");
                 container.innerHTML="";
+
                 for (var i = 0 ; i < contentList.length ; i++) {
                     var colDiv = document.createElement("div");
                     colDiv.className = "col-lg-3 col-md-6 col-sm-6";

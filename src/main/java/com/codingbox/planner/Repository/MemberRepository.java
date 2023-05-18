@@ -1,4 +1,4 @@
-package com.codingbox.planner.Repository;
+package com.codingbox.planner.repository;
 
 
 import com.codingbox.planner.domain.Members;
@@ -11,6 +11,7 @@ import javax.persistence.Table;
 // db연결방법 = 스프링샵 (참고)
 @Repository
 @Table(name="MEMBERS")
+
 public interface MemberRepository extends JpaRepository<Members, String> {
 
 
