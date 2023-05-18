@@ -20,8 +20,8 @@ import java.util.List;
 public class Schedule {
     @Id
     @GeneratedValue(
-        strategy = GenerationType.SEQUENCE
-        , generator = "SCHEDULE_SEQ_GENERATOR"
+            strategy = GenerationType.SEQUENCE
+            , generator = "SCHEDULE_SEQ_GENERATOR"
     )
     @Column(name = "SCHEDULE_ID")
     private Long Id;

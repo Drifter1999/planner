@@ -15,6 +15,6 @@ import java.util.List;
 public class ScheduleDTO {
     private LocalDateTime strDate;
     private LocalDateTime endDate;
-    private LocalDateTime name;
-    private LocalDateTime destination;
+    private String name;
+    private String destination;
 }

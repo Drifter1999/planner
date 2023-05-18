@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Travel schedule</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <meta charset="UTF-8">
+    <title>Calendar with Itinerary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <link rel="stylesheet" href="path/to/your/custom/header.css">
+    <link rel="stylesheet" href="path/to/your/custom/footer.css">
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
@@ -20,140 +18,172 @@
     <link rel="stylesheet" href="/assets/css/slick.css">
     <link rel="stylesheet" href="/assets/css/nice-select.css">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <style>
-        #calendar-container {
-            margin-top : 100px;
-            margin-bottom: 220px;
-        }
-    </style>
 </head>
 <body>
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img src="assets/img/logo/loder.jpg" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Preloader Start -->
-<div>
 <header>
     <div th:insert="~{fragment/header :: header}"></div>
 </header>
-
+<main>
     <!-- Hero Start-->
-    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
+    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center pt-50">
-                        <h2>일정</h2>
+                        <h2>Calendar - 일정</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--Hero End -->
-</div>
-<main>
-    <section>
-        <div class="container">
-            <div id="calendar-container">
-                <h1>여행 일정 검색하기</h1>
-                <table id="calendar">
-                    <tbody id="calendar-body"></tbody>
-                </table>
-                <div id="selected-date-container">
-                    <label for="selected-date">여행 시작일</label>
-                    <input type="text" id="selected-date" readonly>
-                </div>
-                <a id="search-button" th:href="@{/header/Calendar/schedule(selectedDate=${selectedDate})}" style="color: black;">Search</a>
-
-            </div>
-        </div>
-    </section>
-
-    <div id="schedule-container" class="areas-facilities">
-        <!-- Your schedule content will be dynamically generated here -->
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <script src="script.js"></script>
-    <script>
-        $(function () {
-            $("#selected-date").datepicker();
-        });
-        $(document).ready(function() {
-  // 검색 버튼 클릭 이벤트 핸들러
-  $('#search-button').click(function(e) {
-    e.preventDefault();
-
-    // 여행 일정 정보를 불러오는 AJAX 요청
-    $.ajax({
-      url: '/get-schedule', // 여행 일정 정보를 불러오는 엔드포인트 URL
-      type: 'GET',
-      dataType: 'json',
-      success: function(response) {
-        // 여행 일정 정보를 성공적으로 불러왔을 때 실행되는 콜백 함수
-        // response 변수에 서버로부터 받은 응답 데이터가 저장되어 있음
-
-        // 여행 일정 정보를 가공하고 표시하는 로직을 작성하세요.
-        // 예시: 받은 데이터를 순회하며 동적으로 HTML을 생성하여 #schedule-container에 추가합니다.
-
-        // 예시 코드
-        var scheduleContainer = $('#schedule-container');
-        scheduleContainer.empty(); // 기존 내용 삭제
-
-        // 받은 데이터를 순회하며 동적으로 HTML 생성
-        for (var i = 0; i < response.length; i++) {
-          var schedule = response[i];
-          var scheduleHTML = '<div class="schedule-item">' +
-            '<h2>' + schedule.title + '</h2>' +
-            '<p>' + schedule.description + '</p>' +
-            '</div>';
-
-          scheduleContainer.append(scheduleHTML);
-        }
-      },
-      error: function(xhr, status, error) {
-        // AJAX 요청이 실패했을 때 실행되는 콜백 함수
-        console.log('Error:', error);
-      }
-    });
-  });
-});
-
-    </script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/jquery.slicknav.min.js"></script>
-    <script src="/assets/js/owl.carousel.min.js"></script>
-    <script src="/assets/js/wow.min.js"></script>
-    <script src="/assets/js/animated.headline.js"></script>
-    <script src="/assets/js/jquery.magnific-popup.js"></script>
-    <script src="/assets/js/jquery.nice-select.min.js"></script>
-    <script src="/assets/js/jquery.sticky.js"></script>
-    <script src="/assets/js/contact.js"></script>
-    <script src="/assets/js/jquery.form.js"></script>
-    <script src="/assets/js/jquery.validate.min.js"></script>
-    <script src="/assets/js/mail-script.js"></script>
-    <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/assets/js/plugins.js"></script>
-    <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/daterangepicker.js"></script>
+    <div id="calendar"></div>
 </main>
-
 <footer>
     <div th:insert="~{fragment/footer1 :: footer1}"></div>
 </footer>
-<!-- Scroll Up -->
-<div id="back-top" >
-    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script>
+    $(document).ready(function() {
+      // Check login status
+      var isLoggedIn = checkLoginStatus(); // Implement your login status check logic here
+
+      if (isLoggedIn) {
+        // Retrieve user's travel data
+        var travelData = getUserTravelData(); // Implement your logic to retrieve user's travel data
+
+        // Transform travel data into itinerary events
+        var itineraryEvents = transformTravelDataToEvents(travelData); // Implement your logic to transform travel data into events
+
+        // Initialize the calendar
+        $('#calendar').fullCalendar({
+          // Set your desired options and configurations
+          // For example, set the calendar to display a month view by default
+          defaultView: 'month',
+
+          // Add the itinerary events
+          events: itineraryEvents,
+
+          // Customize event rendering to display itinerary events differently
+          eventRender: function(event, element) {
+            if (event.itinerary) {
+              element.addClass('itinerary-event');
+            }
+          },
+
+          // Add a click event handler for itinerary events
+          eventClick: function(event) {
+            if (event.itinerary) {
+              alert('Itinerary event: ' + event.title + '\nDescription: ' + event.description);
+            }
+          }
+        });
+
+        // Declare variable for current itinerary index
+        var currentItineraryIndex = 0;
+
+        // Function to show the next travel date
+        function showNextTravelDate() {
+          // Update the current itinerary index
+          currentItineraryIndex = (currentItineraryIndex + 1) % itineraryEvents.length;
+
+          // Get the next travel event
+          var nextTravelEvent = itineraryEvents[currentItineraryIndex];
+
+          // Show the calendar for the next travel date
+          $('#calendar').fullCalendar('gotoDate', nextTravelEvent.start);
+        }
+
+        // Function to find the next travel event
+        function findNextTravelEvent(events) {
+          var today = moment().startOf('day');
+          var nextEvent = null;
+
+          for (var i = 0; i < events.length; i++) {
+            var eventStart = moment(events[i].start).startOf('day');
+
+            if (eventStart.isAfter(today)) {
+              nextEvent = events[i];
+              break;
+            }
+          }
+
+          return nextEvent;
+        }
+
+        // Find the next travel event
+        var nextTravelEvent = findNextTravelEvent(itineraryEvents);
+
+        // Show the next travel date button
+        if (nextTravelEvent) {
+          var nextTravelButtonHtml = '<button onclick="showNextTravelDate()">Show Next Travel Date</button>';
+          $('#calendar').prepend(nextTravelButtonHtml);
+        }
+      } else {
+        // Handle not logged in state (redirect to login page, display a message, etc.)
+        alert('Please log in to view the calendar.');
+        // Implement your logic for handling not logged in state
+      }
+    });
+
+    function checkLoginStatus() {
+      // Implement your login status check logic here
+      // Return true if the user is logged in, false otherwise
+      return true; // Example: Assume the user is logged in
+    }
+
+    function getUserTravelData() {
+      // Implement your logic to retrieve user's travel data
+      // Return the travel data for the logged-in user
+      return [
+        {
+          title: '부산여행',
+          start: '2023-05-28T10:00:00',
+          end: '2023-05-29T11:30:00',
+          description: '부산여행',
+          itinerary: true
+        },
+        {
+          title: '제주도',
+          start: '2023-07-04T12:00:00',
+          end: '2023-07-07T13:00:00',
+          description: '제주도',
+          itinerary: true
+        }
+        // Add more travel data as needed
+      ];
+    }
+
+    function transformTravelDataToEvents(travelData) {
+      // Implement your logic to transform travel data into events
+      // Return the transformed itinerary events
+
+      var itineraryEvents = [];
+
+      for (var i = 0; i < travelData.length; i++) {
+        var event = {
+          title: travelData[i].title,
+          start: travelData[i].start,
+          end: travelData[i].end,
+          description: travelData[i].description,
+          itinerary: true
+        };
+
+        itineraryEvents.push(event);
+      }
+
+      return itineraryEvents;
+    }
+</script>
+<style>
+    .itinerary-event {
+      background-color: #ffc107;
+      border-color: #ffc107;
+      color: #000;
+    }
+</style>
 </body>
 </html>
-
