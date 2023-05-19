@@ -30,7 +30,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("member_id")
                 .passwordParameter("member_pw")
                 .loginPage("/login")
-                .loginProcessingUrl("/login") // /login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인을 진행해준다.
-                .defaultSuccessUrl("/");
+                .loginProcessingUrl("/loginProc") // /login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인을 진행해준다.
+                .defaultSuccessUrl("/home.in")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login.out")
+                .invalidateHttpSession(true).deleteCookies("JSESSIONID");
     }
 }

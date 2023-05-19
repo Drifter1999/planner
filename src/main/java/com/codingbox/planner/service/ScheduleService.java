@@ -2,7 +2,7 @@ package com.codingbox.planner.service;
 
 import com.codingbox.planner.domain.Members;
 import com.codingbox.planner.domain.Schedule;
-import com.codingbox.planner.Repository.ScheduleRepository;
+import com.codingbox.planner.repository.ScheduleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

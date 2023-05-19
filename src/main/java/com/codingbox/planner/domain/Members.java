@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Members {
     @Id
-    @Column(name = "MEMBER_ID")
+    @Column(name = "MEMBER_ID", unique = true)
     private String userId;
 
     @Column(name = "MEMBER_PW")

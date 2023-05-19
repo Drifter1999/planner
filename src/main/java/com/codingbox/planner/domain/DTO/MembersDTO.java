@@ -6,9 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
 public class MembersDTO {
-
     private String userId;
     private String pw;
     private String name;

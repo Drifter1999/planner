@@ -1,52 +1,84 @@
 <!-- header.html -->
-<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div class="header-area header-transparent" th:fragment="header">
-  <div class="main-header">
-    <div class="header-bottom  header-sticky">
-      <div class="container-fluid">
-        <div class="row align-items-center">
-          <!-- Logo -->
-          <div class="col-xl-2 col-lg-2 col-md-1">
-            <div class="logo">
-              <a th:href="@{/}">
-                <img src="/assets/img/logo/logo.png" alt="">
-              </a>
+    <div class="main-header">
+        <div class="header-bottom  header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <!-- Logo -->
+                    <div class="col-xl-2 col-lg-2 col-md-1">
+                        <div class="logo">
+                            <a th:href="@{/}">
+                                <img src="/assets/img/logo/logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-8">
+                        <!-- Main-menu -->
+                        <!-- 로그인 하기 전 화면 -->
+                        <form sec:authorize="isAnonymous()">
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a th:href="@{/}">Home</a></li>
+                                        <li><a th:href="@{/header/about}">About</a></li>
+                                        <li><a th:href="@{/header/category}">Categories</a></li>
+                                        <!--<li><a th:href="@{/header/listing}">Listing</a>-->
+                                        <!--                    <ul class="submenu">-->
+                                        <!--                     <li><a th:href="@{/header/listing_details}">Listing details</a></li>-->
+                                        <!--                    </ul>-->
+                                        <!--                  </li>-->
+                                        <li><a th:href="@{/header/blog}">Blog</a>
+                                            <ul class="submenu">
+                                                <!--                      <li><a th:href="@{/header/blog}">Blog</a></li>-->
+                                                <li><a th:href="@{/header/blogDetails}">여행 후기</a></li>
+                                                <li><a th:href="@{/header/elements}">플래너 공유</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a th:href="@{/header/contact}">Contact</a></li>
+                                        <li><a th:href="@{/header/Calendar}">Calendar</a></li>
+                                        <li class="login"><a th:href="@{/login}"><i class="ti-user"></i> Sign in </a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </form>
+
+                        <!-- 로그인 후 화면 -->
+                        <form id="logout" sec:authorize="isAuthenticated()" action="/logout" method="post">
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation2">
+                                        <li><a th:href="@{/}">Home</a></li>
+                                        <li><a th:href="@{/header/about}">About</a></li>
+                                        <li><a th:href="@{/header/category}">Categories</a></li>
+                                        <!--<li><a th:href="@{/header/listing}">Listing</a>-->
+                                        <!--                    <ul class="submenu">-->
+                                        <!--                     <li><a th:href="@{/header/listing_details}">Listing details</a></li>-->
+                                        <!--                    </ul>-->
+                                        <!--                  </li>-->
+                                        <li><a th:href="@{/header/blog}">Blog</a>
+                                            <ul class="submenu">
+                                                <!--                      <li><a th:href="@{/header/blog}">Blog</a></li>-->
+                                                <li><a th:href="@{/header/blogDetails}">여행 후기</a></li>
+                                                <li><a th:href="@{/header/elements}">플래너 공유</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a th:href="@{/header/contact}">Contact</a></li>
+                                        <li><a th:href="@{/header/Calendar}">Calendar</a></li>
+                                        <li class="login"><a type="submit" onclick="document.getElementById('logout').submit();"><i class="ti-user"></i> Logout </a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-xl-10 col-lg-10 col-md-8">
-            <!-- Main-menu -->
-            <div class="main-menu f-right d-none d-lg-block">
-              <nav>
-                <ul id="navigation">
-                  <li><a th:href="@{/}">Home</a></li>
-                  <li><a th:href="@{/header/about}">About</a></li>
-                  <li><a th:href="@{/header/category}">Categories</a></li>
-                  <!--<li><a th:href="@{/header/listing}">Listing</a>-->
-<!--                    <ul class="submenu">-->
-<!--                     <li><a th:href="@{/header/listing_details}">Listing details</a></li>-->
-<!--                    </ul>-->
-<!--                  </li>-->
-                  <li><a th:href="@{/header/blog}">Blog</a>
-                    <ul class="submenu">
-<!--                      <li><a th:href="@{/header/blog}">Blog</a></li>-->
-                      <li><a th:href="@{/header/blogDetails}">여행 후기</a></li>
-                      <li><a th:href="@{/header/elements}">플래너 공유</a></li>
-                    </ul>
-                  </li>
-                  <li><a th:href="@{/header/contact}">Contact</a></li>
-                  <li><a th:href="@{/header/Calendar}">Calendar</a></li>
-                  <li class="login"><a href="#" th:href="@{/login/login}"><i class="ti-user"></i> Sign in </a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-          <!-- Mobile Menu -->
-          <div class="col-12">
-            <div class="mobile_menu d-block d-lg-none"></div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 </html>

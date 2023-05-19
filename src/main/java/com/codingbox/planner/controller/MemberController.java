@@ -1,12 +1,9 @@
 package com.codingbox.planner.controller;
 
-import com.codingbox.planner.repository.MemberRepository;
 import com.codingbox.planner.domain.Members;
-// import com.codingbox.planner.service.PrincipalDetails;
-import com.codingbox.planner.service.MemberService;
-import com.codingbox.planner.service.PrincipalDetails;
+import com.codingbox.planner.repository.MemberRepository;
+import com.codingbox.planner.service.MemberDetails;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,15 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
-public class SignUpController {
+public class MemberController {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private MemberService memberService;
-
-//    @GetMapping({"", "/"})
-//    public String index() {
-//        return "index"; // src/main/resources/templates/index.html
-//    }
+//    private MemberService memberService;
 
     @GetMapping("/admin")
     public @ResponseBody String admin() {
@@ -39,6 +31,16 @@ public class SignUpController {
     @GetMapping("/login")
     public String loginForm() {
         return "login/login";
+    }
+
+    @GetMapping("/home.in")
+    public String LoginSucess() {
+        return "/home";
+    }
+
+    @GetMapping("/login.out")
+    public String LogOutSucess() {
+        return "/home";
     }
 
     @GetMapping("/signup")
@@ -58,8 +60,8 @@ public class SignUpController {
     }
 
     @GetMapping("/members")
-    public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
-        System.out.println("principalDetails : " + principalDetails.getMembers());
+    public @ResponseBody String user(@AuthenticationPrincipal MemberDetails memberDetails) {
+        System.out.println("principalDetails : " + memberDetails.getMembers());
         return "members";
 
     }

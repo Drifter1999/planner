@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MembersForm {
+    private String userId;
     private String pw;
     private String name;
     private String phone;
