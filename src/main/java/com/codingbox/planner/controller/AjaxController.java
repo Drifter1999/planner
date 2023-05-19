@@ -1,6 +1,5 @@
 package com.codingbox.planner.controller;
 
-import com.codingbox.planner.repository.MemberRepository;
 import com.codingbox.planner.domain.Members;
 import com.codingbox.planner.parser.ParsingToList;
 import com.codingbox.planner.service.MemberService;
@@ -14,7 +13,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class AjaxController {
-    private final MemberRepository memberRepository;
     private MemberService memberService;
 
     @GetMapping("/cities")
@@ -28,8 +26,7 @@ public class AjaxController {
 
     @GetMapping("/checkUserId")
     public boolean checkUserId(@RequestParam("result") String userId) {
-        Members existingUser = memberRepository.findByuserId(userId);
-        System.out.println("jhkjgkj:"+userId);
+        Members existingUser = memberService.findByUserId(userId);
         return existingUser == null;
     }
 
