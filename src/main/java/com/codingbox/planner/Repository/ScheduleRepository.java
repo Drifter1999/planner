@@ -1,4 +1,4 @@
-package com.codingbox.planner.Repository;
+package com.codingbox.planner.repository;
 
 import com.codingbox.planner.domain.Members;
 import com.codingbox.planner.domain.Schedule;
