@@ -1,7 +1,6 @@
 package com.codingbox.planner.parser;
 
-import com.codingbox.planner.domain.DTO.AreaDTO;
-import com.codingbox.planner.domain.DTO.SearchKeyWordDTO;
+import com.codingbox.planner.domain.DTO.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -61,6 +60,141 @@ public class ParsingToList {
         }
         return areaArr;
     }
+    public List<AccommodationDetailIntroDTO> findAccomIntroArray(JSONArray jsonArr) throws ParseException {
+        List<AccommodationDetailIntroDTO> introArr = new ArrayList<AccommodationDetailIntroDTO>();
+
+        for (int i = 0 ; i < jsonArr.size(); i++) {
+            AccommodationDetailIntroDTO data = new AccommodationDetailIntroDTO();
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
+
+            data.setContentid(String.valueOf(jsonObj.get("contentid")));
+            data.setContenttypeid(String.valueOf(jsonObj.get("contenttypeid")));
+            data.setGoodstay(String.valueOf(jsonObj.get("goodstay")));
+            data.setBenikia(String.valueOf(jsonObj.get("benikia")));
+            data.setHanok(String.valueOf(jsonObj.get("hanok")));
+            data.setRoomcount(String.valueOf(jsonObj.get("roomcount")));
+            data.setRoomtype(String.valueOf(jsonObj.get("roomtype")));
+            data.setRefundregulation(String.valueOf(jsonObj.get("refundregulation")));
+            data.setCheckintime(String.valueOf(jsonObj.get("checkintime")));
+            data.setCheckouttime(String.valueOf(jsonObj.get("checkouttime")));
+            data.setChkcooking(String.valueOf(jsonObj.get("chkcooking")));
+            data.setSeminar(String.valueOf(jsonObj.get("seminar")));
+            data.setSports(String.valueOf(jsonObj.get("sports")));
+            data.setSauna(String.valueOf(jsonObj.get("sauna")));
+            data.setBeauty(String.valueOf(jsonObj.get("beauty")));
+            data.setBeverage(String.valueOf(jsonObj.get("beverage")));
+            data.setCampfire(String.valueOf(jsonObj.get("campfire")));
+            data.setBicycle(String.valueOf(jsonObj.get("bicycle")));
+            data.setFitness(String.valueOf(jsonObj.get("fitness")));
+            data.setPublicpc(String.valueOf(jsonObj.get("publicpc")));
+            data.setPublicbath(String.valueOf(jsonObj.get("publicbath")));
+            data.setSubfacility(String.valueOf(jsonObj.get("subfacility")));
+            data.setFoodplace(String.valueOf(jsonObj.get("foodplace")));
+            data.setReservationurl(String.valueOf(jsonObj.get("reservationurl")));
+            data.setPickup(String.valueOf(jsonObj.get("pickup")));
+            data.setInfocenterlodging(String.valueOf(jsonObj.get("infocenterlodging")));
+            data.setParkinglodging(String.valueOf(jsonObj.get("parkinglodging")));
+            data.setReservationlodging(String.valueOf(jsonObj.get("reservationlodging")));
+            data.setScalelodging(String.valueOf(jsonObj.get("scalelodging")));
+            data.setAccomcountlodging(String.valueOf(jsonObj.get("accomcountlodging")));
+            introArr.add(data);
+        }
+        return introArr;
+    }
+
+    public List<LeisureDetailIntroDTO> findLeisureIntroArray(JSONArray jsonArr) throws ParseException {
+        List<LeisureDetailIntroDTO> leisureArr = new ArrayList<LeisureDetailIntroDTO>();
+
+        for (int i = 0 ; i < jsonArr.size(); i++) {
+            LeisureDetailIntroDTO data = new LeisureDetailIntroDTO();
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
+
+            data.setContentid(String.valueOf(jsonObj.get("contentid")));
+            data.setContenttypeid(String.valueOf(jsonObj.get("contenttypeid")));
+            data.setOpenperiod(String.valueOf(jsonObj.get("openperiod")));
+            data.setReservation(String.valueOf(jsonObj.get("reservation")));
+            data.setInfocenterleports(String.valueOf(jsonObj.get("infocenterleports")));
+            data.setScaleleports(String.valueOf(jsonObj.get("scaleleports")));
+            data.setAccomcountleports(String.valueOf(jsonObj.get("accomcountleports")));
+            data.setRestdateleports(String.valueOf(jsonObj.get("restdateleports")));
+            data.setUsetimeleports(String.valueOf(jsonObj.get("usetimeleports")));
+            data.setExpagerangeleports(String.valueOf(jsonObj.get("expagerangeleports")));
+            data.setParkingleports(String.valueOf(jsonObj.get("parkingleports")));
+            data.setParkingleports(String.valueOf(jsonObj.get("parkingfeeleports")));
+            data.setParkingleports(String.valueOf(jsonObj.get("chkbabycarriageleports")));
+            data.setParkingleports(String.valueOf(jsonObj.get("chkpetleports")));
+            data.setParkingleports(String.valueOf(jsonObj.get("chkcreditcardleports")));
+
+            leisureArr.add(data);
+        }
+        return leisureArr;
+    }
+
+    public List<RestaurantDetailDTO> findRestIntroArray(JSONArray jsonArr) throws ParseException {
+        List<RestaurantDetailDTO> restauArr = new ArrayList<RestaurantDetailDTO>();
+
+        for (int i = 0 ; i < jsonArr.size(); i++) {
+            RestaurantDetailDTO data = new RestaurantDetailDTO();
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
+
+            data.setContentid(String.valueOf(jsonObj.get("contentid")));
+            data.setContenttypeid(String.valueOf(jsonObj.get("contenttypeid")));
+            data.setSeat(String.valueOf(jsonObj.get("seat")));
+            data.setKidsfacility(String.valueOf(jsonObj.get("kidsfacility")));
+            data.setFirstmenu(String.valueOf(jsonObj.get("firstmenu")));
+            data.setTreatmenu(String.valueOf(jsonObj.get("treatmenu")));
+            data.setSmoking(String.valueOf(jsonObj.get("smoking")));
+            data.setPacking(String.valueOf(jsonObj.get("packing")));
+            data.setInfocenterfood(String.valueOf(jsonObj.get("infocenterfood")));
+            data.setScalefood(String.valueOf(jsonObj.get("scalefood")));
+            data.setParkingfood(String.valueOf(jsonObj.get("parkingfood")));
+            data.setOpendatefood(String.valueOf(jsonObj.get("opendatefood")));
+            data.setOpentimefood(String.valueOf(jsonObj.get("opentimefood")));
+            data.setRestdatefood(String.valueOf(jsonObj.get("restdatefood")));
+            data.setDiscountinfofood(String.valueOf(jsonObj.get("discountinfofood")));
+            data.setChkcreditcardfood(String.valueOf(jsonObj.get("chkcreditcardfood")));
+            data.setReservationfood(String.valueOf(jsonObj.get("reservationfood")));
+            data.setLcnsno(String.valueOf(jsonObj.get("lcnsno")));
+
+            restauArr.add(data);
+        }
+        return restauArr;
+    }
+
+    public List<TourDetailIntroDTO> findTourIntroArray(JSONArray jsonArr) throws ParseException {
+        List<TourDetailIntroDTO> TourArr = new ArrayList<TourDetailIntroDTO>();
+
+        for (int i = 0 ; i < jsonArr.size(); i++) {
+            TourDetailIntroDTO data = new TourDetailIntroDTO();
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
+
+            data.setContenttypeid(String.valueOf(jsonObj.get("contentid")));
+            data.setContenttypeid(String.valueOf(jsonObj.get("contenttypeid")));
+            data.setHeritage1(String.valueOf(jsonObj.get("heritage1")));
+            data.setHeritage1(String.valueOf(jsonObj.get("heritage2")));
+            data.setHeritage1(String.valueOf(jsonObj.get("heritage3")));
+            data.setInfocenter(String.valueOf(jsonObj.get("infocenter")));
+            data.setOpendate(String.valueOf(jsonObj.get("opendate")));
+            data.setRestdate(String.valueOf(jsonObj.get("restdate")));
+            data.setExpguide(String.valueOf(jsonObj.get("expguide")));
+            data.setExpgerange(String.valueOf(jsonObj.get("expgerange")));
+            data.setAccomcount(String.valueOf(jsonObj.get("accomcount")));
+            data.setUseseason(String.valueOf(jsonObj.get("useseason")));
+            data.setUsetime(String.valueOf(jsonObj.get("usetime")));
+            data.setParking(String.valueOf(jsonObj.get("parking")));
+            data.setChkbabycarriage(String.valueOf(jsonObj.get("chkbabycarriage")));
+            data.setChkpet(String.valueOf(jsonObj.get("chkpet")));
+            data.setChkcreditcard(String.valueOf(jsonObj.get("chkcreditcard")));
+
+            TourArr.add(data);
+        }
+        return TourArr;
+    }
+
 
     public List<String> AreaJsonArray (String province) {
         List<String> Area = new ArrayList<String>();
@@ -119,5 +253,25 @@ public class ParsingToList {
         }
 
         return Area;
+    }
+
+    public List<DetailsImagesDTO> findImageArray(JSONArray jsonArr) throws ParseException {
+        List<DetailsImagesDTO> imagesArr = new ArrayList<DetailsImagesDTO>();
+
+        for (int i = 0 ; i < jsonArr.size() ; i++) {
+            DetailsImagesDTO data = new DetailsImagesDTO();
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
+
+            data.setContentid(String.valueOf(jsonObj.get("contentid")));
+            data.setOriginimgurl(String.valueOf(jsonObj.get("originimgurl")));
+            data.setImgname(String.valueOf(jsonObj.get("imgname")));
+            data.setSmallimageurl(String.valueOf(jsonObj.get("smallimageurl")));
+            data.setCpyrhtDivCd(String.valueOf(jsonObj.get("cpyrhtDivCd")));
+            data.setSerialnum(String.valueOf(jsonObj.get("serialnum")));
+
+            imagesArr.add(data);
+        }
+        return imagesArr;
     }
 }

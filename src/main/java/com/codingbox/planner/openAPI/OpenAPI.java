@@ -39,4 +39,45 @@ public class OpenAPI {
                 + Application + "&numOfRows=20";
         return URL;
     }
+
+    public String createDetailIntroURL (String contentId, String contentTypeId) {
+        String contetnt = contentId.trim();
+        String contentType = contentTypeId.trim();
+
+        switch (contentType) {
+            case "관광지" :
+                contentType = "12";
+                break;
+
+            case "레포츠" :
+                contentType = "28";
+                break;
+
+            case "숙박" :
+                contentType = "32";
+                break;
+
+            case "음식점" :
+                contentType = "39";
+                break;
+        }
+
+        URL = EndPoint + "detailIntro1?" +
+                "ServiceKey=" +MyKey +
+                Application +
+                "&contentId=" + contetnt + "&numOfRows=1&pageNo=1" + "&contentTypeId=" + contentType;
+
+        return URL;
+    };
+
+    public String createDetailsImagesURL(String contentId) {
+        URL = EndPoint + "detailImage1?" +
+                "ServiceKey=" + MyKey +
+                Application +
+                "&contentId=" + contentId +
+                "&imageYN=Y" +
+                "&subImageYN=Y" +
+                "&numOfRows=10&pageNo=1";
+        return URL;
+    }
 }
