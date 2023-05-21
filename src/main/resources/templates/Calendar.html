@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Calendar with Itinerary</title>
@@ -37,153 +37,160 @@
         </div>
     </div>
     <!--Hero End -->
-    <div id="calendar"></div>
+    <hr>
+    <!-- Shopping Cart Table Start -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>일정</th>
+                        <th>목적지</th>
+                        <th>카테고리</th>
+                        <th>여행기간</th>
+                        <th>Action</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>일정1</td>
+                        <td>부산</td>
+                        <td>숙박</td>
+                        <td>2023-05-23 ~ 2023-05-30</td>
+                        <td><button class="btn btn-primary apply-btn">Apply</button></td>
+                        <td><button class="btn btn-danger">Remove</button></td>
+
+                    </tr>
+                    <tr>
+                        <td>일정2</td>
+                        <td>제주도</td>
+                        <td>레저스포츠</td>
+                        <td>2023-07-04 ~ 2023-07-07</td>
+                        <td><button class="btn btn-primary apply-btn">Apply</button></td>
+                        <td><button class="btn btn-danger">Remove</button></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Shopping Cart Table End -->
+
+    <!-- Calendar Start -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Calendar End -->
 </main>
 <footer>
     <div th:insert="~{fragment/footer1 :: footer1}"></div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script>
-    $(document).ready(function() {
-      // Check login status
-      var isLoggedIn = checkLoginStatus(); // Implement your login status check logic here
-
-      if (isLoggedIn) {
-        // Retrieve user's travel data
-        var travelData = getUserTravelData(); // Implement your logic to retrieve user's travel data
-
-        // Transform travel data into itinerary events
-        var itineraryEvents = transformTravelDataToEvents(travelData); // Implement your logic to transform travel data into events
-
-        // Initialize the calendar
-        $('#calendar').fullCalendar({
-          // Set your desired options and configurations
-          // For example, set the calendar to display a month view by default
-          defaultView: 'month',
-
-          // Add the itinerary events
-          events: itineraryEvents,
-
-          // Customize event rendering to display itinerary events differently
-          eventRender: function(event, element) {
-            if (event.itinerary) {
-              element.addClass('itinerary-event');
-            }
-          },
-
-          // Add a click event handler for itinerary events
-          eventClick: function(event) {
-            if (event.itinerary) {
-              alert('Itinerary event: ' + event.title + '\nDescription: ' + event.description);
-            }
-          }
-        });
-
-        // Declare variable for current itinerary index
-        var currentItineraryIndex = 0;
-
-        // Function to show the next travel date
-        function showNextTravelDate() {
-          // Update the current itinerary index
-          currentItineraryIndex = (currentItineraryIndex + 1) % itineraryEvents.length;
-
-          // Get the next travel event
-          var nextTravelEvent = itineraryEvents[currentItineraryIndex];
-
-          // Show the calendar for the next travel date
-          $('#calendar').fullCalendar('gotoDate', nextTravelEvent.start);
-        }
-
-        // Function to find the next travel event
-        function findNextTravelEvent(events) {
-          var today = moment().startOf('day');
-          var nextEvent = null;
-
-          for (var i = 0; i < events.length; i++) {
-            var eventStart = moment(events[i].start).startOf('day');
-
-            if (eventStart.isAfter(today)) {
-              nextEvent = events[i];
-              break;
-            }
-          }
-
-          return nextEvent;
-        }
-
-        // Find the next travel event
-        var nextTravelEvent = findNextTravelEvent(itineraryEvents);
-
-        // Show the next travel date button
-        if (nextTravelEvent) {
-          var nextTravelButtonHtml = '<button onclick="showNextTravelDate()">Show Next Travel Date</button>';
-          $('#calendar').prepend(nextTravelButtonHtml);
-        }
-      } else {
-        // Handle not logged in state (redirect to login page, display a message, etc.)
-        alert('Please log in to view the calendar.');
-        // Implement your logic for handling not logged in state
-      }
+ $(document).ready(function() {
+    // Initialize the calendar
+    $('#calendar').fullCalendar({
+        // Set the calendar options
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        defaultView: 'month',
+        editable: false,
+        eventLimit: true, // allow "more" link when too many events
+        displayEventTime: false,
+        events: []
     });
 
-    function checkLoginStatus() {
-      // Implement your login status check logic here
-      // Return true if the user is logged in, false otherwise
-      return true; // Example: Assume the user is logged in
-    }
+    // Add a click event handler for the "Apply" button
+    $('.apply-btn').click(function() {
+        // Get the corresponding itinerary data from the table row
+        var row = $(this).closest('tr');
+        var title = row.find('td:eq(0)').text();
+        var start = row.find('td:eq(3)').text().split(' ~ ')[0];
+        var end = row.find('td:eq(3)').text().split(' ~ ')[1];
+        var description = row.find('td:eq(0)').text();
 
-    function getUserTravelData() {
-      // Implement your logic to retrieve user's travel data
-      // Return the travel data for the logged-in user
-      return [
-        {
-          title: '부산여행',
-          start: '2023-05-28T10:00:00',
-          end: '2023-05-29T11:30:00',
-          description: '부산여행',
-          itinerary: true
-        },
-        {
-          title: '제주도',
-          start: '2023-07-04T12:00:00',
-          end: '2023-07-07T13:00:00',
-          description: '제주도',
-          itinerary: true
+        // Check if the event is already applied to the calendar
+        var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {
+            return (
+                event.title === title &&
+                event.start.format('YYYY-MM-DD') === start &&
+                event.end.format('YYYY-MM-DD') === end &&
+                event.description === description &&
+                event.itinerary === true
+            );
+        }).length > 0;
+
+        if (isEventApplied) {
+            // Event is already applied, so remove it from the calendar
+            $('#calendar').fullCalendar('removeEvents', function(event) {
+                return (
+                    event.title === title &&
+                    event.start.format('YYYY-MM-DD') === start &&
+                    event.end.format('YYYY-MM-DD') === end &&
+                    event.description === description &&
+                    event.itinerary === true
+                );
+            });
+
+            // Change the button text and style back to default
+            $(this).text('Apply').removeClass('btn-success').addClass('btn-primary');
+        } else {
+            // Event is not applied, so add it to the calendar
+            var event = {
+                title: title,
+                start: start,
+                end: end,
+                description: description,
+                itinerary: true
+            };
+
+            // Add the new event to the calendar
+            $('#calendar').fullCalendar('renderEvent', event);
+
+            // Change the button text and style to indicate it's applied
+            $(this).text('Applied').removeClass('btn-primary').addClass('btn-success');
         }
-        // Add more travel data as needed
-      ];
-    }
+    });
 
-    function transformTravelDataToEvents(travelData) {
-      // Implement your logic to transform travel data into events
-      // Return the transformed itinerary events
+    // Add a click event handler for the "Remove" button
+    $('.btn-danger').click(function() {
+        // Get the corresponding itinerary data from the table row
+        var row = $(this).closest('tr');
+        var title = row.find('td:eq(0)').text();
+        var start = row.find('td:eq(3)').text().split(' ~ ')[0];
+        var end = row.find('td:eq(3)').text().split(' ~ ')[1];
+        var description = row.find('td:eq(0)').text();
 
-      var itineraryEvents = [];
+        // Remove the event from the calendar
+        $('#calendar').fullCalendar('removeEvents', function(event) {
+            return (
+                event.title === title &&
+                event.start.format('YYYY-MM-DD') === start &&
+                event.end.format('YYYY-MM-DD') === end &&
+                event.description === description &&
+                event.itinerary === true
+            );
+        });
 
-      for (var i = 0; i < travelData.length; i++) {
-        var event = {
-          title: travelData[i].title,
-          start: travelData[i].start,
-          end: travelData[i].end,
-          description: travelData[i].description,
-          itinerary: true
-        };
+        // Optionally, remove the row from the table if needed
+        row.remove();
+    });
+});
 
-        itineraryEvents.push(event);
-      }
-
-      return itineraryEvents;
-    }
 </script>
-<style>
-    .itinerary-event {
-      background-color: #ffc107;
-      border-color: #ffc107;
-      color: #000;
-    }
-</style>
 </body>
 </html>
