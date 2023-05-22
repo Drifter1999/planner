@@ -31,11 +31,17 @@
       </div>
     </div>
     <textarea id="summernote" name="content" class="note-editable" th:field="*{content}" ><p>Hello</p></textarea>
-    <input type="hidden" th:field="*{imgpath}">
+    <div>
+      <img th:if="${blog.imgpath}" th:src="@{'/files/' + ${blog.imgpath}}" width="200px" alt="Uploaded Image">
+    </div>
+
+    <input type="file" name="file" id="file">
+
     <div style="text-align: center;">
       <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
               style=" width:  770px; height: 50px;" >수정하기</button>
     </div>
+
   </form>
 </div>
 

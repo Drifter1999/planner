@@ -60,7 +60,7 @@
           <th:block th:each="blogs : ${blogs}">
             <article class="blog_item">
               <div class="blog_item_img">
-                <img class="card-img rounded-0" src="assets/img/blog/single_blog_1.png" th:src="@{'/assets/blog/temp/' + ${blogs.imgpath}}" alt="">
+                <img class="card-img rounded-0" src="assets/img/blog/single_blog_1.png" th:src="@{${blogs.imgpath}}" alt="">
               </div>
               <div class="blog_details">
                 <a class="d-inline-block" href="blog_details.html" th:href="@{/blog/detailblog/{blogId}(blogId=${blogs.blogId})}">

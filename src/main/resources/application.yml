@@ -32,6 +32,10 @@ spring:
   sql:
     init:
       mode: always
+  servlet:
+    multipart:
+      max-file-size: 5242880000
+      max-request-size: 5242880000
 
 #  mvc:
 #    static-path-pattern: /static/**

@@ -31,7 +31,7 @@
       </div>
     </div>
     <textarea id="summernote" name="content" class="note-editable"><p>Hello</p></textarea>
-    <div id="reviewI-imageAppend"></div>
+    <input type="file" name="file">
     <div style="text-align: center;">
       <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
               style=" width:  770px; height: 50px;" >저장하기</button>
@@ -61,19 +61,19 @@
         ['table', ['table']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['height', ['height']],
-        ['insert',['picture','link']],
+        ['insert',['link']],
         ['view', ['fullscreen', 'help']]
       ],
       fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
       fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
       //이미지 업로드시 콜백 호출 :
-      callbacks: {
+/*      callbacks: {
         onImageUpload: function (files, editor, welEditable) {
           for (var i = 0; i < files.length; i++) {
             sendFile(files[i], this, i);
           }
         }
-      }
+      }*/
     });
   });
 

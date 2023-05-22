@@ -4,7 +4,7 @@ import com.codingbox.planner.config.UploadFileUtil;
 import com.codingbox.planner.domain.Blog;
 import com.codingbox.planner.domain.DTO.BlogDTO;
 import com.codingbox.planner.service.BlogService;
-//import com.codingbox.planner.service.ImageService;
+import com.codingbox.planner.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,8 +34,8 @@ public class BlogController {
     @Autowired
     private final UploadFileUtil fileUtil;
 
-    /*@Autowired
-    private final ImageService imageService;*/
+    @Autowired
+    private final ImageService imageService;
 
     @Autowired
     private HttpServletRequest request;
@@ -70,40 +71,51 @@ public class BlogController {
     }
     
     // 이미지 등록
-    /*@ResponseBody
-    @PostMapping("/writeblog/image")
-    public ResponseEntity<?> imageUpload(@RequestParam("file") MultipartFile file) {
-        try {
-            String filePath = imageService.store(file);
-            return ResponseEntity.ok().body(filePath);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().build();
-        }
-    }*/
+//    @ResponseBody
+//    @PostMapping("/writeblog/image")
+//    public ResponseEntity<?> imageUpload(@RequestParam("file") MultipartFile file) {
+//        try {
+//            String filePath = imageService.store(file);
+//            return ResponseEntity.ok().body(filePath);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.badRequest().build();
+//        }
+//    }
 
     //후기 게시글 등록
     // return "redirect:/blog/detailblog/{blogId}"
+//    @PostMapping("/writeblog")
+//    public String insertBlog(@RequestParam(required = false) String[] imgpath, BlogDTO blogDTO, RedirectAttributes redirectAttributes) {
+//
+//        // 이미지 blogDTO에 String으로 바뀐 이미지 Path 전달
+//        if (imgpath != null) {
+//            //String배열 문자열 치환 후 문자열로 변경
+//            String uploadImg = Arrays.stream(imgpath).map(s -> s = s.split("temp")[1].substring(1)).collect(Collectors.joining(","));
+//            blogDTO.setImgpath(uploadImg);
+//        }
+//
+//        // blog에 insert
+//        BlogDTO blog = blogService.insertBlog(blogDTO);
+//
+//        //imgpath가 null이 아닌 경우, fileUtil.moveImages() 메소드를 호출하여 블로그에 첨부된 이미지를 이동
+//        if (blog.getImgpath() != null) {
+//            fileUtil.moveImages(blog.getBlogId(), blog.getImgpath());
+//        }
+//
+//        redirectAttributes.addAttribute("blogId", blog.getBlogId());
+//
+//        return "redirect:/blog/detailblog/{blogId}";
+//    }
+
     @PostMapping("/writeblog")
-    public String insertBlog(@RequestParam(required = false) String[] imgpath, BlogDTO blogDTO, RedirectAttributes redirectAttributes) {
+    public String boardWritePro(Blog blog, Model model, MultipartFile file,  RedirectAttributes redirectAttribute) throws Exception{
 
-        // 이미지 blogDTO에 String으로 바뀐 이미지 Path 전달
-        if (imgpath != null) {
-            //String배열 문자열 치환 후 문자열로 변경
-            String uploadImg = Arrays.stream(imgpath).map(s -> s = s.split("temp")[1].substring(1)).collect(Collectors.joining(","));
-            blogDTO.setImgpath(uploadImg);
-        }
 
-        // blog에 insert
-        BlogDTO blog = blogService.insertBlog(blogDTO);
+        blogService.insertBlog(blog, file);
 
-        //imgpath가 null이 아닌 경우, fileUtil.moveImages() 메소드를 호출하여 블로그에 첨부된 이미지를 이동
-        if (blog.getImgpath() != null) {
-            fileUtil.moveImages(blog.getBlogId(), blog.getImgpath());
-        }
-
-        redirectAttributes.addAttribute("blogId", blog.getBlogId());
+        redirectAttribute.addAttribute("blogId", blog.getBlogId());
 
         return "redirect:/blog/detailblog/{blogId}";
     }
@@ -137,14 +149,14 @@ public class BlogController {
         blogDTO.setTitle(blog.getTitle());
         blogDTO.setContent(blog.getContent());
         blogDTO.setDate(blog.getDate());
-        blog.setImgpath(blog.getImgpath());
-        fileUtil.moveToTemp(blogId);
+        blogDTO.setImgpath(blog.getImgpath());
+
         model.addAttribute("blog",blog);
 
         return "blog/editblog";
     }
 
-    /*@ResponseBody
+/*    @ResponseBody
     @PostMapping("/editblog/image")
     public ResponseEntity<?> imageReload(@RequestParam("file") MultipartFile file) {
         try {
@@ -157,7 +169,7 @@ public class BlogController {
         }
     }*/
 
-    @PostMapping ( "/detailblog/{blogId}/edit")
+/*    @PostMapping ( "/detailblog/{blogId}/edit")
     public String updateBlog(@PathVariable("blogId") Long blogId,
                                BlogDTO dto,
                                @RequestParam(required = false) String[] imgpath) {
@@ -169,6 +181,26 @@ public class BlogController {
 
         blogService.updateBlog(blogId, dto);
         fileUtil.moveImages(blogId, dto.getImgpath());
+
+        return "redirect:/blog/detailblog/{blogId}";
+    }*/
+
+    @PostMapping ( "/detailblog/{blogId}/edit")
+    public String updateBlog(@ModelAttribute("blog")Blog blogDTO,
+                             MultipartFile file)throws Exception {
+
+        Blog blog = new Blog();
+
+        blog.setBlogId(blogDTO.getBlogId());
+        blog.setTitle(blogDTO.getTitle());
+        blog.setContent(blogDTO.getContent());
+
+        if (file != null && !file.isEmpty()) {
+            blogService.updatesBlog(blogDTO.getBlogId(), blogDTO, file);
+        } else {
+            blogService.updateBlog(blogDTO.getBlogId(), blogDTO);
+        }
+
 
         return "redirect:/blog/detailblog/{blogId}";
     }

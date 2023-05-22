@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -54,5 +55,9 @@ public class BlogRepository {
 
         return new PageImpl<>(content, pageable, total);
 
+    }
+
+    public Blog findById(Long blogId) {
+        return em.find(Blog.class, blogId);
     }
 }

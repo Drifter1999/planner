@@ -31,8 +31,11 @@ public class Blog {
     @Column(columnDefinition = "CLOB", name="BLOG_CONTENT")
     private String content;
 
-    @Column(name = "IMG_PATH")
+    @Column(name="IMG_PATH")
     private String imgpath;
+
+    @Column(name="IMG_NAME")
+    private String imgname;
 
     @Column(name = "UPDATE_DATE")
     private LocalDateTime date;
