@@ -46,34 +46,23 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>일정</th>
                         <th>목적지</th>
                         <th>카테고리</th>
-                        <th>여행기간</th>
-                        <th>Action</th>
-                        <th>Action</th>
+                        <th>여행시작</th>
+                        <th>여행종료</th>
+                        <th>일정 등록/철회</th>
+                        <th>일정 삭제</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>일정1</td>
-                        <td>부산</td>
-                        <td>숙박</td>
-                        <td>2023-05-23 ~ 2023-05-30</td>
-                        <td><button class="btn btn-primary apply-btn">Apply</button></td>
-                        <td><button class="btn btn-danger">Remove</button></td>
-
-                    </tr>
-                    <tr>
-                        <td>일정2</td>
-                        <td>제주도</td>
-                        <td>레저스포츠</td>
-                        <td>2023-07-04 ~ 2023-07-07</td>
-                        <td><button class="btn btn-primary apply-btn">Apply</button></td>
-                        <td><button class="btn btn-danger">Remove</button></td>
-
-                    </tr>
-
+                    <tbody th:each="data : ${cartArr}">
+                        <tr>
+                            <td th:text="${data.contentTitleList}"></td>
+                            <td th:text="${data.contentName}"></td>
+                            <td th:text="${data.strDate}"></td>
+                            <td th:text="${data.endDate}"></td>
+                            <td><button class="btn btn-primary apply-btn">Apply</button></td>
+                            <td><button class="btn btn-danger">Remove</button></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

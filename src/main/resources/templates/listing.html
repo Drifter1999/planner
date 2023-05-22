@@ -142,88 +142,68 @@
                     </div>
                     <!-- Job Category Listing start -->
                     <div class="category-listing mb-50">
+                        <form id="cartForm" method="post" th:action="@{/header/Calendar}">
                         <!-- single one -->
                         <div class="single-listing">
-                            <!-- input -->
-                            <div class="input-form">
-                                <input id="startDate" name="startDate" type="date" placeholder="출발일">
+                                <!-- input -->
+                                <div class="input-form">
+                                    <input id="startDate" name="startDate" type="date" placeholder="출발일" />
+                                </div>
+                                <div class="input-form">
+                                    <input id="endDate" name="endDate" type="date" placeholder="도착일" />
+                                </div>
+                                <div class="input-form">
+                                    <input type="text" id="contentTitleList" name="contentTitleList" readonly/>
+                                </div>
+                                <!-- Select job items start -->
+                                <!--<div class="select-job-items1">
+                                    <select name="select1">
+                                        <option value="">Choose categories</option>
+                                        <option value="">Category 1</option>
+                                        <option value="">Category 2</option>
+                                        <option value="">Category 3</option>
+                                    </select>
+                                </div>
+                                &lt;!&ndash;  Select job items End&ndash;&gt;
+                                &lt;!&ndash; Select job items start &ndash;&gt;
+                                <div class="select-job-items2">
+                                    <select name="select2">
+                                        <option value="">Location</option>
+                                        <option value="">Dhaka</option>
+                                        <option value="">Mirpur</option>
+                                        <option value="">Dannondi</option>
+                                    </select>
+                                </div>
+                                &lt;!&ndash;  Select job items End&ndash;&gt;
+                                &lt;!&ndash; select-Categories start &ndash;&gt;
+                                <div class="select-Categories pt-140 pb-20">
+                                    <label class="container">Full Time
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="container">Ratings
+                                        <input type="checkbox" checked="checked active">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                &lt;!&ndash; select-Categories End &ndash;&gt;
+                                &lt;!&ndash; Select job items start &ndash;&gt;
+                                <div class="select-job-items2">
+                                    <select name="select2">
+                                        <option value="">Area (km)</option>
+                                        <option value="">Dhaka- 1km</option>
+                                        <option value="">Dinajpur- 2km</option>
+                                        <option value="">Chittagong - 3km</option>
+                                    </select>
+                                </div>-->
+                                <!--  Select job items End-->
                             </div>
-                            <div class="input-form">
-                                <input id="endDate" name="endDate" type="date" placeholder="도착일">
-                            </div>
-                            <div class="input-form">
-                                <input type="text" placeholder="What are you finding?">
-                            </div>
-                            <!-- Select job items start -->
-                            <div class="select-job-items1">
-                                <select name="select1">
-                                    <option value="">Choose categories</option>
-                                    <option value="">Category 1</option>
-                                    <option value="">Category 2</option>
-                                    <option value="">Category 3</option>
-                                </select>
-                            </div>
-                            <!--  Select job items End-->
-                            <!-- Select job items start -->
-                            <div class="select-job-items2">
-                                <select name="select2">
-                                    <option value="">Location</option>
-                                    <option value="">Dhaka</option>
-                                    <option value="">Mirpur</option>
-                                    <option value="">Dannondi</option>
-                                </select>
-                            </div>
-                            <!--  Select job items End-->
-                            <!-- select-Categories start -->
-                            <div class="select-Categories pt-140 pb-20">
-                                <label class="container">Full Time
-                                    <input type="checkbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label class="container">Ratings
-                                    <input type="checkbox" checked="checked active">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <!-- select-Categories End -->
-                            <!-- Select job items start -->
-                            <div class="select-job-items2">
-                                <select name="select2">
-                                    <option value="">Area (km)</option>
-                                    <option value="">Dhaka- 1km</option>
-                                    <option value="">Dinajpur- 2km</option>
-                                    <option value="">Chittagong - 3km</option>
-                                </select>
-                            </div>
-                            <!--  Select job items End-->
-                        </div>
+                            <input hidden="hidden" id="hiddenInput" name="contentTitleList"/>
+                            <input hidden="hidden" id="hiddenInput-1" name="ContentType" th:value="${ApiArr.get(0).contenttypeid}">
+                            <input type="submit" class="btn list-btn mt-20" value="일정 담기"/>
+                        </form>
+<!--                        <a href="#" class="btn list-btn mt-20">Reset</a>-->
 
-                        <div class="single-listing">
-                            <!-- Range Slider Start -->
-                            <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
-                                <div class="small-section-tittle2">
-                                    <h4>Price range</h4>
-                                </div>
-                                <div class="widgets_inner">
-                                    <div class="range_item">
-                                        <!-- <div id="slider-range"></div> -->
-                                        <input type="text" class="js-range-slider" value=""/>
-                                        <div class="d-flex align-items-center">
-                                            <div class="price_text">
-                                                <p>Price :</p>
-                                            </div>
-                                            <div class="price_value d-flex justify-content-center">
-                                                <input type="text" class="js-input-from" id="amountA" readonly/>
-                                                <span>to</span>
-                                                <input type="text" class="js-input-to" id="amountB" readonly/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </aside>
-                            <!-- Range Slider End -->
-                            <a href="#" class="btn list-btn mt-20">Reset</a>
-                        </div>
                     </div>
                     <!-- Job Category Listing End -->
                 </div>
@@ -247,7 +227,8 @@
                                             <img th:unless="${data.firstimage} != ''" src="/assets/img/gallery/none.png" alt="">
                                         </div>
                                         <div class="list-caption">
-                                            <span>Open</span>
+<!--                                            <span th:onclick="'contentInCart(\''+${data.contentid}+'\', \'' + ${data.title} + '\')'">담기</span>-->
+                                            <span th:data-id="${data.contentid}" th:data-title="${data.title}" onclick="contentInCart(this)">담기</span>
                                             <h3>
                                                 <a th:href="@{'/listing/details?contentId=' + ${data.contentid}
                                                  + '&contentTypeId=' + ${data.contenttypeid}}"
@@ -370,6 +351,18 @@
         $(".monthselect").css("float", "right");
         $(".cancelBtn").css("float", "right");
     });
+</script>
+<script>
+    function contentInCart(element) {
+        var id = "\""+element.getAttribute('data-id')+"\",";
+        var title = "\"" + element.getAttribute('data-title') + "\",";
+
+        var titleList = document.getElementById("contentTitleList");
+
+        var titleStr = titleList.value;
+        titleList.value = titleStr + title;
+    }
+
 </script>
 </body>
 </html>
