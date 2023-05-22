@@ -65,8 +65,8 @@ public class  HeaderController {
     }
 
     @GetMapping("/listing_details")
-    public String listing_details() {
-        return "listing_details";
+    public String listingDetailsRedirect() {
+        return "redirect:/listing/details";
     }
 
     @GetMapping("/Calendar")

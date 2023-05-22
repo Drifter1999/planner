@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Calendar with Itinerary</title>
@@ -23,7 +24,7 @@
 <header>
     <div th:insert="~{fragment/header :: header}"></div>
 </header>
-<main>
+<main sec:authorize="isAuthenticated()">
     <!-- Hero Start-->
     <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
         <div class="container">

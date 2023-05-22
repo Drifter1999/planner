@@ -247,7 +247,7 @@
                                             <img th:unless="${data.firstimage} != ''" src="/assets/img/gallery/none.png" alt="">
                                         </div>
                                         <div class="list-caption">
-                                            <span>Open</span>
+                                            <button onclick="openContent('${data.contentid}', '${data.contenttypeid}', '${data.title}')">Open</button>
                                             <h3>
                                                 <a th:href="@{'/listing/details?contentId=' + ${data.contentid}
                                                  + '&contentTypeId=' + ${data.contenttypeid}}"
@@ -370,6 +370,15 @@
         $(".monthselect").css("float", "right");
         $(".cancelBtn").css("float", "right");
     });
+
+    function openContent(content) {
+    let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+    shoppingCart.push(content);
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+
+    window.location.href = 'calendar';
+}
+
 </script>
 </body>
 </html>

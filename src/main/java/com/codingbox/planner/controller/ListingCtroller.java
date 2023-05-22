@@ -24,10 +24,10 @@ public class ListingCtroller {
     private final TourService tourService;
     private final DetailImagesService detailImagesService;
 
-    @GetMapping("/details")
-    public String listingDetails (
-            @RequestParam String contentId,
-            @RequestParam String contentTypeId,
+    @GetMapping("/details/{contentId}/{contentTypeId}")
+    public String listingDetails(
+            @PathVariable String contentId,
+            @PathVariable String contentTypeId,
             Model model) {
         switch (contentTypeId) {
             case "12":
