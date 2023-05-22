@@ -1,198 +1,189 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Web Hosting HTML-5 Template </title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Web Hosting HTML-5 Template </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
-	<!-- CSS here -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="assets/css/slicknav.css">
-	<link rel="stylesheet" href="assets/css/animate.min.css">
-	<link rel="stylesheet" href="assets/css/magnific-popup.css">
-	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-	<link rel="stylesheet" href="assets/css/themify-icons.css">
-	<link rel="stylesheet" href="assets/css/slick.css">
-	<link rel="stylesheet" href="assets/css/nice-select.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<title>Sign up</title>
-	<script>
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="/templates/signup/custom.js"></script>
+    <title>Sign up</title>
+    <script>
+        function checkUserId(selecor) {
+            var userId = document.getElementById("Id").value;
 
-		function checkUserId(selecor) {
-			var userId = document.getElementById("Id").value;
+            if (userId.trim() === "") {
+                // alert("아이디를 입력해주세요.");
 
-			if (userId.trim() === "") {
-				alert("아이디를 입력해주세요.");
-				return;
-			}
+                document.getElementById("result").innerText = "아이디를 입력해주세요.";
+                return;
+            }
 
+            var xhr = new XMLHttpRequest();
+            var url = "/checkUserId?result=" + userId;
+            xhr.open("GET", url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    // 여기까지는 작동 여부 확인완료
+                    console.log("AJAX Response:", result);
+                    if (result) {
+                        // alert("사용 가능한 아이디입니다.");
+                        document.getElementById("result").innerText = "사용 가능한 아이디입니다.";
+                    } else {
+                        // alert("이미 사용 중인 아이디입니다.");
+                        document.getElementById("result").innerText = "이미 사용 중인 아이디입니다.";
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+    <style>
 
-			var xhr = new XMLHttpRequest();
-			var url = "/checkUserId?result=" + userId;
-			xhr.open("GET", url, true);
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState === 4 && xhr.status === 200) {
-					var result = JSON.parse(xhr.responseText);
-					// 여기까지는 작동 여부 확인완료
-					console.log("AJAX Response:", result);
-					if (result) {
-						alert("사용 가능한 아이디입니다.");
-					} else {
-						alert("이미 사용 중인 아이디입니다.");
-					}
-				}
-			};
-			xhr.send();
-
-		}
-
-
-
-
-
-	</script>
-
-
+    </style>
 </head>
 <body>
 <!-- Preloader Start -->
 <div id="preloader-active">
-	<div class="preloader d-flex align-items-center justify-content-center">
-		<div class="preloader-inner position-relative">
-			<div class="preloader-circle"></div>
-			<div class="preloader-img pere-text">
-				<img src="/assets/img/logo/loder.jpg" alt="">
-			</div>
-		</div>
-	</div>
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                <img src="/assets/img/logo/loder.jpg" alt="">
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Preloader Start -->
 <header>
-	<div th:insert="~{fragment/header :: header}"></div>
+    <div th:insert="~{fragment/header :: header}"></div>
 </header>
 <main>
-	<!-- Hero Start-->
-	<div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-12">
-					<div class="hero-cap text-center pt-50">
-						<h2>Sign up</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--Hero End -->
-
-	<div class="listing-caption section-padding2">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-8">
-					<h3 class="mb-20" style ="text-align: center">Sign up</h3>
-					<form name="signupform" id="signupform" method="post" action="/signup" >
-						<div class="mt-10">
-
-							<input type="text" id="Id" name="userId" placeholder="Please enter a ID"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a ID'" required
-								   class="single-input" style="width: 650px; float:left;"
-								   pattern="[a-z0-9]{4,12}" title="4~12자 영어소문자, 숫자만 가능합니다." >
-							<input type="button" id="userId"  onclick="checkUserId(this)" value="Check" style="float: right">
-
-
-						</div>
-
-						</br></br></br>
-
-						<div>
-							<input type="password" name="pw" id="pw" placeholder="Please enter a password"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a password'" required
-								   class="single-input"
-								   pattern="(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,24}$" title="8~24자 영문대소문자, 숫자, 특수문자 혼합해서 넣어주세요">
-
-						</div>
-
-						</br>
-
-						<div>
-							<input type="password" name="password_chk" id="password_chk" placeholder="Enter your password one more time"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your password one more time'" required
-								   class="single-input">
-							<span id="password-error" style="color: tomato;"></span>
-						</div>
-
-						</br>
-
-						<div class="mt-10">
-							<input type="text" id="name" name="name" placeholder="Please enter a name"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a name'" required
-								   class="single-input"
-								   maxlength="8" title="8자까지 가능합니다.">
-						</div>
-
-						</br>
-
-						<div class="mt-10">
-
-							<input type="email" id="email" name="email" placeholder="Please enter a email"
-								   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a email'" required
-								   class="single-input">
-
-
-						</div>
-						</br></br></br>
-						<div class="">
-							<div class="icon"><i class="" aria-hidden="true"></i></div>
-							<input type="text" name="phone" placeholder="Please enter a contact number without -" onfocus="this.placeholder = ''"
-								   onblur="this.placeholder = 'Please enter a contact number without - '" required class="single-input"
-								   pattern="[0-9]{11}" title="11자 이내 숫자만 가능합니다">
-
-						</div>
-						</br>
-						<div class="">
-							<div class="form-select" id="default-select" style="text-align:center">
-								<h5>GENDER</h5>
-								<label><input type="radio" name="gender" value="Male" required>Male</label>
-								<label><input type="radio" name="gender" value="Female" required>Female</label>
-							</div>
-
-							<br><br>
-						</div>
-
-						<br>
-
-						<div class="" style="text-align:center">
-							<h5>Birth Date</h5>
-							<input style="width: 300px; height: 40px;" type="date" name="birth" required>
-						</div>
-
-						</br></br></br>
-						<div style="text-align: center;">
-							<button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" style=" width:  770px; height: 50px;">Sign Up</button>
-<!--							<input class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit" value="Sign Up" style=" width:  770px; height: 50px;">-->
-						</div>
-						</br>
-						<div style="text-align: center;">
-							<input class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"  type="submit" value="Cancle" style=" width:  770px;  height: 50px;" onclick="validatePassword(e)">
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Hero Start-->
+    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>Sign up</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Hero End -->
+    <div class="listing-caption section-padding2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h3 class="mb-20" style="text-align: center">Sign up</h3>
+                    <form name="signupform" method="post" action="/signup" >
+                        <div class="mt-10">
+                            <input type="text" id="Id" name="userId" placeholder="Please enter a ID"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a ID'"
+                                   class="single-input" style="width: 680px; float:left;"
+                                   minlength="4" maxlength="12"
+                                   required
+                                   pattern="[a-z0-9]{4,12}" title="4~12자 영어소문자, 숫자만 가능합니다.">
+                            <input type="button" class="button rounded-0 primary-bg text-white w-15 btn_1 boxed-btn"
+                                   id="userId" onclick="checkUserId(this)" value="Check"
+                                   style="float: right; height: 40px; text-align: center; padding: unset;">
+                        </div>
+                        </br>
+                        <span id="result" style="height: 25px; font-size: 15px; color: red; text-align: center"></span>
+                        </br></br>
+                        <div>
+                            <input type="password" name="pw" id="pw" placeholder="Please enter a password"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a password'"
+                                   required
+                                   class="single-input"
+                                   pattern="(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,24}$"
+                                   title="8~24자 영문대소문자, 숫자, 특수문자 혼합해서 넣어주세요">
+                        </div>
+                        </br>
+                        <div class="mt-10 " >
+                            <input type="password" name="password_chk" id="password_chk"
+                                   placeholder="Enter your password one more time"
+                                   onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = 'Enter your password one more time'" required
+                                   class="single-input">
+                        </div>
+                        </br>
+                        <div class="mt-10">
+                            <input type="text" id="name" name="name" placeholder="Please enter a name"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a name'"
+                                   required
+                                   class="single-input"
+                                   maxlength="8" title="8자까지 가능합니다.">
+                        </div>
+                        </br>
+                        <div class="mt-10">
+                            <input type="email" id="email" name="email" placeholder="Please enter a email"
+                                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a email'"
+                                   required
+                                   class="single-input">
+                        </div>
+                        <br>
+                        <div class="mt-10">
+                            <div class="icon"><i class="" aria-hidden="true"></i></div>
+                            <input type="text" id="phone" name="phone"
+                                   placeholder="Please enter a contact number without -" onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = 'Please enter a contact number without - '" required
+                                   class="single-input"
+                                   pattern="[0-9]{11}" title="11자 이내 숫자만 가능합니다">
+                        </div>
+                        </br></br>
+                        <div class="">
+                            <div class="form-select" id="default-select" style="text-align:center">
+                                <h5>GENDER</h5>
+                                <label><input type="radio" name="gender" value="Male" required>Male</label>
+                                <label><input type="radio" name="gender" value="Female" required>Female</label>
+                            </div>
+                            <br><br>
+                        </div>
+                        <br>
+                        <div class="" style="text-align:center">
+                            <h5>Birth Date</h5>
+                            <input style="width: 300px; height: 40px;" type="date" name="birth" required>
+                        </div>
+                        </br></br>
+                        <div style="text-align: center;">
+                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit"
+                                    style=" width:  770px; height: 50px;">Sign Up
+                            </button>
+                        </div>
+                        </br>
+                        <div style="text-align: center;">
+                            <input class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit"
+                                   value="Cancle" style=" width:  770px;  height: 50px;" onclick="validatePassword(e)">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <footer>
-	<div th:insert="~{fragment/footer1 :: footer1}"></div>
+    <div th:insert="~{fragment/footer1 :: footer1}"></div>
 </footer>
 <!-- Scroll Up -->
-<div id="back-top" >
-	<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
-
 <!-- JS here -->
 <!--<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>-->
 <!--<script>-->

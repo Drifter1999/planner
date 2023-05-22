@@ -14,32 +14,16 @@ public class MemberDetails implements UserDetails {
 
     private final Members members;
 
-//    private Map<String, Object> attributes;
-
     // 일반 로그인 생성자
     public MemberDetails(Members members) {
         this.members = members;
     }
-
-    // OAuth 로그인 생성자 / 안쓰는 기능
-//    public MemberDetails(Members members, Map<String, Object> attributes) {
-//        this.members = members;
-//        this.attributes = attributes;
-//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { // User 권한을 리턴하는 메서드
         Collection<GrantedAuthority> collect = new ArrayList<>();
         collect.add(new SimpleGrantedAuthority((members.getRole())));
         return collect;
-
-//        collect.add(new GrantedAuthority() {
-//            @Override
-//            public String getAuthority() {
-//                return members.getRole();
-//            }
-//        });
-//        return collect;
     }
 
     @Override

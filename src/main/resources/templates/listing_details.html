@@ -84,12 +84,18 @@
 
                     </div>
                 </div>
+                <hr>
                 <!-- Map -->
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <h3 class="mb-30" th:text="${ApiArr}">Location</h3>
                         <div class="d-none d-sm-block mb-30 pb-4">
-
+                            <th:block th:switch="${ApiArr.get(0).contenttypeid}">
+                                <div th:case="12" th:insert="~{fragment/tourdetails :: tour}">관광지</div>
+                                <div th:case="28" th:insert="~{fragment/leisuredetails :: leisure}">레포츠</div>
+                                <div th:case="32" th:insert="~{fragment/accomdetails :: accommodation}">숙박</div>
+                                <div th:case="39" th:insert="~{fragment/restaudetails :: restaurant}">음식점</div>
+                                <!--<div th:insert="~{fragment/header :: header}"></div>-->
+                            </th:block>
                         </div>
                     </div>
                 </div>
