@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/header")
 @RequiredArgsConstructor
-public class HeaderController {
+public class  HeaderController {
     private final ListingService listingService;
     private final MultiSelectService multiSelectService;
 
