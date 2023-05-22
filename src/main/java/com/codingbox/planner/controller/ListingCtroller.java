@@ -33,14 +33,17 @@ public class ListingCtroller {
             case "12":
                 List<TourDetailIntroDTO> TourApiArr = tourService.getApiResponse(contentId, contentTypeId);
                 model.addAttribute("ApiArr", TourApiArr);
+
                 break;
             case "28":
                 List<LeisureDetailIntroDTO> LeisureApiArr = leisureService.getApiResponse(contentId, contentTypeId);
                 model.addAttribute("ApiArr", LeisureApiArr);
+
                 break;
             case "32":
                 List<AccommodationDetailIntroDTO> AccomApiArr = accommodationService.getApiResponse(contentId, contentTypeId);
                 model.addAttribute("ApiArr", AccomApiArr);
+
                 break;
             case "39":
                 List<RestaurantDetailDTO> RestauApiArr = restaurantService.getApiResponse(contentId, contentTypeId);
@@ -55,4 +58,6 @@ public class ListingCtroller {
 
         return "listing_details";
     }
+
+
 }

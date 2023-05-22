@@ -1,5 +1,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="tour">
-  <p>관광</p>
+<div class="table-responsive" th:fragment="tour">
+  <table class="table table-striped custom-table"
+         style="display: flex; display: -webkit-box; display: -ms-flexbox; overflow-x: auto; overflow-y: hidden;">
+    <thead>
+    <tr>
+      <th scope="col" style="display: block">Info</th>
+      <th scope="col" style="display: block">오픈 일</th>
+      <th scope="col" style="display: block">휴 일</th>
+      <th scope="col" style="display: block">가이드 여부</th>
+      <th scope="col" style="display: block">주차 여부</th>
+      <th scope="col" style="display: block">아기캐리어 여부</th>
+      <th scope="col" style="display: block">애완 동물 입장 가능 여부 </th>
+    </tr>
+    </thead>
+    <tbody style="display: flex">
+    <tr style="text-align: center;">
+      <td style="display: block">
+        <span th:text="${ApiArr.get(0).infocenter}"></span>
+      </td>
+      <td style="display: block">
+          <span th:if="${ApiArr.get(0).opendate.equals(null) || !ApiArr.get(0).opendate.equals('')}" class="black-color" th:text="${ApiArr.get(0).opendate}"/>
+          <span th:unless="${ApiArr.get(0).opendate.equals(null) || !ApiArr.get(0).opendate.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).opendate.equals(null) || !ApiArr.get(0).restdate.equals('')}" class="black-color" th:text="${ApiArr.get(0).restdate}"/>
+        <span th:unless="${ApiArr.get(0).opendate.equals(null) || !ApiArr.get(0).restdate.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).expguide.equals(null) || !ApiArr.get(0).expguide.equals('')}" class="black-color" th:text="${ApiArr.get(0).expguide}"/>
+        <span th:unless="${ApiArr.get(0).expguide.equals(null) || !ApiArr.get(0).expguide.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).parking.equals(null) || !ApiArr.get(0).parking.equals('')}" class="black-color" th:text="${ApiArr.get(0).parking}"/>
+        <span th:unless="${ApiArr.get(0).parking.equals(null) || !ApiArr.get(0).parking.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).chkbabycarriage.equals(null) || !ApiArr.get(0).chkbabycarriage.equals('')}" class="black-color" th:text="${ApiArr.get(0).chkbabycarriage}"/>
+        <span th:unless="${ApiArr.get(0).chkbabycarriage.equals(null) || !ApiArr.get(0).chkbabycarriage.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).chkpet.equals(null) || !ApiArr.get(0).chkpet.equals('')}" class="black-color" th:text="${ApiArr.get(0).chkpet}"/>
+        <span th:unless="${ApiArr.get(0).chkpet.equals(null) || !ApiArr.get(0).chkpet.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
 </div>
 </html>

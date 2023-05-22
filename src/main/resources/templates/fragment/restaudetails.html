@@ -1,5 +1,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="restaurant">
-  <p>음식</p>
+  <table class="table table-striped custom-table"
+         style="display: flex; display: -webkit-box; display: -ms-flexbox; overflow-x: auto; overflow-y: hidden;">
+    <thead>
+    <tr>
+      <th scope="col" style="display: block">Info</th>
+      <th scope="col" style="display: block">좌 석</th>
+      <th scope="col" style="display: block">아이 시설 여부</th>
+      <th scope="col" style="display: block">주 메뉴</th>
+      <th scope="col" style="display: block">다른 메뉴</th>
+      <th scope="col" style="display: block">흡연 여부</th>
+      <th scope="col" style="display: block">주차 여부</th>
+      <th scope="col" style="display: block">영업 시간</th>
+      <th scope="col" style="display: block">휴 일</th>
+      <th scope="col" style="display: block">예약 여부</th>
+
+    </tr>
+    </thead>
+    <tbody style="display: flex">
+    <tr style="text-align: center;">
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).infocenterfood.equals(null) || !ApiArr.get(0).infocenterfood.equals('')}" th:text="${ApiArr.get(0).infocenterfood}"></span>
+        <span th:unless="${ApiArr.get(0).infocenterfood.equals(null) || !ApiArr.get(0).infocenterfood.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).seat.equals(null) || !ApiArr.get(0).seat.equals('')}" th:text="${ApiArr.get(0).seat}"></span>
+        <span th:unless="${ApiArr.get(0).seat.equals(null) || !ApiArr.get(0).seat.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).kidsfacility.equals(null) || !ApiArr.get(0).kidsfacility.equals('')}" th:text="${ApiArr.get(0).kidsfacility}"></span>
+        <span th:unless="${ApiArr.get(0).kidsfacility.equals(null) || !ApiArr.get(0).kidsfacility.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).firstmenu.equals(null) || !ApiArr.get(0).firstmenu.equals('')}" th:text="${ApiArr.get(0).firstmenu}"></span>
+        <span th:unless="${ApiArr.get(0).firstmenu.equals(null) || !ApiArr.get(0).firstmenu.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).treatmenu.equals(null) || !ApiArr.get(0).treatmenu.equals('')}" th:text="${ApiArr.get(0).treatmenu}"></span>
+        <span th:unless="${ApiArr.get(0).treatmenu.equals(null) || !ApiArr.get(0).treatmenu.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).smoking.equals(null) || !ApiArr.get(0).smoking.equals('')}" th:text="${ApiArr.get(0).smoking}"></span>
+        <span th:unless="${ApiArr.get(0).smoking.equals(null) || !ApiArr.get(0).smoking.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).packing.equals(null) || !ApiArr.get(0).packing.equals('')}" th:text="${ApiArr.get(0).packing}"></span>
+        <span th:unless="${ApiArr.get(0).packing.equals(null) || !ApiArr.get(0).packing.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).opentimefood.equals(null) || !ApiArr.get(0).opentimefood.equals('')}" th:text="${ApiArr.get(0).opentimefood}"></span>
+        <span th:unless="${ApiArr.get(0).opentimefood.equals(null) || !ApiArr.get(0).opentimefood.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).restdatefood.equals(null) || !ApiArr.get(0).restdatefood.equals('')}" th:text="${ApiArr.get(0).restdatefood}"></span>
+        <span th:unless="${ApiArr.get(0).restdatefood.equals(null) || !ApiArr.get(0).restdatefood.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).reservationfood.equals(null) || !ApiArr.get(0).reservationfood.equals('')}" th:text="${ApiArr.get(0).reservationfood}"></span>
+        <span th:unless="${ApiArr.get(0).reservationfood.equals(null) || !ApiArr.get(0).reservationfood.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
 </div>
 </html>

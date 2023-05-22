@@ -1,6 +1,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="accommodation">
-  <p>숙소</p>
-  <p th:text="${ApiArr.get(0).contenttypeid}"></p>
+
+<div class="table-responsive" th:fragment="accommodation">
+  <table class="table table-striped custom-table"
+         style="display: flex; display: -webkit-box; display: -ms-flexbox; overflow-x: auto; overflow-y: hidden;">
+    <thead>
+    <tr>
+      <th scope="col" style="display: block">Info</th>
+      <th scope="col" style="display: block">방 수</th>
+      <th scope="col" style="display: block">방 종류</th>
+
+      <th scope="col" style="display: block">체크 인</th>
+      <th scope="col" style="display: block">체크 아웃</th>
+      <th scope="col" style="display: block">조리 여부</th>
+      <th scope="col" style="display: block">여가 시설</th>
+      <th scope="col" style="display: block">식 당</th>
+      <th scope="col" style="display: block">예약 문의</th>
+      <th scope="col" style="display: block">픽업 여부</th>
+      <th scope="col" style="display: block">주차 여부</th>
+      <th scope="col" style="display: block">예약 수단</th>
+
+      <th scope="col" style="display: block">예약 관련 사항</th>
+    </tr>
+    </thead>
+    <tbody style="display: flex">
+    <tr style="text-align: center;">
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).infocenterlodging.equals(null) || !ApiArr.get(0).infocenterlodging.equals('')}" th:text="${ApiArr.get(0).infocenterlodging}"></span>
+        <span th:unless="${ApiArr.get(0).infocenterlodging.equals(null) || !ApiArr.get(0).infocenterlodging.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).roomcount.equals(null) || !ApiArr.get(0).roomcount.equals('')}" class="black-color" th:text="${ApiArr.get(0).roomcount}"/>
+        <span th:unless="${ApiArr.get(0).roomcount.equals(null) || !ApiArr.get(0).roomcount.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).roomtype.equals(null) || !ApiArr.get(0).roomtype.equals('')}" class="black-color" th:text="${ApiArr.get(0).roomtype}"/>
+        <span th:unless="${ApiArr.get(0).roomtype.equals(null) || !ApiArr.get(0).roomtype.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).checkintime.equals(null) || !ApiArr.get(0).checkintime.equals('')}" class="black-color" th:text="${ApiArr.get(0).checkintime}"/>
+        <span th:unless="${ApiArr.get(0).checkintime.equals(null) || !ApiArr.get(0).checkintime.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).checkouttime.equals(null) || !ApiArr.get(0).checkouttime.equals('')}" class="black-color" th:text="${ApiArr.get(0).checkouttime}"/>
+        <span th:unless="${ApiArr.get(0).checkouttime.equals(null) || !ApiArr.get(0).checkouttime.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).chkcooking.equals(null) || !ApiArr.get(0).chkcooking.equals('')}" class="black-color" th:text="${ApiArr.get(0).chkcooking}"/>
+        <span th:unless="${ApiArr.get(0).chkcooking.equals(null) || !ApiArr.get(0).chkcooking.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).subfacility.equals(null) || !ApiArr.get(0).subfacility.equals('')}" class="black-color" th:text="${ApiArr.get(0).subfacility}"/>
+        <span th:unless="${ApiArr.get(0).subfacility.equals(null) || !ApiArr.get(0).subfacility.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).foodplace.equals(null) || !ApiArr.get(0).foodplace.equals('')}" class="black-color" th:text="${ApiArr.get(0).foodplace}"/>
+        <span th:unless="${ApiArr.get(0).foodplace.equals(null) || !ApiArr.get(0).foodplace.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).reservationurl.equals(null) || !ApiArr.get(0).reservationurl.equals('')}" class="black-color" th:utext="${ApiArr.get(0).reservationurl}"/>
+        <span th:unless="${ApiArr.get(0).reservationurl.equals(null) || !ApiArr.get(0).reservationurl.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).pickup.equals(null) || !ApiArr.get(0).pickup.equals('')}" class="black-color" th:text="${ApiArr.get(0).pickup}"/>
+        <span th:unless="${ApiArr.get(0).pickup.equals(null) || !ApiArr.get(0).pickup.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).parkinglodging.equals(null) || !ApiArr.get(0).parkinglodging.equals('')}" class="black-color" th:text="${ApiArr.get(0).parkinglodging}"/>
+        <span th:unless="${ApiArr.get(0).parkinglodging.equals(null) || !ApiArr.get(0).parkinglodging.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).reservationlodging.equals(null) || !ApiArr.get(0).reservationlodging.equals('')}" class="black-color" th:text="${ApiArr.get(0).reservationlodging}"/>
+        <span th:unless="${ApiArr.get(0).reservationlodging.equals(null) || !ApiArr.get(0).reservationlodging.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).refundregulation.equals(null) || !ApiArr.get(0).refundregulation.equals('')}" class="black-color" th:text="${ApiArr.get(0).refundregulation}"/>
+        <span th:unless="${ApiArr.get(0).refundregulation.equals(null) || !ApiArr.get(0).refundregulation.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
 </div>
 </html>

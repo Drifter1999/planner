@@ -1,5 +1,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="leisure">
-  <p>레포츠</p>
+  <table class="table table-striped custom-table"
+         style="display: flex; display: -webkit-box; display: -ms-flexbox; overflow-x: auto; overflow-y: hidden;">
+    <thead>
+    <tr>
+      <th scope="col" style="display: block">Info</th>
+      <th scope="col" style="display: block">예약 관련 문의</th>
+      <th scope="col" style="display: block">주차 공간 여부</th>
+    </tr>
+    </thead>
+    <tbody style="display: flex">
+    <tr style="text-align: center;">
+      <td style="display: block">
+        <span th:text="${ApiArr.get(0).infocenterleports}"></span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).reservation.equals(null) || !ApiArr.get(0).reservation.equals('')}" class="black-color" th:text="${ApiArr.get(0).reservation}"/>
+        <span th:unless="${ApiArr.get(0).reservation.equals(null) || !ApiArr.get(0).reservation.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+      <td style="display: block">
+        <span th:if="${ApiArr.get(0).parkingleports.equals(null) || !ApiArr.get(0).parkingleports.equals('')}" class="black-color" th:text="${ApiArr.get(0).parkingleports}"/>
+        <span th:unless="${ApiArr.get(0).parkingleports.equals(null) || !ApiArr.get(0).parkingleports.equals('')}" class="black-color">누락된 정보</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </html>

@@ -67,6 +67,10 @@ public class ParsingToList {
             AccommodationDetailIntroDTO data = new AccommodationDetailIntroDTO();
             JSONParser parser = new JSONParser();
             JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
+            StringBuffer reservationB = new StringBuffer();
+            reservationB.append(String.valueOf(jsonObj.get("reservationurl")));
+            reservationB.insert(2, " style=\"color:black;\"");
+
 
             data.setContentid(String.valueOf(jsonObj.get("contentid")));
             data.setContenttypeid(String.valueOf(jsonObj.get("contenttypeid")));
@@ -91,7 +95,7 @@ public class ParsingToList {
             data.setPublicbath(String.valueOf(jsonObj.get("publicbath")));
             data.setSubfacility(String.valueOf(jsonObj.get("subfacility")));
             data.setFoodplace(String.valueOf(jsonObj.get("foodplace")));
-            data.setReservationurl(String.valueOf(jsonObj.get("reservationurl")));
+            data.setReservationurl(String.valueOf(reservationB.toString()));
             data.setPickup(String.valueOf(jsonObj.get("pickup")));
             data.setInfocenterlodging(String.valueOf(jsonObj.get("infocenterlodging")));
             data.setParkinglodging(String.valueOf(jsonObj.get("parkinglodging")));
@@ -172,7 +176,7 @@ public class ParsingToList {
             JSONParser parser = new JSONParser();
             JSONObject jsonObj = (JSONObject) parser.parse(jsonArr.get(i).toString());
 
-            data.setContenttypeid(String.valueOf(jsonObj.get("contentid")));
+            data.setContentid(String.valueOf(jsonObj.get("contentid")));
             data.setContenttypeid(String.valueOf(jsonObj.get("contenttypeid")));
             data.setHeritage1(String.valueOf(jsonObj.get("heritage1")));
             data.setHeritage1(String.valueOf(jsonObj.get("heritage2")));
