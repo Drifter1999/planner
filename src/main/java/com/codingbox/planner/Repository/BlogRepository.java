@@ -44,7 +44,7 @@ public class BlogRepository {
     public Page<Blog> findAllPages(Pageable pageable) {
 
         String countQuery = "SELECT COUNT(b) FROM Blog b";
-        String selectQuery = "SELECT b FROM Blog b";
+        String selectQuery = "SELECT b FROM Blog b order by b.time desc";
         TypedQuery<Long> countTypedQuery = em.createQuery(countQuery, Long.class);
         TypedQuery<Blog> selectTypedQuery = em.createQuery(selectQuery, Blog.class);
 

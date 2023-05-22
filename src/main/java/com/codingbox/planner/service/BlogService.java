@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +45,8 @@ public class BlogService {
         blog.setImgname(fileName);
         /*저장되는 경로*/
         blog.setImgpath("/files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
-
+        blog.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        blog.setTime(LocalDateTime.now());
         /*파일 저장*/
         blogRepository.save(blog);
     }
@@ -90,7 +92,8 @@ public class BlogService {
 
         blogDTO.setTitle(blog.getTitle());
         blogDTO.setContent(blog.getContent());
-        blogDTO.setDate(LocalDateTime.now());
+        blogDTO.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        blogDTO.setTime(LocalDateTime.now());
 
         return blogDTO;
 
@@ -122,7 +125,8 @@ public class BlogService {
         // 블로그 정보 업데이트
         existingBlog.setTitle(blogDTO.getTitle());
         existingBlog.setContent(blogDTO.getContent());
-        existingBlog.setDate(LocalDateTime.now());
+        existingBlog.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        existingBlog.setTime(LocalDateTime.now());
         // 파일 업로드 처리 (예시)
         if (file != null && !file.isEmpty()) {
             // 파일을 저장하고 파일 경로를 블로그 엔티티에 설정합니다.
@@ -134,6 +138,5 @@ public class BlogService {
         return existingBlog;
     }
 
-    public void updateBlogWithFile(Long blogId, Blog blogDTO, MultipartFile file) {
-    }
+
 }
