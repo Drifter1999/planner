@@ -16,5 +16,7 @@ public class BlogDTO {
     private String title;
     private String content;
     private String imgpath;
-    private LocalDateTime date;
+    private String date;
+
+    private LocalDateTime time;
 }

@@ -38,11 +38,11 @@ public class Blog {
     private String imgname;
 
     @Column(name = "UPDATE_DATE")
-    private LocalDateTime date;
+    private String date;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Members membersToBoard;
 
-
+    private LocalDateTime time;
 }
