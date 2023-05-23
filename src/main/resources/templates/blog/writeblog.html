@@ -23,22 +23,22 @@
 
 </head>
 <body>
-<div class="writearea">
-  <form class="reviewForm" id="reviewForm" method="post" th:action enctype="multipart/form-data">
-    <div class="col-12">
-      <div class="form-group">
-        <input class="form-control" name="title" id="title" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
+  <div class="writearea">
+    <form class="reviewForm" id="reviewForm" method="post" th:action enctype="multipart/form-data">
+      <input type="hidden" name="userId" id="members" th:text="${members.userId}" />
+      <div class="col-12">
+        <div class="form-group">
+          <input class="form-control" name="title" id="title" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
+        </div>
       </div>
-    </div>
-    <textarea id="summernote" name="content" class="note-editable"><p>Hello</p></textarea>
-    <input type="file" name="file">
-    <div style="text-align: center;">
-      <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-              style=" width:  770px; height: 50px;" >저장하기</button>
-    </div>
-
-  </form>
-</div>
+      <textarea id="summernote" name="content" class="note-editable"><p>Hello</p></textarea>
+      <input type="file" name="file">
+      <div style="text-align: center;">
+        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                style=" width:  770px; height: 50px;" >저장하기</button>
+      </div>
+    </form>
+  </div>
 
 
 <script>

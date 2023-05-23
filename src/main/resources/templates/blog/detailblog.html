@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="zxx" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -64,20 +64,21 @@
             <input type="hidden" th:field="*{imgpath}">
 
 
-          <div class="single-post">
-            <div class="row justify-content-center">
-              <img class="img-fluid"  th:src="${blog.imgpath}" alt="이미지">
+            <div class="single-post">
+              <div class="row justify-content-center">
+                <img class="img-fluid"  th:src="${blog.imgpath}" alt="이미지">
+              </div>
+              <div class="blog_details">
+                <h2><span th:text="${blog.title}" > 제목 </span></h2>
+                <ul class="blog-info-link mt-3 mb-4">
+                  <li><i class="fa fa-user"></i> <span th:text="${blog.members.name}"> </span></li>
+                  <li><span th:text="${blog.date}"></span></li>
+                </ul>
+                <p class="excert" ><span th:utext="${blog.content}"> 내용 </span> </p>
+              </div>
             </div>
-            <div class="blog_details">
-              <h2><span th:text="${blog.title}" > 제목 </span></h2>
-              <ul class="blog-info-link mt-3 mb-4">
-                <li><i class="fa fa-user"></i> <span th:text="${blog.date}"> </span></li>
-              </ul>
-              <p class="excert" ><span th:utext="${blog.content}"> 내용 </span> </p>
-            </div>
-          </div>
 
-            <div class="row">
+            <div class="row" th:if="${blog.members.userId == #authentication.name}">
               <div class="col-sm-6">
                 <div class="form-group">
                   <a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" th:href="@{/blog/detailblog/{blogId}/edit(blogId=${blog.blogId})}">수정</a>
@@ -89,9 +90,11 @@
                 </div>
               </div>
             </div>
+
             <div class="form-group">
               <a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" th:href="@{/blog/selectblog}">목록보기</a>
             </div>
+
           </form>
         </div>
       </div>

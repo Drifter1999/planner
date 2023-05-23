@@ -3,6 +3,8 @@ package com.codingbox.planner.controller;
 import com.codingbox.planner.config.UploadFileUtil;
 import com.codingbox.planner.domain.Blog;
 import com.codingbox.planner.domain.DTO.BlogDTO;
+import com.codingbox.planner.domain.Members;
+import com.codingbox.planner.repository.MemberRepository;
 import com.codingbox.planner.service.BlogService;
 import com.codingbox.planner.service.ImageService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +43,9 @@ public class BlogController {
 
     @Autowired
     private HttpServletRequest request;
+
+    @Autowired
+    private final MemberRepository memberRepository;
 
     // 후기게시글 상세
     @GetMapping("/detailblog/{blogId}")
@@ -63,9 +70,13 @@ public class BlogController {
     }
 
     @GetMapping("/writeblog")
-    public String writeBlogForm(Model model) {
+    public String writeBlogForm(Principal principal, Model model) {
+
+        String userId = principal.getName();
+        Members members = memberRepository.findByuserId(userId);
 
         model.addAttribute("blogDTO", new BlogDTO());
+        model.addAttribute("members", members);
 
         return "blog/writeblog";
     }
@@ -110,8 +121,12 @@ public class BlogController {
 //    }
 
     @PostMapping("/writeblog")
-    public String boardWritePro(Blog blog, Model model, MultipartFile file,  RedirectAttributes redirectAttribute) throws Exception{
+    public String boardWritePro(Blog blog, Model model, MultipartFile file,  RedirectAttributes redirectAttribute, Principal principal) throws Exception{
 
+        String userId = principal.getName();
+        Members members = memberRepository.findByuserId(userId);
+
+        blog.setMembers(members);
 
         blogService.insertBlog(blog, file);
 
@@ -129,12 +144,15 @@ public class BlogController {
     }*/
     @GetMapping("/selectblog")
     public String list(@PageableDefault(size = 4) Pageable pageable, Model model) {
+
+
         Page<Blog> blogPage = blogService.findPages(pageable);
         List<Blog> blogs = blogPage.getContent();
         int totalPages = blogPage.getTotalPages();
 
         model.addAttribute("blogs", blogs);
         model.addAttribute("totalPages", totalPages);
+
         return "blog/selectblog";
     }
 

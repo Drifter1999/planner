@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Entity
 @Getter
@@ -48,6 +49,7 @@ public class Members {
     @OneToMany(mappedBy = "membersToParty")
     private List<Party> parties = new ArrayList<>();
 
+
     @Builder
     public Members(String id, String pw, String name, String phone, String email, String birth, MemberGender gender, String role){
         this.userId = id;
@@ -58,5 +60,20 @@ public class Members {
         this.birth = birth;
         this.gender = gender;
         this.role = role;
+    }
+
+    // 임시 비밀번호 생성하는 코드
+    public String createtempPw() {
+        int length = 8;
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!";
+        StringBuilder sb = new StringBuilder();
+
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length());
+            sb.append(characters.charAt(index));
+        }
+
+        return sb.toString();
     }
 }

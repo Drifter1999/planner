@@ -57,14 +57,15 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <h3 class="mb-20">비밀번호 찾기</h3>
-                    <form action="#">
+                    <form action="#" th:action method="post">
+                        <b><span th:if="${error}" th:text="${error}"></span></b>
                         <div class="form-group">
                             <div class="input-group mb-3">
-                                <input type="text" name="member_id" id="member_id"  onfocus="this.placeholder = ''" onblur="this.placeholder = '가입 시 아이디를 입력하세요'" required
+                                <input type="text" name="userId" id="userId"  onfocus="this.placeholder = ''" onblur="this.placeholder = '가입 시 아이디를 입력하세요'" required
                                        class="single-input" placeholder = '가입 시 아이디를 입력하세요'>
                             </div>
                             <div class="input-group mb-3">
-                                <input type="email" name="member_email" id="member_email"  onfocus="this.placeholder = ''" onblur="this.placeholder = '가입 시 이메일을 입력하세요'" required
+                                <input type="email" name="email" id="email"  onfocus="this.placeholder = ''" onblur="this.placeholder = '가입 시 이메일을 입력하세요'" required
                                        class="single-input" placeholder = '가입 시 이메일을 입력하세요'>
                             </div>
 

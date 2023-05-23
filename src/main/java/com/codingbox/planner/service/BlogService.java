@@ -2,7 +2,9 @@ package com.codingbox.planner.service;
 
 import com.codingbox.planner.domain.Blog;
 import com.codingbox.planner.domain.DTO.BlogDTO;
+import com.codingbox.planner.domain.Members;
 import com.codingbox.planner.repository.BlogRepository;
+import com.codingbox.planner.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +25,8 @@ import java.util.UUID;
 public class BlogService {
 
     private final BlogRepository blogRepository;
+
+    private final MemberRepository memberRepository;
 
     @Transactional
     public void insertBlog(Blog blog , MultipartFile file) throws Exception{
@@ -45,8 +49,13 @@ public class BlogService {
         blog.setImgname(fileName);
         /*저장되는 경로*/
         blog.setImgpath("/files/" + fileName); /*저장된파일의이름,저장된파일의경로*/
+
+        // 날짜 저장
         blog.setDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         blog.setTime(LocalDateTime.now());
+
+
+
         /*파일 저장*/
         blogRepository.save(blog);
     }

@@ -35,7 +35,7 @@ public class TourService {
             String resp = Httpresponse.body();
             JSONObject Parsed = new ApiJsonParser().ApiParser(resp);
             JSONArray jsonArr = (JSONArray) Parsed.get("item");
-
+            System.out.println("jsonArr : " + jsonArr + "!");
             List<TourDetailIntroDTO> resultList = new ParsingToList().findTourIntroArray(jsonArr);
 
             return resultList;

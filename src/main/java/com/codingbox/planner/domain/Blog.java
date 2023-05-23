@@ -40,9 +40,11 @@ public class Blog {
     @Column(name = "UPDATE_DATE")
     private String date;
 
+    private LocalDateTime time;
+
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
-    private Members membersToBoard;
+    private Members members;
 
-    private LocalDateTime time;
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="zxx" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -98,14 +98,15 @@
             </ul>
           </nav>
 
-          <br><br><br>
-          <div class="col-lg-12">
-            <div style="text-align: center;">
-              <a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" style=" width:  770px; height: 70px;" th:href="@{/blog/writeblog}">글쓰기</a>
+          <div sec:authorize="isAuthenticated()">
+            <br><br><br>
+            <div class="col-lg-12">
+              <div style="text-align: center;">
+                <a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" style=" width:  770px; height: 70px;" th:href="@{/blog/writeblog}">글쓰기</a>
+              </div>
+              <div id="writeBlogContainer"></div>
             </div>
-            <div id="writeBlogContainer"></div>
           </div>
-
 
 
         </div>

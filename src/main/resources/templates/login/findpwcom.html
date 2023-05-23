@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="assets/css/slick.css" th:href="@{/assets/css/slick.css}">
     <link rel="stylesheet" href="assets/css/nice-select.css" th:href="@{/assets/css/nice-select.css}">
     <link rel="stylesheet" href="assets/css/style.css" th:href="@{/assets/css/style.css}">
-    <title>아이디 찾기</title>
+    <title>비밀번호 찾기</title>
 </head>
 <body>
 <!-- Preloader Start -->
@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="hero-cap text-center pt-50">
-                        <h2>아이디 찾기</h2>
+                        <h2>비밀번호 찾기</h2>
                     </div>
                 </div>
             </div>
@@ -56,24 +56,18 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <h3 class="mb-20">아이디 찾기</h3>
-                    <form action="#">
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <input type="text" name="member_name" id="member_name"  onfocus="this.placeholder = ''" onblur="this.placeholder = '가입 시 이름을 입력하세요'" required
-                                       class="single-input" placeholder = '가입 시 이름을 입력하세요'>
-                            </div>
-                            <div class="input-group mb-3">
-                                <input type="email" name="member_email" id="member_email"  onfocus="this.placeholder = ''" onblur="this.placeholder = '가입 시 이메일을 입력하세요'" required
-                                       class="single-input" placeholder = '가입 시 이메일을 입력하세요'>
-                            </div>
-
+                    <h3 class="mb-20">비밀번호 찾기</h3>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <b>임시 비밀번호</b>
+                            <blockquote class="generic-blockquote" >
+                                <h3><span th:text="${tempPw}"></span></h3>
+                            </blockquote>
                             <div class="form-group">
-                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="submit">아이디 찾기</button>
+                                <a class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" type="button" th:href="@{/login}">로그인 하기</a>
                             </div>
-
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
