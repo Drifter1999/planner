@@ -28,22 +28,24 @@
   <script>
     $(document).ready(function() {
       $("#memberForm").submit(function(event) {
-        event.preventDefault(); // 폼 제출 이벤트 기본 동작 방지
+        event.preventDefault();
 
-        // update 함수 정의
         function update() {
           var pw = $("#pw").val();
           var pw_chk = $("#pw_chk").val();
+          var passwordError = $("#password-error");
 
           if (pw.length < 8) {
-            alert('비밀번호는 최소 8자 이상이어야 합니다.');
+            passwordError.text('비밀번호는 최소 8자 이상이어야 합니다.');
             return;
           }
 
           if (pw !== pw_chk) {
-            alert("비밀번호가 일치하지 않습니다.");
-            return;
+            passwordError.text('비밀번호가 일치하지 않습니다.');
+            return false;
           }
+
+          passwordError.text("비밀번호가 일치합니다.");
 
           var data = {
             userId: $("#userId").val(),
@@ -53,7 +55,7 @@
           $.ajax({
             type: "PUT",
             url: "/member",
-            data: JSON.stringify(data), // object -> json
+            data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json"
           }).done(function (response) {
@@ -68,26 +70,29 @@
         update();
       });
     });
-  </script>
-  <script type="text/javascript">
-    function test() {
-      var pw = document.getElementById('pw').value;
-      var pw_chk = document.getElementById('pw_chk').value;
 
-      if (pw.length < 8) {
-        alert('비밀번호는 최소 8자 이상이어야 합니다.');
-        return false;
-      }
-
-      if (pw !== pw_chk) {
-        alert("비밀번호가 일치하지 않습니다.");
-        return false;
-      } else {
-        alert("비밀번호가 일치합니다.");
-        return true;
-      }
-    }
   </script>
+
+<!--  test용도-->
+<!--  <script type="text/javascript">-->
+<!--    function test() {-->
+<!--      var pw = document.getElementById('pw').value;-->
+<!--      var pw_chk = document.getElementById('pw_chk').value;-->
+
+<!--      if (pw.length < 8) {-->
+<!--        alert('비밀번호는 최소 8자 이상이어야 합니다.');-->
+<!--        return false;-->
+<!--      }-->
+
+<!--      if (pw !== pw_chk) {-->
+<!--        alert("비밀번호가 일치하지 않습니다.");-->
+<!--        return false;-->
+<!--      } else {-->
+<!--        alert("비밀번호가 일치합니다.");-->
+<!--        return true;-->
+<!--      }-->
+<!--    }-->
+<!--  </script>-->
 </head>
 <body>
 <!-- Preloader Start -->
@@ -130,6 +135,7 @@
 
               <!--            패스워드 타입은 팀원들에게 확인 시키고 적용 필요 -->
               새 비밀번호 <input class="single-input" id="pw" >
+              <span id="password-error" style="color: red;"></span></br>
               새 비밀번호 확인 <input class="single-input"  id="pw_chk" value="test">
 
               </br>
