@@ -1,8 +1,6 @@
 package com.codingbox.planner.repository;
 
 import com.codingbox.planner.domain.Blog;
-import com.codingbox.planner.domain.DTO.BlogDTO;
-import com.codingbox.planner.domain.Members;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -11,9 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor

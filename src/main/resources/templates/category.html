@@ -247,7 +247,30 @@
                               locationImgDiv.className = "location-img";
 
                               var img = document.createElement("img");
-                              img.src = "/assets/img/gallery/location1.jpg";
+                              var imgIndex = i + 1; // 이미지 인덱스 (1부터 시작)
+                              var imgPath = "";
+
+                              if (val === "31") {
+                                  imgPath = "/assets/img/gallery/location/gyeongi/location" + imgIndex + ".jpg";
+                              } else if (val === "32") {
+                                  imgPath = "/assets/img/gallery/location/gangwon/location" + imgIndex + ".jpg";
+                              } else if (val === "33") {
+                                  imgPath = "/assets/img/gallery/location/choongbuk/location" + imgIndex + ".jpg";
+                              } else if (val === "34") {
+                                  imgPath = "/assets/img/gallery/location/choongnam/location" + imgIndex + ".jpg";
+                              } else if (val === "35") {
+                                  imgPath = "/assets/img/gallery/location/gyeongbuk/location" + imgIndex + ".jpg";
+                              } else if (val === "36") {
+                                  imgPath = "/assets/img/gallery/location/gyeongnam/location" + imgIndex + ".jpg";
+                              } else if (val === "37") {
+                                  imgPath = "/assets/img/gallery/location/jeonbuk/location" + imgIndex + ".jpg";
+                              } else if (val === "38") {
+                                  imgPath = "/assets/img/gallery/location/jeonnam/location" + imgIndex + ".jpg";
+                              } else if (val === "39") {
+                                  imgPath = "/assets/img/gallery/location/jeju/location" + imgIndex + ".jpg";
+                              }
+
+                              img.src = imgPath;
                               img.alt = "";
 
                               var locationDetailsDiv = document.createElement("div");
