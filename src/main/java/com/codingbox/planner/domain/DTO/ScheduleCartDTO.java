@@ -11,8 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ScheduleCartDTO {
-    private Date strDate;
-    private Date endDate;
+    private String strDate;
+    private String endDate;
     private String contentTitleList;
     private String contentName;
 

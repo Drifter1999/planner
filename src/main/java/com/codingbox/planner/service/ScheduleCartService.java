@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class ScheduleCartService {
-    public List<ScheduleCartDTO> createCartList (Date startDate, Date endDate, String contentTitleList, String contentName) {
+    public List<ScheduleCartDTO> createCartList (String startDate, String endDate, String contentTitleList, String contentName) {
         List<ScheduleCartDTO> CartArr = new ArrayList<ScheduleCartDTO>();
         String [] str = contentTitleList.split(",");
 

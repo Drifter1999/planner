@@ -95,12 +95,8 @@ public class  HeaderController {
             default:
                 System.out.println("잘못된 값입니다.");
         }
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-        Date date1 = formatter.parse(startDate);
-        Date date2 = formatter.parse(endDate);
-
-        List<ScheduleCartDTO> CartArr = scheduleCartService.createCartList(date1, date2, contentTitleList, contentName);
+        System.out.println(startDate+" : "+endDate);
+        List<ScheduleCartDTO> CartArr = scheduleCartService.createCartList(startDate, endDate, contentTitleList, contentName);
 
         model.addAttribute("cartArr", CartArr);
 
