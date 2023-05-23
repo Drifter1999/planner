@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/header")
@@ -83,7 +86,7 @@ public class  HeaderController {
                            @RequestParam("endDate") String endDate,
                            @RequestParam("contentTitleList") String contentTitleList,
                            @RequestParam("ContentType") String ContentType,
-                           Model model) throws ParseException {
+                           Model model, HttpSession httpSession) throws ParseException {
         contentTitleList = contentTitleList.substring(0, contentTitleList.length()-2);
         contentTitleList = contentTitleList.replaceAll("\"", "");
         String contentName = "";
@@ -95,10 +98,50 @@ public class  HeaderController {
             default:
                 System.out.println("잘못된 값입니다.");
         }
-        System.out.println(startDate+" : "+endDate);
-        List<ScheduleCartDTO> CartArr = scheduleCartService.createCartList(startDate, endDate, contentTitleList, contentName);
 
-        model.addAttribute("cartArr", CartArr);
+        List<ScheduleCartDTO> CartArr;
+
+        if (httpSession.getAttribute("CartArrSec") != null){
+            String SessionString =  String.valueOf(httpSession.getAttribute("CartArrSec"));
+            SessionString = SessionString.replaceAll("\\[|\\]", "");
+
+            String[] SessionArrayList = SessionString.split("\\),");
+            ArrayList<ScheduleCartDTO> SessionArr= new ArrayList<>();
+
+            for (String item : SessionArrayList ) {
+                item = item.replace("ScheduleCartDTO(", "");
+                item = item.replace(")", "");
+                String [] str = item.split(",");
+                List<String> strData = new ArrayList<String>();
+                for (int i = 0 ; i <  str.length ; i++){
+                    String [] tempStr = str[i].split("=");
+                    strData.add(tempStr[1]);
+                }
+
+                ScheduleCartDTO data = new ScheduleCartDTO();
+
+                data.setStrDate(strData.get(0));
+                data.setEndDate(strData.get(1));
+                data.setContentTitleList(strData.get(2));
+                data.setContentName(strData.get(3));
+
+                SessionArr.add(data);
+            }
+
+            CartArr = scheduleCartService.createCartList(startDate, endDate, contentTitleList, contentName);
+            for (int i = 0 ; i < CartArr.size() ; i++) {
+                SessionArr.add(CartArr.get(i));
+            }
+            httpSession.setAttribute("CartArrSec", SessionArr);
+        }else {
+            CartArr = scheduleCartService.createCartList(startDate, endDate, contentTitleList, contentName);
+            httpSession.setAttribute("CartArrSec", CartArr);
+        }
+
+        Object value = httpSession.getAttribute("CartArrSec");
+
+        model.addAttribute("CartArr", value);
+
 
         return "Calendar";
     }

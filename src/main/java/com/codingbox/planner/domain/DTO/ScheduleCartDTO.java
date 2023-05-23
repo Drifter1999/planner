@@ -16,4 +16,7 @@ public class ScheduleCartDTO {
     private String contentTitleList;
     private String contentName;
 
+    public ScheduleCartDTO(String item) {
+
+    }
 }

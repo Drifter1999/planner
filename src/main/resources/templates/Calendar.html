@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Calendar with Itinerary</title>
@@ -23,6 +24,7 @@
 <header>
     <div th:insert="~{fragment/header :: header}"></div>
 </header>
+<!--  sec:authorize="isAuthenticated()" -->
 <main>
     <!-- Hero Start-->
     <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
@@ -53,14 +55,14 @@
                         <th>일정 삭제</th>
                     </tr>
                     </thead>
-                    <tbody th:each="data : ${cartArr}">
+                    <tbody th:each="data : ${CartArr}">
                         <tr>
                             <td th:text="${data.contentTitleList}"></td>
                             <td th:text="${data.contentName}"></td>
                             <td th:text="${data.strDate}"></td>
                             <td th:text="${data.endDate}"></td>
                             <td><button class="btn btn-primary apply-btn">Apply</button></td>
-                            <td><button class="btn btn-danger">Remove</button></td>
+                            <td><button class="btn btn-danger" onclick="removeCart()">Remove</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -87,88 +89,106 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script>
- $(document).ready(function() {
-    $('#calendar').fullCalendar({
-        // Set the calendar options
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        defaultView: 'month',
-        editable: false,
-        eventLimit: true, // allow "more" link when too many events
-        displayEventTime: false,
-        events: []
-    });
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            // Set the calendar options
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'month',
+            editable: false,
+            eventLimit: true, // allow "more" link when too many events
+            displayEventTime: false,
+            events: []
+        });
 
-    $('.apply-btn').click(function() {
-        // Get the corresponding itinerary data from the table row
-        var row = $(this).closest('tr');
-        var title = row.find('td:eq(0)').text();
-        var start = row.find('td:eq(3)').text().split(' ~ ')[0];
-        var end = row.find('td:eq(3)').text().split(' ~ ')[1];
-        var description = row.find('td:eq(0)').text();
+        $('.apply-btn').click(function() {
+            // Get the corresponding itinerary data from the table row
+            var row = $(this).closest('tr');
+            var title = row.find('td:eq(0)').text();
+            var startDate = row.find('td:eq(2)').text();
+            var endDate = row.find('td:eq(3)').text();
+            var description = row.find('td:eq(0)').text();
 
-        var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {
-            return (
-                event.title === title &&
-                event.start.format('YYYY-MM-DD') === start &&
-                event.end.format('YYYY-MM-DD') === end &&
-                event.description === description &&
-                event.itinerary === true
-            );
-        }).length > 0;
+            var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {
+                return (
+                    event.title === title &&
+                    event.start.format('YYYY-MM-DD') === startDate &&
+                    event.end.format('YYYY-MM-DD') === endDate &&
+                    event.description === description &&
+                    event.itinerary === true
+                );
+            }).length > 0;
 
-        if (isEventApplied) {
+            if (isEventApplied) {
+                $('#calendar').fullCalendar('removeEvents', function(event) {
+                    return (
+                        event.title === title &&
+                        event.start.format('YYYY-MM-DD') === startDate &&
+                        event.end.format('YYYY-MM-DD') === endDate &&
+                        event.description === description &&
+                        event.itinerary === true
+                    );
+                });
+
+                $(this).text('Apply').removeClass('btn-success').addClass('btn-primary');
+            } else {
+                var event = {
+                    title: title,
+                    start: startDate,
+                    end: endDate,
+                    description: description,
+                    itinerary: true
+                };
+
+                $('#calendar').fullCalendar('renderEvent', event);
+
+                $(this).text('Applied').removeClass('btn-primary').addClass('btn-success');
+            }
+        });
+
+        $('.btn-danger').click(function() {
+            // Get the corresponding itinerary data from the table row
+            var row = $(this).closest('tr');
+            var title = row.find('td:eq(0)').text();
+            var startDate = row.find('td:eq(2)').text();
+            var endDate = row.find('td:eq(3)').text();
+            var description = row.find('td:eq(0)').text();
+
             $('#calendar').fullCalendar('removeEvents', function(event) {
                 return (
                     event.title === title &&
-                    event.start.format('YYYY-MM-DD') === start &&
-                    event.end.format('YYYY-MM-DD') === end &&
+                    event.start.format('YYYY-MM-DD') === startDate &&
+                    event.end.format('YYYY-MM-DD') === endDate &&
                     event.description === description &&
                     event.itinerary === true
                 );
             });
 
-            $(this).text('Apply').removeClass('btn-success').addClass('btn-primary');
-        } else {
-            var event = {
-                title: title,
-                start: start,
-                end: end,
-                description: description,
-                itinerary: true
-            };
-
-            $('#calendar').fullCalendar('renderEvent', event);
-
-            $(this).text('Applied').removeClass('btn-primary').addClass('btn-success');
-        }
-    });
-
-    $('.btn-danger').click(function() {
-        // Get the corresponding itinerary data from the table row
-        var row = $(this).closest('tr');
-        var title = row.find('td:eq(0)').text();
-        var start = row.find('td:eq(3)').text().split(' ~ ')[0];
-        var end = row.find('td:eq(3)').text().split(' ~ ')[1];
-        var description = row.find('td:eq(0)').text();
-
-        $('#calendar').fullCalendar('removeEvents', function(event) {
-            return (
-                event.title === title &&
-                event.start.format('YYYY-MM-DD') === start &&
-                event.end.format('YYYY-MM-DD') === end &&
-                event.description === description &&
-                event.itinerary === true
-            );
+            row.remove();
         });
-
-        row.remove();
     });
-});
+</script>
+<script>
+    /*function removeCart() {
+        var xhr = new XMLHttpRequest();
+    }*/
+</script>
+<script>
+    function saveSchedule() {
+        /*const fc_content = document.getElementsByClassName('fc-content').classList.contains()*/
+        const fc_content = document.getElementsByClassName('fc-content');
 
+        contentList
+        for (var i = 0 ; i < fc_content.length ; i++) {
+            if(fc_content[i].classList.contains('fc-title')){
+
+            }
+        }
+
+    };
 </script>
 </body>
 </html>
