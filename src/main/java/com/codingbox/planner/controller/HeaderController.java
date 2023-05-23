@@ -100,9 +100,11 @@ public class  HeaderController {
             default:
                 System.out.println("잘못된 값입니다.");
         }
-
+        System.out.println(httpSession.getAttribute("CartArrSec")+"!!");
         List<ScheduleCartDTO> CartArr;
-        if (!String.valueOf(httpSession.getAttribute("CartArrSec")).equals("[]")){
+//
+        if (httpSession.getAttribute("CartArrSec")!= null &&
+                !String.valueOf(httpSession.getAttribute("CartArrSec")).equals("[]")){
             String SessionString =  String.valueOf(httpSession.getAttribute("CartArrSec"));
             SessionString = SessionString.replaceAll("\\[|\\]", "");
 
@@ -116,7 +118,6 @@ public class  HeaderController {
                 List<String> strData = new ArrayList<String>();
                 for (int i = 0 ; i <  str.length ; i++){
                     String [] tempStr = str[i].split("=");
-                    System.out.println(tempStr.toString());
                     strData.add(tempStr[1]);
                 }
                 ScheduleCartDTO data = new ScheduleCartDTO();

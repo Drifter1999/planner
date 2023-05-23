@@ -77,6 +77,8 @@ public class AjaxController {
         }
 
         if (cartArrSec != null) {
+            System.out.println("cartArrSec" + cartArrSec);
+
             httpSession.setAttribute("CartArr", cartArrSec);
         }else {
             RedirectView redirectView = new RedirectView("/home");
