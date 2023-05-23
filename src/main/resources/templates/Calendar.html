@@ -208,14 +208,21 @@
             events: []
         });
 
-        $('.apply-btn').click(function() {
-            // Get the corresponding itinerary data from the table row
-            var row = $(this).closest('tr');
-            var title = row.find('td:eq(0)').text();
-            var startDate = row.find('td:eq(2)').text();
-            var endDate = row.find('td:eq(3)').text();
-            var description = row.find('td:eq(0)').text();
+       $('.apply-btn').click(function() {
+          // Get the corresponding itinerary data from the table row
+          var row = $(this).closest('tr');
+          var title = row.find('td:eq(0)').text();
+          var startDate = row.find('td:eq(2)').text();
+          var endDate = row.find('td:eq(3)').text();
+          var description = row.find('td:eq(0)').text();
 
+          // Update the shareData object with the applied schedule
+          shareData = {
+            title: title,
+            startDate: startDate,
+            endDate: endDate,
+            description: description
+          };
             var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {
                 return (
                     event.title === title &&
