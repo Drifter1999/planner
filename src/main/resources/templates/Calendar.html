@@ -113,74 +113,74 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-<script>
-    $(document).ready(function() {
-  // Handle the button click event
-  $('#shareButton').click(function() {
-    // Get the user ID from the input field
-    var userId = $('#userIdInput').val();
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--  // Handle the button click event-->
+<!--  $('#shareButton').click(function() {-->
+<!--    // Get the user ID from the input field-->
+<!--    var userId = $('#userIdInput').val();-->
 
-    // Create the shareData object with the itinerary information
-    var shareData = {
-      // Include your itinerary data here
-    };
+<!--    // Create the shareData object with the itinerary information-->
+<!--    var shareData = {-->
+<!--      // Include your itinerary data here-->
+<!--    };-->
 
-    // Send the AJAX request to the calendar controller
-    $.ajax({
-      type: "POST",
-      url: "/calendar/share",
-      data: JSON.stringify({
-        userId: userId,
-        shareData: shareData
-      }),
-      contentType: "application/json",
-      success: function(response) {
-        console.log("Shared itinerary successfully:", response);
-        // Handle success response
-      },
-      error: function(error) {
-        console.log("Error sharing itinerary:", error);
-        // Handle error response
-      }
-    });
-  });
-});
+<!--    // Send the AJAX request to the calendar controller-->
+<!--    $.ajax({-->
+<!--      type: "POST",-->
+<!--      url: "/calendar/share",-->
+<!--      data: JSON.stringify({-->
+<!--        userId: userId,-->
+<!--        shareData: shareData-->
+<!--      }),-->
+<!--      contentType: "application/json",-->
+<!--      success: function(response) {-->
+<!--        console.log("Shared itinerary successfully:", response);-->
+<!--        // Handle success response-->
+<!--      },-->
+<!--      error: function(error) {-->
+<!--        console.log("Error sharing itinerary:", error);-->
+<!--        // Handle error response-->
+<!--      }-->
+<!--    });-->
+<!--  });-->
+<!--});-->
 
-</script>
-<script>
-    $(document).ready(function() {
-  // Handle the button click event
-  $('#shareButton').click(function() {
-    // Get the user ID from the input field
-    var userId = $('#userIdInput').val();
+<!--</script>-->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--  // Handle the button click event-->
+<!--  $('#shareButton').click(function() {-->
+<!--    // Get the user ID from the input field-->
+<!--    var userId = $('#userIdInput').val();-->
 
-    // Create the shareData object with the itinerary information
-    var shareData = {
-      // Include your itinerary data here
-    };
+<!--    // Create the shareData object with the itinerary information-->
+<!--    var shareData = {-->
+<!--      // Include your itinerary data here-->
+<!--    };-->
 
-    // Send the AJAX request to the calendar controller
-    $.ajax({
-      type: "POST",
-      url: "/calendar/share",
-      data: JSON.stringify({
-        userId: userId,
-        shareData: shareData
-      }),
-      contentType: "application/json",
-      success: function(response) {
-        console.log("Shared itinerary successfully:", response);
-        // Handle success response
-      },
-      error: function(error) {
-        console.log("Error sharing itinerary:", error);
-        // Handle error response
-      }
-    });
-  });
-});
+<!--    // Send the AJAX request to the calendar controller-->
+<!--    $.ajax({-->
+<!--      type: "POST",-->
+<!--      url: "/calendar/share",-->
+<!--      data: JSON.stringify({-->
+<!--        userId: userId,-->
+<!--        shareData: shareData-->
+<!--      }),-->
+<!--      contentType: "application/json",-->
+<!--      success: function(response) {-->
+<!--        console.log("Shared itinerary successfully:", response);-->
+<!--        // Handle success response-->
+<!--      },-->
+<!--      error: function(error) {-->
+<!--        console.log("Error sharing itinerary:", error);-->
+<!--        // Handle error response-->
+<!--      }-->
+<!--    });-->
+<!--  });-->
+<!--});-->
 
-</script>
+<!--</script>-->
 <script>
     var colleagues = [];
 
@@ -192,8 +192,137 @@
     }
 
 </script>
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        $('#calendar').fullCalendar({-->
+<!--            // Set the calendar options-->
+<!--            header: {-->
+<!--                left: 'prev,next today',-->
+<!--                center: 'title',-->
+<!--                right: 'month,agendaWeek,agendaDay'-->
+<!--            },-->
+<!--            defaultView: 'month',-->
+<!--            editable: false,-->
+<!--            eventLimit: true, // allow "more" link when too many events-->
+<!--            displayEventTime: false,-->
+<!--            events: []-->
+<!--        });-->
+
+<!--        $('.apply-btn').click(function() {-->
+<!--            // Get the corresponding itinerary data from the table row-->
+<!--            var row = $(this).closest('tr');-->
+<!--            var title = row.find('td:eq(0)').text();-->
+<!--            var startDate = row.find('td:eq(2)').text();-->
+<!--            var endDate = row.find('td:eq(3)').text();-->
+<!--            var description = row.find('td:eq(0)').text();-->
+
+<!--            var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {-->
+<!--                return (-->
+<!--                    event.title === title &&-->
+<!--                    event.start.format('YYYY-MM-DD') === startDate &&-->
+<!--                    event.end.format('YYYY-MM-DD') === endDate &&-->
+<!--                    event.description === description &&-->
+<!--                    event.itinerary === true-->
+<!--                );-->
+<!--            }).length > 0;-->
+
+<!--            if (isEventApplied) {-->
+<!--                $('#calendar').fullCalendar('removeEvents', function(event) {-->
+<!--                    return (-->
+<!--                        event.title === title &&-->
+<!--                        event.start.format('YYYY-MM-DD') === startDate &&-->
+<!--                        event.end.format('YYYY-MM-DD') === endDate &&-->
+<!--                        event.description === description &&-->
+<!--                        event.itinerary === true-->
+<!--                    );-->
+<!--                });-->
+
+<!--                $(this).text('Apply').removeClass('btn-success').addClass('btn-primary');-->
+<!--            } else {-->
+<!--                var event = {-->
+<!--                    title: title,-->
+<!--                    start: startDate,-->
+<!--                    end: endDate,-->
+<!--                    description: description,-->
+<!--                    itinerary: true-->
+<!--                };-->
+
+<!--                $('#calendar').fullCalendar('renderEvent', event);-->
+
+<!--                $(this).text('Applied').removeClass('btn-primary').addClass('btn-success');-->
+<!--            }-->
+<!--        });-->
+
+<!--        $('.btn-danger').click(function() {-->
+<!--            // Get the corresponding itinerary data from the table row-->
+<!--            var row = $(this).closest('tr');-->
+<!--            var title = row.find('td:eq(0)').text();-->
+<!--            var startDate = row.find('td:eq(2)').text();-->
+<!--            var endDate = row.find('td:eq(3)').text();-->
+<!--            var description = row.find('td:eq(0)').text();-->
+
+<!--            $('#calendar').fullCalendar('removeEvents', function(event) {-->
+<!--                return (-->
+<!--                    event.title === title &&-->
+<!--                    event.start.format('YYYY-MM-DD') === startDate &&-->
+<!--                    event.end.format('YYYY-MM-DD') === endDate &&-->
+<!--                    event.description === description &&-->
+<!--                    event.itinerary === true-->
+<!--                );-->
+<!--            });-->
+
+<!--            row.remove();-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--<script>-->
+<!--    function removeCart(selector) {-->
+
+<!--        var id = selector.value;-->
+<!--        var xhr = new XMLHttpRequest();-->
+<!--        xhr.open("POST", "/remove");-->
+<!--        xhr.setRequestHeader("Content-Type", "application/json");-->
+<!--        xhr.send(JSON.stringify({ id: id }));-->
+<!--        xhr.onreadystatechange = function() {-->
+<!--            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {-->
+<!--                // 응답 처리 로직-->
+<!--                var response = JSON.parse(xhr.responseText);-->
+<!--                console.log(response)-->
+<!--                // 성공적으로 삭제된 경우-->
+<!--                if (response.success) {-->
+<!--                    alert("삭제 성공");-->
+<!--                } else {-->
+<!--                    // 삭제 실패 시 처리 로직-->
+<!--                    alert("삭제 실패");-->
+<!--                }-->
+<!--            }-->
+<!--        };-->
+<!--    }-->
+<!--</script>-->
+<!--<script>-->
+<!--    function saveSchedule() {-->
+<!--        /*const fc_content = document.getElementsByClassName('fc-content').classList.contains()*/-->
+<!--        const fc_content = document.getElementsByClassName('fc-content');-->
+<!--        for (var i = 0 ; i < fc_content.length ; i++) {-->
+<!--            if(fc_content[i].classList.contains('fc-title')){-->
+
+<!--            }-->
+<!--        }-->
+
+<!--    };-->
+<!--</script>-->
+
 <script>
     $(document).ready(function() {
+        var colleagues = [];
+
+        function addColleague() {
+            var colleagueId = $('#colleagueIdInput').val();
+            colleagues.push(colleagueId);
+            $('#addedColleagues').append('<li>' + colleagueId + '</li>');
+            $('#colleagueIdInput').val('');
+        }
+
         $('#calendar').fullCalendar({
             // Set the calendar options
             header: {
@@ -208,21 +337,14 @@
             events: []
         });
 
-       $('.apply-btn').click(function() {
-          // Get the corresponding itinerary data from the table row
-          var row = $(this).closest('tr');
-          var title = row.find('td:eq(0)').text();
-          var startDate = row.find('td:eq(2)').text();
-          var endDate = row.find('td:eq(3)').text();
-          var description = row.find('td:eq(0)').text();
+        $('.apply-btn').click(function() {
+            // Get the corresponding itinerary data from the table row
+            var row = $(this).closest('tr');
+            var title = row.find('td:eq(0)').text();
+            var startDate = row.find('td:eq(2)').text();
+            var endDate = row.find('td:eq(3)').text();
+            var description = row.find('td:eq(0)').text();
 
-          // Update the shareData object with the applied schedule
-          shareData = {
-            title: title,
-            startDate: startDate,
-            endDate: endDate,
-            description: description
-          };
             var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {
                 return (
                     event.title === title &&
@@ -280,43 +402,86 @@
 
             row.remove();
         });
-    });
-</script>
-<script>
-    function removeCart(selector) {
 
-        var id = selector.value;
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/remove");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.send(JSON.stringify({ id: id }));
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                // 응답 처리 로직
-                var response = JSON.parse(xhr.responseText);
-                console.log(response)
-                // 성공적으로 삭제된 경우
-                if (response.success) {
-                    alert("삭제 성공");
-                } else {
-                    // 삭제 실패 시 처리 로직
-                    alert("삭제 실패");
+        function removeCart(selector) {
+            var id = selector.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/remove");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify({ id: id }));
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    if (response.success) {
+                        alert("Deletion successful");
+                    } else {
+                        alert("Deletion failed");
+                    }
                 }
-            }
-        };
-    }
-</script>
-<script>
-    function saveSchedule() {
-        /*const fc_content = document.getElementsByClassName('fc-content').classList.contains()*/
-        const fc_content = document.getElementsByClassName('fc-content');
-        for (var i = 0 ; i < fc_content.length ; i++) {
-            if(fc_content[i].classList.contains('fc-title')){
+            };
+        }
 
+        function saveSchedule() {
+            var fc_content = document.getElementsByClassName('fc-content');
+            for (var i = 0; i < fc_content.length; i++) {
+                if (fc_content[i].classList.contains('fc-title')) {
+                    // Additional logic for saving schedule
+                }
             }
         }
 
-    };
+        // Handle the button click event
+        $('#shareButton').click(function() {
+            // Get the user ID from the input field
+            var userId = $('#userIdInput').val();
+
+            // Create the shareData object with the itinerary information
+            var shareData = {
+                scheduleData: []
+            };
+
+            // Retrieve the applied schedule data from the calendar
+            var events = $('#calendar').fullCalendar('clientEvents', function(event) {
+                return event.itinerary === true;
+            });
+
+            // Add the applied schedule data to the shareData object
+            events.forEach(function(event) {
+                shareData.scheduleData.push({
+                    destination: event.title,
+                    category: event.category,
+                    startDate: event.start.format('YYYY-MM-DD'),
+                    endDate: event.end.format('YYYY-MM-DD')
+                });
+            });
+            // Encode the shareData object as a query parameter
+                var encodedData = encodeURIComponent(JSON.stringify(shareData));
+
+            // Redirect to the blog page with the shareData query parameter
+                window.location.href = "/header/blog?shareData=" + encodedData;
+
+<!--            // Send the AJAX request to the calendar controller-->
+<!--            $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: "/header/blog",-->
+<!--                data: JSON.stringify({-->
+<!--                    userId: userId,-->
+<!--                    shareData: shareData-->
+<!--                }),-->
+<!--                contentType: "application/json",-->
+<!--                success: function(response) {-->
+<!--                    console.log("Shared itinerary successfully:", response);-->
+<!--                    // Handle success response-->
+<!--                },-->
+<!--                error: function(error) {-->
+<!--                    console.log("Error sharing itinerary:", error);-->
+<!--                    // Handle error response-->
+<!--                }-->
+<!--            });-->
+        });
+    });
 </script>
+
 </body>
 </html>
