@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <title>Calendar with Itinerary</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
-    <link rel="stylesheet" href="path/to/your/custom/header.css">
-    <link rel="stylesheet" href="path/to/your/custom/footer.css">
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
@@ -56,16 +54,16 @@
                     </tr>
                     </thead>
                     <tbody th:each="data : ${CartArr}">
-                        <tr>
-                            <td th:text="${data.contentTitleList}"></td>
-                            <td th:text="${data.contentName}"></td>
-                            <td th:text="${data.strDate}"></td>
-                            <td th:text="${data.endDate}"></td>
-                            <td><button class="btn btn-primary apply-btn">Apply</button></td>
-                            <td><button class="btn btn-danger"
-                                        onclick="removeCart(this)"
-                                        th:value="${data.ScheduleCartId}"> 일정 삭제 </button></td>
-                        </tr>
+                    <tr>
+                        <td th:text="${data.contentTitleList}"></td>
+                        <td th:text="${data.contentName}"></td>
+                        <td th:text="${data.strDate}"></td>
+                        <td th:text="${data.endDate}"></td>
+                        <td><button class="btn btn-primary apply-btn">Apply</button></td>
+                        <td><button class="btn btn-danger"
+                                    onclick="removeCart(this)"
+                                    th:value="${data.ScheduleCartId}"> 일정 삭제 </button></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -82,6 +80,31 @@
         </div>
     </div>
     <!-- Calendar End -->
+
+
+    <!-- Share Itinerary Start -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section-title text-center">
+                    <h2>Share Travel Itinerary with Colleagues</h2>
+                </div>
+                <div class="text-center">
+                    <input type="text" id="colleagueIdInput" placeholder="Enter User ID">
+                    <button class="btn btn-primary" onclick="addColleague()">Add</button>
+                </div>
+
+                <div class="text-center mt-3">
+                    <h4>Added Colleagues:</h4>
+                    <ul id="addedColleagues"></ul>
+                </div>
+                <div class="text-center mt-3">
+                    <button id="shareButton" style="">Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Share Itinerary End -->
 </main>
 <footer>
     <div th:insert="~{fragment/footer1 :: footer1}"></div>
@@ -90,6 +113,85 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script>
+    $(document).ready(function() {
+  // Handle the button click event
+  $('#shareButton').click(function() {
+    // Get the user ID from the input field
+    var userId = $('#userIdInput').val();
+
+    // Create the shareData object with the itinerary information
+    var shareData = {
+      // Include your itinerary data here
+    };
+
+    // Send the AJAX request to the calendar controller
+    $.ajax({
+      type: "POST",
+      url: "/calendar/share",
+      data: JSON.stringify({
+        userId: userId,
+        shareData: shareData
+      }),
+      contentType: "application/json",
+      success: function(response) {
+        console.log("Shared itinerary successfully:", response);
+        // Handle success response
+      },
+      error: function(error) {
+        console.log("Error sharing itinerary:", error);
+        // Handle error response
+      }
+    });
+  });
+});
+
+</script>
+<script>
+    $(document).ready(function() {
+  // Handle the button click event
+  $('#shareButton').click(function() {
+    // Get the user ID from the input field
+    var userId = $('#userIdInput').val();
+
+    // Create the shareData object with the itinerary information
+    var shareData = {
+      // Include your itinerary data here
+    };
+
+    // Send the AJAX request to the calendar controller
+    $.ajax({
+      type: "POST",
+      url: "/calendar/share",
+      data: JSON.stringify({
+        userId: userId,
+        shareData: shareData
+      }),
+      contentType: "application/json",
+      success: function(response) {
+        console.log("Shared itinerary successfully:", response);
+        // Handle success response
+      },
+      error: function(error) {
+        console.log("Error sharing itinerary:", error);
+        // Handle error response
+      }
+    });
+  });
+});
+
+</script>
+<script>
+    var colleagues = [];
+
+    function addColleague() {
+        var colleagueId = $('#colleagueIdInput').val(); // Updated ID
+        colleagues.push(colleagueId);
+        $('#addedColleagues').append('<li>' + colleagueId + '</li>');
+        $('#colleagueIdInput').val(''); // Updated ID
+    }
+
+</script>
 <script>
     $(document).ready(function() {
         $('#calendar').fullCalendar({

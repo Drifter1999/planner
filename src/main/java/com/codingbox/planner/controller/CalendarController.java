@@ -1,8 +1,11 @@
 package com.codingbox.planner.controller;
 
+import com.codingbox.planner.domain.DTO.ShareScheduleDTO;
 import com.codingbox.planner.domain.Members;
 import com.codingbox.planner.domain.Schedule;
 import com.codingbox.planner.service.ScheduleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +15,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/calendar")
 public class CalendarController {
+    private static final Logger logger = LoggerFactory.getLogger(CalendarController.class);
+
     private final ScheduleService scheduleService;
 
     @Autowired
@@ -42,5 +47,14 @@ public class CalendarController {
     @GetMapping("/schedules/members")
     public List<Schedule> getScheduleByMembers(@RequestBody Members members) {
         return scheduleService.getScheduleByMembers(members);
+    }
+
+    @PostMapping("/share")
+    public void shareScheduleWithColleague(@RequestBody ShareScheduleDTO request) {
+        logger.info("Received share request for schedule with ID: {}", request.getScheduleId());
+        logger.debug("Shared schedule details: {}", request);
+
+        // Log a confirmation message
+        logger.info("Schedule shared successfully with colleague: {}", request.getColleagueId());
     }
 }

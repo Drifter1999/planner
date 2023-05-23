@@ -35,4 +35,11 @@ public class ScheduleService {
     public List<Schedule> getScheduleByMembers(Members members) {
         return scheduleRepository.findByMembersToSchedule(members);
     }
+
+    public void shareScheduleWithColleague(String colleagueId, Schedule schedule) {
+        // Implement the logic to share the schedule with the colleague
+        // This could involve updating the schedule entity with the colleague's ID
+        // or performing any necessary actions to notify the colleague
+        // You can use the scheduleRepository or other relevant dependencies to update the schedule
+    }
 }
