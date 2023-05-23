@@ -32,10 +32,22 @@
 
         // update 함수 정의
         function update() {
-          let data = {
+          var pw = $("#pw").val();
+          var pw_chk = $("#pw_chk").val();
+
+          if (pw.length < 8) {
+            alert('비밀번호는 최소 8자 이상이어야 합니다.');
+            return;
+          }
+
+          if (pw !== pw_chk) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
+          }
+
+          var data = {
             userId: $("#userId").val(),
-            //  username: $("#name").val(),
-            pw: $("#pw").val()
+            pw: pw
           };
 
           $.ajax({
@@ -46,15 +58,35 @@
             dataType: "json"
           }).done(function (response) {
             alert("회원 수정 완료");
-            location.href = "/logout";
+            location.href = "/";
           }).fail(function (error) {
             alert("회원 수정 실패");
           });
         }
+
         // update 함수 호출
         update();
       });
     });
+  </script>
+  <script type="text/javascript">
+    function test() {
+      var pw = document.getElementById('pw').value;
+      var pw_chk = document.getElementById('pw_chk').value;
+
+      if (pw.length < 8) {
+        alert('비밀번호는 최소 8자 이상이어야 합니다.');
+        return false;
+      }
+
+      if (pw !== pw_chk) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return false;
+      } else {
+        alert("비밀번호가 일치합니다.");
+        return true;
+      }
+    }
   </script>
 </head>
 <body>
@@ -93,14 +125,16 @@
         <div class="col-lg-8">
           <h3 class="mb-20" style="text-align: center">My Page</h3>
           <form id="memberForm">
-          <div class="mt-10">
-            계정 <input class="single-input" id="userId" value="test">
-            새 비밀번호 <input class="single-input" id="pw" value="test">
-            새 비밀번호 확인 <input class="single-input"  id="pw_chk" value="test">
+            <div class="mt-10">
+              계정 <input class="single-input" id="userId" >
 
-            </br>
-            <button class="genric-btn primary small" name="pw" type="submit">비밀번호 변경</button>
-          </div>
+              <!--            패스워드 타입은 팀원들에게 확인 시키고 적용 필요 -->
+              새 비밀번호 <input class="single-input" id="pw" >
+              새 비밀번호 확인 <input class="single-input"  id="pw_chk" value="test">
+
+              </br>
+              <button onclick="test()" class="genric-btn primary small" name="pw">비밀번호 변경</button>
+            </div>
           </form>
 
           <hr>
