@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Web Hosting HTML-5 Template </title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+
+  <!-- CSS here -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="assets/css/slicknav.css">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="assets/css/themify-icons.css">
+  <link rel="stylesheet" href="assets/css/slick.css">
+  <link rel="stylesheet" href="assets/css/nice-select.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="/templates/signup/custom.js"></script>
+  <title>My Page</title>
+  <style>
+
+  </style>
+</head>
+<body>
+<!-- Preloader Start -->
+<div id="preloader-active">
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-inner position-relative">
+      <div class="preloader-circle"></div>
+      <div class="preloader-img pere-text">
+        <img src="/assets/img/logo/loder.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Preloader Start -->
+<header>
+  <div th:insert="~{fragment/header :: header}"></div>
+</header>
+<main>
+  <!-- Hero Start-->
+  <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="hero-cap text-center pt-50">
+            <h2>My Page</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Hero End -->
+  <div class="listing-caption section-padding2">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h3 class="mb-20" style="text-align: center">My Page</h3>
+
+          <div class="mt-10">
+            ID <input class="single-input" name="userId" id="id" value="test">
+            PassWord <br>
+            <button href="#" class="genric-btn primary small" name="pw" id="pw">비밀번호 변경</button>
+          </div>
+
+          <hr>
+
+          <form name="" method="post" action="#" >
+            <div class="mt-10">
+              이름 <input class="single-input" name="name" id="name" value="test">
+              핸드폰번호 <input class="single-input" type="phone" name="phone" id="phone" value="010-1234-5678" readonly>
+              이메일주소 <input class="single-input" type="email" name="email" id="email" value="abc@abc.com" readonly>
+              생일 <input class="single-input" type="date" name="birth" id="birth" value="2023-05-23" readonly>
+              성별 <br>
+              <a class="single-input" >
+                <input type="radio" name="gender" value="Male" checked readonly>Male</label>
+                <input type="radio" name="gender" value="Female" readonly><label>Female</label>
+              </a>
+            </div>
+
+            <hr>
+
+            <div style="text-align: center;">
+              <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" style=" width:  770px; height: 50px;" >
+                회원정보 수정
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <div th:insert="~{fragment/footer1 :: footer1}"></div>
+</footer>
+<!-- Scroll Up -->
+<div id="back-top">
+  <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
+
+<!--</script>-->
+<!-- All JS Custom Plugins Link Here here -->
+<script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<!-- Jquery Mobile Menu -->
+<script src="/assets/js/jquery.slicknav.min.js"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/slick.min.js"></script>
+<!-- One Page, Animated-HeadLin -->
+<script src="/assets/js/wow.min.js"></script>
+<script src="/assets/js/animated.headline.js"></script>
+
+<!-- Nice-select, sticky -->
+<script src="/assets/js/jquery.nice-select.min.js"></script>
+<script src="/assets/js/jquery.sticky.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+
+<!-- contact js -->
+<script src="/assets/js/contact.js"></script>
+<script src="/assets/js/jquery.form.js"></script>
+<script src="/assets/js/jquery.validate.min.js"></script>
+<script src="/assets/js/mail-script.js"></script>
+<script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+
+<!-- Jquery Plugins, main Jquery -->
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
