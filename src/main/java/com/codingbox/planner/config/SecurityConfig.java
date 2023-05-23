@@ -1,14 +1,16 @@
 package com.codingbox.planner.config;
 
+import com.codingbox.planner.service.MemberDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 @Configuration
 @EnableWebSecurity // 스프링 시큐리티 필터가 스프링 필터체인에 등록 된다.
@@ -21,8 +23,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    private final MemberDetailsService memberDetailsService;
     private final AuthenticationFailureHandler CustomFailureHandler;
 
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(memberDetailsService).passwordEncoder(encodePwd());
+    }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable(); //csrf 비활성화
@@ -44,13 +58,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login.out")
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID");
-
-    }
-
-    // 시큐리티 타임리프 사용
-    @Bean
-    public SpringSecurityDialect springSecurityDialect() {
-        return new SpringSecurityDialect();
     }
 
 }

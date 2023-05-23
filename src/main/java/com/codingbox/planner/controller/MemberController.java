@@ -32,8 +32,8 @@ public class MemberController {
 
     @GetMapping("/login")
     public String loginForm(@RequestParam(value = "error", required = false) String error,
-                        @RequestParam(value = "exception", required = false) String exception,
-                        Model model) {
+                            @RequestParam(value = "exception", required = false) String exception,
+                            Model model) {
 
         /* 에러와 예외를 모델에 담아 view resolve */
         model.addAttribute("error", error);
@@ -56,6 +56,11 @@ public class MemberController {
         return "signup/signup";
     }
 
+    @GetMapping("/mypage")
+    public String mypage() {
+        return "mypage/mypage";
+    }
+
 
     @PostMapping("/signup")
     public String join(Members members) {
@@ -74,5 +79,7 @@ public class MemberController {
         return "members";
 
     }
+
+
 
 }
