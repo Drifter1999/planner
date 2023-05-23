@@ -19,80 +19,77 @@
   <link rel="stylesheet" href="assets/css/slick.css">
   <link rel="stylesheet" href="assets/css/nice-select.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="/templates/signup/custom.js"></script>
   <title>My Page</title>
   <style>
 
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $("#memberForm").submit(function(event) {
-        event.preventDefault();
+    $(document).ready(function () {
+        $("#memberForm").submit(function (event) {
+          event.preventDefault(); // 폼 제출 이벤트 기본 동작 방지
 
-        function update() {
-          var pw = $("#pw").val();
-          var pw_chk = $("#pw_chk").val();
-          var passwordError = $("#password-error");
-
-          if (pw.length < 8) {
-            passwordError.text('비밀번호는 최소 8자 이상이어야 합니다.');
-            return;
+          // 유효성 검사 함수 호출
+          if (!validcheck()) {
+            return false; // 유효성 검사에 실패하면 폼 제출을 막음
           }
 
-          if (pw !== pw_chk) {
-            passwordError.text('비밀번호가 일치하지 않습니다.');
-            return false;
+          // update 함수 정의
+          function update() {
+            let data = {
+              userId: $("#userId").val(),
+              //  username: $("#name").val(),
+              pw: $("#pw").val()
+            };
+
+            $.ajax({
+              type: "PUT",
+              url: "/member",
+              data: JSON.stringify(data), // object -> json
+              contentType: "application/json; charset=utf-8",
+              dataType: "json"
+            }).done(function (response) {
+              alert("회원 정보 수정이 완료되었습니다.");
+              location.href = "/logout";
+            }).fail(function (error) {
+              alert("회원 정보 수정을 실패하였습니다.");
+            });
           }
 
-          passwordError.text("비밀번호가 일치합니다.");
+          // update 함수 호출
+          update();
+        });
+      });
 
-          var data = {
-            userId: $("#userId").val(),
-            pw: pw
-          };
+      function validcheck() {
+        var pw = document.getElementById('pw').value;
+        var pw_chk = document.getElementById('pw_chk').value;
+        var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,24}$/; // 비밀번호 정규식
 
-          $.ajax({
-            type: "PUT",
-            url: "/member",
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
-          }).done(function (response) {
-            alert("회원 수정 완료");
-            location.href = "/";
-          }).fail(function (error) {
-            alert("회원 수정 실패");
-          });
+        // 만들어 놓은거라 주석 풀고 사용하면 됨.
+        // if (!reg.test(pw.value)) {
+        //   document.getElementById("error1").innerText = "비밀번호는 8~24자 사이의 영문소문자, 숫자, 특수문자 조합을 사용하세요.";
+        //   return false;
+        // }
+
+        if (pw.length < 8) {
+          // alert('비밀번호는 최소 8자 이상이어야 합니다.');
+          document.getElementById("error1").innerText = "비밀번호는 8~24자 사이의 영문소문자, 숫자, 특수문자 조합을 사용하세요.";
+          return false;
         }
 
-        // update 함수 호출
-        update();
-      });
-    });
+        if (pw !== pw_chk) {
+          // alert("비밀번호가 일치하지 않습니다.");
+          document.getElementById("error2").innerText = "비밀번호가 일치하지 않습니다.";
+          document.getElementById("error1").style.display = "none";
+          return false;
+        }
 
+        document.getElementById("error1").style.display = "none";
+        document.getElementById("error2").style.display = "none";
+        return true; // 유효성 검사 통과 시 true 반환
+      }
   </script>
-
-<!--  test용도-->
-<!--  <script type="text/javascript">-->
-<!--    function test() {-->
-<!--      var pw = document.getElementById('pw').value;-->
-<!--      var pw_chk = document.getElementById('pw_chk').value;-->
-
-<!--      if (pw.length < 8) {-->
-<!--        alert('비밀번호는 최소 8자 이상이어야 합니다.');-->
-<!--        return false;-->
-<!--      }-->
-
-<!--      if (pw !== pw_chk) {-->
-<!--        alert("비밀번호가 일치하지 않습니다.");-->
-<!--        return false;-->
-<!--      } else {-->
-<!--        alert("비밀번호가 일치합니다.");-->
-<!--        return true;-->
-<!--      }-->
-<!--    }-->
-<!--  </script>-->
 </head>
 <body>
 <!-- Preloader Start -->
@@ -129,45 +126,48 @@
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <h3 class="mb-20" style="text-align: center">My Page</h3>
-          <form id="memberForm">
+          <form id="memberForm" onsubmit="return validcheck()">
             <div class="mt-10">
-              계정 <input class="single-input" id="userId" >
-
-              <!--            패스워드 타입은 팀원들에게 확인 시키고 적용 필요 -->
-              새 비밀번호 <input class="single-input" id="pw" >
-              <span id="password-error" style="color: red;"></span></br>
-              새 비밀번호 확인 <input class="single-input"  id="pw_chk" value="test">
+              계정 <input class="single-input" id="userId" th:value="${session.memberinfo.userId}" readonly>
+              새 비밀번호 <input class="single-input" id="pw" value="">
+              <span id="error1" style="color: red;"></span></br>
+              새 비밀번호 확인 <input class="single-input" id="pw_chk" value="">
+              <span id="error2" style="color: red;"></span></br>
 
               </br>
-              <button onclick="test()" class="genric-btn primary small" name="pw">비밀번호 변경</button>
+              <button class="genric-btn primary small" name="pw" type="submit">비밀번호 변경</button>
             </div>
           </form>
 
           <hr>
 
-          <form name="" method="post" id="memberForm2" >
+          <form name="" method="post" id="">
             <div class="mt-10">
 
-              이름 <input class="single-input" name="name" id="name" value="test" >
-              핸드폰번호 <input class="single-input" type="phone" name="phone" id="phone" value="010-1234-5678" readonly>
-              이메일주소 <input class="single-input" type="email" name="email" id="email" value="abc@abc.com" readonly>
-              생일 <input class="single-input" type="date" name="birth" id="birth" value="2023-05-23" readonly>
-              성별 <br>
-              <a class="single-input" >
-                <input type="radio" name="gender" value="Male" checked readonly>Male</label>
-                <input type="radio" name="gender" value="Female" readonly><label>Female</label>
-              </a>
+              이름 <input class="single-input" name="name" id="name" th:value="${session.memberinfo.name}"
+                        readonly>
+              핸드폰번호 <input class="single-input" type="phone" name="phone" id="phone" th:value="${session.memberinfo.phone}" readonly>
+              이메일주소 <input class="single-input" type="email" name="email" id="email" th:value="${session.memberinfo.email}" readonly>
+              생일 <input class="single-input" type="date" name="birth" id="birth" th:value="${session.memberinfo.birth}" readonly>
+              성별<input class="single-input" name="gender" id="gender" th:value="${session.memberinfo.gender}" readonly>
+
+              <!--              성별 <br>-->
+              <!--              <a class="single-input">-->
+              <!--                <input type="radio" name="gender" value="Male" id="maleRadio" th:checked="${session.memberinfo.gender == 'Male'}" /><label for="maleRadio">Male</label>-->
+              <!--                <input type="radio" name="gender" value="Female" id="femaleRadio" th:checked="${session.memberinfo.gender == 'Female'}" /><label for="femaleRadio">Female</label>-->
+              <!--              </a>-->
+
             </div>
 
             <hr>
 
             <div style="text-align: center;">
-              <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn" style=" width:  770px; height: 50px;" >
+              <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                      style=" width:  770px; height: 50px;">
                 회원정보 수정
               </button>
             </div>
           </form>
-
         </div>
       </div>
     </div>

@@ -17,6 +17,7 @@ public class MemberDetails implements UserDetails {
     // 일반 로그인 생성자
     public MemberDetails(Members members) {
         this.members = members;
+
     }
 
     @Override
