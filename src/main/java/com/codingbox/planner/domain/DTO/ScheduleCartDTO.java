@@ -11,12 +11,11 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ScheduleCartDTO {
+
+    private int ScheduleCartId;
     private String strDate;
     private String endDate;
     private String contentTitleList;
     private String contentName;
 
-    public ScheduleCartDTO(String item) {
-
-    }
 }

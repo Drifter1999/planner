@@ -73,11 +73,49 @@
                                 <span>Travel in korea</span>
                                 <h1>Discover Great Places In Korea</h1>
                             </div>
-
+                            <!--Hero form -->
+<!--                            <form action="#" class="search-box">-->
+<!--                                <div class="input-form">-->
+<!--                                    <input type="text" placeholder="What are you looking for?">-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash;<div class="select-form">-->
+<!--                                    <div class="select-itms">-->
+<!--                                        <select name="select" id="select">-->
+<!--                                            <option value="">All Catagories</option>-->
+<!--                                            <option value="">Catagories One</option>-->
+<!--                                            <option value="">Catagories Two</option>-->
+<!--                                            <option value="">Catagories Three</option>-->
+<!--                                            <option value="">Catagories Four</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                </div>&ndash;&gt;-->
+<!--                                <div class="search-form">-->
+<!--                                    <a href="#">Search</a>-->
+<!--                                </div>	-->
+<!--                            </form>-->
                             <form action="#" class="search-box search-box2">
 
+                                <div class="select-form">
+                                    <div class="select-itms">
+                                        <select name="select" id="select1">
+                                            <option value="All">All Location</option>
+                                            <option value="hotel">Busan</option>
+                                            <option value="nightlife">Seoul</option>
+                                            <option value="cultureplace">Yeosu</option>
+                                            <option value="restaurant">...</option>
+                                        </select>
+                                        <select name="select" id="select2">
+                                            <option value="All">All Catagories</option>
+                                            <option value="hotel">Living Hotel</option>
+                                            <option value="nightlife">Night Life</option>
+                                            <option value="cultureplace">Culture Place</option>
+                                            <option value="restaurant">Restaurant</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Search box -->
                                 <div class="search-form">
-                                    <a th:href="@{/header/category}">시작하기</a>
+                                    <a th:href="@{/header/listing_details}">Search</a>
                                 </div>
                             </form>
 
@@ -89,7 +127,6 @@
         </div>
 
         <!--Hero Area End-->
-
         <!-- Popular Locations Start -->
         <div class="popular-location section-padding30">
             <div class="container">
@@ -141,7 +178,45 @@
                             </div>
                         </div>
                     </div>
-
+<!--                    <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                        <div class="single-location mb-30">-->
+<!--                            <div class="location-img">-->
+<!--                                <img-->
+<!--                                    src="assets/img/gallery/location4.png"-->
+<!--                                    alt="">-->
+<!--                            </div>-->
+<!--                            <div class="location-details">-->
+<!--                                <p>Italy</p>-->
+<!--                                <a href="#" class="location-btn">28 <i class="ti-plus"></i> Location</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                        <div class="single-location mb-30">-->
+<!--                            <div class="location-img">-->
+<!--                                <img-->
+<!--                                        src="assets/img/gallery/location5.png"-->
+<!--                                        alt="">-->
+<!--                            </div>-->
+<!--                            <div class="location-details">-->
+<!--                                <p>Nepal</p>-->
+<!--                                <a href="#" class="location-btn">99 <i class="ti-plus"></i> Location</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-md-6 col-sm-6">-->
+<!--                        <div class="single-location mb-30">-->
+<!--                            <div class="location-img">-->
+<!--                                <img-->
+<!--                                        src="assets/img/gallery/location6.png"-->
+<!--                                        alt="">-->
+<!--                            </div>-->
+<!--                            <div class="location-details">-->
+<!--                                <p>indonesia</p>-->
+<!--                                <a href="#" class="location-btn">78 <i class="ti-plus"></i> Location</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
 <!--                &lt;!&ndash; More Btn &ndash;&gt;-->
                 <div class="row justify-content-center">
@@ -208,6 +283,256 @@
                 </div>
             </div>
         </div>
+        <!-- Services Area End -->
+<!--        &lt;!&ndash; Categories Area Start &ndash;&gt;-->
+<!--        <div class="categories-area section-padding30">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-lg-12">-->
+<!--                        &lt;!&ndash; Section Tittle &ndash;&gt;-->
+<!--                        <div class="section-tittle text-center mb-80">-->
+<!--                            <span>We are offering for you</span>-->
+<!--                            <h2>Featured Categories</h2>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--                        <div class="single-cat text-center mb-50">-->
+<!--                            <div class="cat-icon">-->
+<!--                                <span class="flaticon-bed"></span>-->
+<!--                            </div>-->
+<!--                            <div class="cat-cap">-->
+<!--                                <h5><a href="category.html">Leving Hotel</a></h5>-->
+<!--                                <p>Must explain your how this keind denoun pleasure</p>-->
+<!--                                <a href="category.html">View Details</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--                        <div class="single-cat text-center mb-50">-->
+<!--                            <div class="cat-icon">-->
+<!--                                <span class="flaticon-drink"></span>-->
+<!--                            </div>-->
+<!--                            <div class="cat-cap">-->
+<!--                                <h5><a href="category.html">Night Life</a></h5>-->
+<!--                                <p>Must explain your how this keind denoun pleasure</p>-->
+<!--                                <a href="category.html">View Details</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--                        <div class="single-cat text-center mb-50">-->
+<!--                            <div class="cat-icon">-->
+<!--                                <span class="flaticon-home"></span>-->
+<!--                            </div>-->
+<!--                            <div class="cat-cap">-->
+<!--                                <h5><a href="category.html">Culture Place</a></h5>-->
+<!--                                <p>Must explain your how this keind denoun pleasure</p>-->
+<!--                                <a href="category.html">View Details</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--                        <div class="single-cat text-center mb-50">-->
+<!--                            <div class="cat-icon">-->
+<!--                                <span class="flaticon-food"></span>-->
+<!--                            </div>-->
+<!--                            <div class="cat-cap">-->
+<!--                                <h5><a href="category.html">Resturent</a></h5>-->
+<!--                                <p>Must explain your how this keind denoun pleasure</p>-->
+<!--                                <a href="category.html">View Details</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                 </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Categories Area End &ndash;&gt;-->
+<!--         &lt;!&ndash; peoples-visit Start &ndash;&gt;-->
+<!--         <div class="peoples-visit dining-padding-top">-->
+<!--            &lt;!&ndash; Single Left img &ndash;&gt;-->
+<!--            <div class="single-visit left-img">-->
+<!--                <div class="container">-->
+<!--                    <div class="row justify-content-end">-->
+<!--                        <div class="col-lg-8">-->
+<!--                            <div class="visit-caption">-->
+<!--                                <span>We are offering for you</span>-->
+<!--                                <h3>Every Month, Millions of People -->
+<!--                                    visit this site We’ve Built.</h3>-->
+<!--                                <p>Unlike what its name implies, dry cleaning is not actually a 'dry' process. Clothes are soaked in a different solvent.</p>-->
+<!--                                &lt;!&ndash;Single Visit categories &ndash;&gt;-->
+<!--                                <div class="visit-categories mb-40">-->
+<!--                                    <div class="visit-location">-->
+<!--                                        <span class="flaticon-travel"></span>-->
+<!--                                    </div>-->
+<!--                                    <div class="visit-cap">-->
+<!--                                        <h4>Great places in the world</h4>-->
+<!--                                        <p>Unlike what its name implies, dry cleaning is not actu  process. Clothes soaked differentent.-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash;Single Visit categories &ndash;&gt;-->
+<!--                                <div class="visit-categories">-->
+<!--                                    <div class="visit-location">-->
+<!--                                        <span class="flaticon-work"></span>-->
+<!--                                    </div>-->
+<!--                                    <div class="visit-cap">-->
+<!--                                        <h4>Biggest category listing</h4>-->
+<!--                                        <p>Unlike what its name implies, dry cleaning is not actu  process. Clothes soaked differentent.-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; peoples-visit End &ndash;&gt;-->
+<!--        &lt;!&ndash; Testimonial Start &ndash;&gt;-->
+<!--        <div class="testimonial-area testimonial-padding">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-lg-12">-->
+<!--                        &lt;!&ndash; Section Tittle &ndash;&gt;-->
+<!--                        <div class="section-tittle text-center mb-80">-->
+<!--                            <span>Our client testimonials</span>-->
+<!--                            <h2>What our client say</h2>-->
+<!--                        </div> -->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row align-items-center">-->
+<!--                    <div class="col-lg-11 col-md-11">-->
+<!--                        <div class="h1-testimonial-active">-->
+<!--                            &lt;!&ndash; Single Testimonial &ndash;&gt;-->
+<!--                            <div class="single-testimonial text-center">-->
+<!--                                &lt;!&ndash; Testimonial Content &ndash;&gt;-->
+<!--                                <div class="testimonial-caption ">-->
+<!--                                    <div class="testimonial-top-cap">-->
+<!--                                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis por incididunt ut labore et dolore mas. </p>-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; founder &ndash;&gt;-->
+<!--                                    <div class="testimonial-founder d-flex align-items-center justify-content-center mb-30">-->
+<!--                                        <div class="founder-img">-->
+<!--                                            <img src="assets/img/testmonial/Homepage_testi.png" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="founder-text">-->
+<!--                                            <span>Oliva jems</span>-->
+<!--                                            <p>UIX designer</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Single Testimonial &ndash;&gt;-->
+<!--                            <div class="single-testimonial text-center">-->
+<!--                                &lt;!&ndash; Testimonial Content &ndash;&gt;-->
+<!--                                <div class="testimonial-caption ">-->
+<!--                                    <div class="testimonial-top-cap">-->
+<!--                                        <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis por incididunt ut labore et dolore mas. </p>-->
+<!--                                    </div>-->
+<!--                                    &lt;!&ndash; founder &ndash;&gt;-->
+<!--                                    <div class="testimonial-founder d-flex align-items-center justify-content-center mb-30">-->
+<!--                                        <div class="founder-img">-->
+<!--                                            <img src="assets/img/testmonial/Homepage_testi.png"-->
+<!--                                                 alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="founder-text">-->
+<!--                                            <span>Oliva jems</span>-->
+<!--                                            <p>UIX designer</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Testimonial End &ndash;&gt;-->
+<!--        &lt;!&ndash; Subscribe Area Start &ndash;&gt;-->
+<!--        <div class="subscribe-area section-bg pt-150 pb-150" data-background="assets/img/gallery/section_bg04.jpg">-->
+<!--            <div class="container">-->
+<!--                <div class="row justify-content-center">-->
+<!--                    <div class="col-xl-6 col-lg-8">-->
+<!--                        &lt;!&ndash; Section Tittle &ndash;&gt;-->
+<!--                        <div class="section-tittle section-tittle2 text-center mb-40">-->
+<!--                            <span>Subscribe out newslatter</span>-->
+<!--                            <h2>Subscribe For Newsletter</h2>-->
+<!--                        </div> -->
+<!--                        &lt;!&ndash;Hero form &ndash;&gt;-->
+<!--                        <form action="#" class="search-box">-->
+<!--                            <div class="input-form">-->
+<!--                                <input type="text" placeholder="What are you looking for?">-->
+<!--                            </div>-->
+<!--                            <div class="search-form">-->
+<!--                                <a href="#">Send Now</a>-->
+<!--                            </div>	-->
+<!--                        </form>	-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Subscribe Area End &ndash;&gt;-->
+<!--        &lt;!&ndash; Blog Ara Start &ndash;&gt;-->
+<!--        <div class="home-blog-area section-padding30">-->
+<!--            <div class="container">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-lg-12">-->
+<!--                        &lt;!&ndash; Section Tittle &ndash;&gt;-->
+<!--                        <div class="section-tittle text-center mb-70">-->
+<!--                            <span>Our blog</span>-->
+<!--                            <h2>News and tips</h2>-->
+<!--                        </div> -->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">-->
+<!--                        <div class="single-team mb-30">-->
+<!--                            <div class="team-img">-->
+<!--                                <img src="assets/img/gallery/home_blog1.png"-->
+<!--                                     alt="">-->
+<!--                            </div>-->
+<!--                            <div class="team-caption">-->
+<!--                                <span>HEALTH & CARE</span>-->
+<!--                                <h3><a href="blog.html">The Best SPA Salons For-->
+<!--                                    Your Relaxation</a></h3>-->
+<!--                                <p>October 6, 2020by Steve</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">-->
+<!--                        <div class="single-team mb-30">-->
+<!--                            <div class="team-img">-->
+<!--                                <img src="assets/img/gallery/home_blog2.png"-->
+<!--                                     alt="">-->
+<!--                            </div>-->
+<!--                            <div class="team-caption">-->
+<!--                                <span>HEALTH & CARE</span>-->
+<!--                                <h3><a href="blog.html">The Best SPA Salons For-->
+<!--                                    Your Relaxation</a></h3>-->
+<!--                                <p>October 6, 2020by Steve</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">-->
+<!--                        <div class="single-team mb-30">-->
+<!--                            <div class="team-img">-->
+<!--                                <img src="assets/img/gallery/home_blog3.png"-->
+<!--                                     alt="">-->
+<!--                            </div>-->
+<!--                            <div class="team-caption">-->
+<!--                                <span>HEALTH & CARE</span>-->
+<!--                                <h3><a href="blog.html">The Best SPA Salons For-->
+<!--                                    Your Relaxation</a></h3>-->
+<!--                                <p>October 6, 2020by Steve</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Blog Ara End &ndash;&gt;-->
 
     </main>
     <footer>
@@ -238,61 +563,29 @@
     <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
     <script src="/assets/js/plugins.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/daterangepicker.js"></script>
 
     <script>
-    // Assuming you have the 'regions' array containing region names
-    var regions = ["Busan", "Seoul", "Yeosu", "..."];
+    $(function () {
+        // Datepicker 초기화
+        $(".datepicker").datepicker();
 
-    // Get the select element
-    var selectElement = document.getElementById("select1");
+        // Search button click event handling
+        $(".form").submit(function (e) {
+            e.preventDefault();
 
-    // Populate the options
-    for (var i = 0; i < regions.length; i++) {
-      var option = document.createElement("option");
-      option.value = regions[i];
-      option.text = regions[i];
-      selectElement.appendChild(option);
-}
-    var cities = [
-      "Seoul",
-      "Incheon",
-      "Daejeon",
-      "Daegu",
-      "Gwangju",
-      "Busan",
-      "Ulsan",
-      "Sejong Metropolitan Autonomous City",
-      "Gyeonggi-do",
-      "Gangwon-do",
-      "Chungcheongbuk-do",
-      "Chungcheongnam-do",
-      "Gyeongsangbuk-do",
-      "Gyeongsangnam-do",
-      "Jeollabuk-do",
-      "Jeollanam-do",
-      "Jeju Island"
-    ];
+            // Get selected date
+            var selectedDate = $("input[name='daterange']").val();
 
-    // Get the categories container element
-    var categoriesContainer = document.getElementById("categories-container");
+            // Get other necessary information
+            var destination = $("select[name='destination']").val();
+            var numOfPeople = $("input[name='numOfPeople']").val();
+            var saveSearch = $("input[name='saveSearch']").is(":checked");
 
-    // Generate buttons for each city
-    for (var i = 0; i < cities.length; i++) {
-      var button = document.createElement("button");
-      button.className = "button-arounder";
-      button.value = i + 1;
-      button.onclick = getCityLists;
-      button.innerHTML = cities[i];
-      categoriesContainer.appendChild(button);
-    }
-
-    // Example onclick function
-    function getCityLists() {
-      var cityIndex = this.value - 1;
-      // Perform desired action when a city button is clicked
-      // You can access the selected city using 'cities[cityIndex]'
-    }
-
-    </script>
+            // Perform search
+            performSearch(destination, selectedDate, numOfPeople, saveSearch);
+        });
+    });
+</script>
    </body>
 </html>

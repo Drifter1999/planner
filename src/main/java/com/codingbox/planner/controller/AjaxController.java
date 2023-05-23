@@ -1,19 +1,31 @@
 package com.codingbox.planner.controller;
 
+import com.codingbox.planner.domain.DTO.ScheduleCartDTO;
 import com.codingbox.planner.domain.Members;
 import com.codingbox.planner.parser.ParsingToList;
 import com.codingbox.planner.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
+import java.net.http.HttpRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 public class AjaxController {
     private MemberService memberService;
+    private final HttpSession httpSession;
 
     @GetMapping("/cities")
     public List<String> findAreaCategory (@RequestParam("province") String province, Model model) {
@@ -51,6 +63,33 @@ public class AjaxController {
         this.memberService = memberService;
     }
 
+    @PostMapping("/remove")
+    public ResponseEntity<?> removeCartItem(@RequestBody Map<String, Long> request) {
+        int id = Integer.parseInt(String.valueOf(request.get("id")));
+
+        // 세션에서 필요한 값 가져오기
+        List<ScheduleCartDTO> cartArrSec = (List<ScheduleCartDTO>) httpSession.getAttribute("CartArrSec");
+        // 처리 로직 작성
+        for (int i = 0 ; i < cartArrSec.size(); i++) {
+            if (id == cartArrSec.get(i).getScheduleCartId()) {
+                cartArrSec.remove(i);
+            }
+        }
+
+        if (cartArrSec != null) {
+            httpSession.setAttribute("CartArr", cartArrSec);
+        }else {
+            RedirectView redirectView = new RedirectView("/home");
+            return new ResponseEntity<>(redirectView, HttpStatus.OK);
+        }
+
+        // 응답 반환
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("success", true); // 또는 false
+        response.put("CartArr", cartArrSec);
+        return ResponseEntity.ok(response);
+    }
 }
 
 

@@ -62,7 +62,9 @@
                             <td th:text="${data.strDate}"></td>
                             <td th:text="${data.endDate}"></td>
                             <td><button class="btn btn-primary apply-btn">Apply</button></td>
-                            <td><button class="btn btn-danger" onclick="removeCart()">Remove</button></td>
+                            <td><button class="btn btn-danger"
+                                        onclick="removeCart(this)"
+                                        th:value="${data.ScheduleCartId}"> 일정 삭제 </button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -172,16 +174,33 @@
     });
 </script>
 <script>
-    /*function removeCart() {
+    function removeCart(selector) {
+
+        var id = selector.value;
         var xhr = new XMLHttpRequest();
-    }*/
+        xhr.open("POST", "/remove");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify({ id: id }));
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                // 응답 처리 로직
+                var response = JSON.parse(xhr.responseText);
+                console.log(response)
+                // 성공적으로 삭제된 경우
+                if (response.success) {
+                    alert("삭제 성공");
+                } else {
+                    // 삭제 실패 시 처리 로직
+                    alert("삭제 실패");
+                }
+            }
+        };
+    }
 </script>
 <script>
     function saveSchedule() {
         /*const fc_content = document.getElementsByClassName('fc-content').classList.contains()*/
         const fc_content = document.getElementsByClassName('fc-content');
-
-        contentList
         for (var i = 0 ; i < fc_content.length ; i++) {
             if(fc_content[i].classList.contains('fc-title')){
 

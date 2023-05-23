@@ -33,6 +33,8 @@ public class  HeaderController {
 
     private final ScheduleCartService scheduleCartService;
 
+
+
     @GetMapping("/about")
     public String about() {
         return "about";
@@ -100,8 +102,7 @@ public class  HeaderController {
         }
 
         List<ScheduleCartDTO> CartArr;
-
-        if (httpSession.getAttribute("CartArrSec") != null){
+        if (!String.valueOf(httpSession.getAttribute("CartArrSec")).equals("[]")){
             String SessionString =  String.valueOf(httpSession.getAttribute("CartArrSec"));
             SessionString = SessionString.replaceAll("\\[|\\]", "");
 
@@ -115,15 +116,16 @@ public class  HeaderController {
                 List<String> strData = new ArrayList<String>();
                 for (int i = 0 ; i <  str.length ; i++){
                     String [] tempStr = str[i].split("=");
+                    System.out.println(tempStr.toString());
                     strData.add(tempStr[1]);
                 }
-
                 ScheduleCartDTO data = new ScheduleCartDTO();
 
-                data.setStrDate(strData.get(0));
-                data.setEndDate(strData.get(1));
-                data.setContentTitleList(strData.get(2));
-                data.setContentName(strData.get(3));
+                data.setScheduleCartId(Integer.parseInt(strData.get(0)));
+                data.setStrDate(strData.get(1));
+                data.setEndDate(strData.get(2));
+                data.setContentTitleList(strData.get(3));
+                data.setContentName(strData.get(4));
 
                 SessionArr.add(data);
             }
@@ -133,7 +135,9 @@ public class  HeaderController {
                 SessionArr.add(CartArr.get(i));
             }
             httpSession.setAttribute("CartArrSec", SessionArr);
+
         }else {
+
             CartArr = scheduleCartService.createCartList(startDate, endDate, contentTitleList, contentName);
             httpSession.setAttribute("CartArrSec", CartArr);
         }
