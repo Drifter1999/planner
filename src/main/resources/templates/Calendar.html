@@ -89,94 +89,88 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $('#calendar').fullCalendar({
-      // Set the calendar options
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-      },
-      defaultView: 'month',
-      editable: false,
-      eventLimit: true, // allow "more" link when too many events
-      displayEventTime: false,
-      events: []
-    });
-
-    $('.apply-btn').click(function() {
-      // Get the corresponding itinerary data from the table row
-      var row = $(this).closest('tr');
-      var title = row.find('td:eq(0)').text();
-      var startDate = row.find('td:eq(2)').text();
-      var endDate = row.find('td:eq(3)').text();
-      var description = row.find('td:eq(0)').text();
-
-      var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {
-        return (
-          event.title === title &&
-          event.start.format('YYYY-MM-DD') === startDate &&
-          event.end.format('YYYY-MM-DD') === endDate &&
-          event.description === description &&
-          event.itinerary === true
-        );
-      }).length > 0;
-
-      if (isEventApplied) {
-        var eventToRemove = $('#calendar').fullCalendar('clientEvents', function(event) {
-          return (
-            event.title === title &&
-            event.start.format('YYYY-MM-DD') === startDate &&
-            event.end.format('YYYY-MM-DD') === moment(endDate).add(1, 'day').format('YYYY-MM-DD') &&
-            event.description === description &&
-            event.itinerary === true
-          );
+    $(document).ready(function() {
+        $('#calendar').fullCalendar({
+            // Set the calendar options
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'month',
+            editable: false,
+            eventLimit: true, // allow "more" link when too many events
+            displayEventTime: false,
+            events: []
         });
 
-        if (eventToRemove.length > 0) {
-          $('#calendar').fullCalendar('removeEvents', eventToRemove);
-        }
+        $('.apply-btn').click(function() {
+            // Get the corresponding itinerary data from the table row
+            var row = $(this).closest('tr');
+            var title = row.find('td:eq(0)').text();
+            var startDate = row.find('td:eq(2)').text();
+            var endDate = row.find('td:eq(3)').text();
+            var description = row.find('td:eq(0)').text();
 
-        $(this).text('Apply').removeClass('btn-success').addClass('btn-primary');
-      } else {
-        var event = {
-          title: title,
-          start: startDate,
-          end: moment(endDate).add(1, 'day').format('YYYY-MM-DD'),
-          description: description,
-          itinerary: true
-        };
+            var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {
+                return (
+                    event.title === title &&
+                    event.start.format('YYYY-MM-DD') === startDate &&
+                    event.end.format('YYYY-MM-DD') === endDate &&
+                    event.description === description &&
+                    event.itinerary === true
+                );
+            }).length > 0;
 
-        $('#calendar').fullCalendar('renderEvent', event);
+            if (isEventApplied) {
+                $('#calendar').fullCalendar('removeEvents', function(event) {
+                    return (
+                        event.title === title &&
+                        event.start.format('YYYY-MM-DD') === startDate &&
+                        event.end.format('YYYY-MM-DD') === endDate &&
+                        event.description === description &&
+                        event.itinerary === true
+                    );
+                });
 
-        $(this).text('Applied').removeClass('btn-primary').addClass('btn-success');
-      }
+                $(this).text('Apply').removeClass('btn-success').addClass('btn-primary');
+            } else {
+                var event = {
+                    title: title,
+                    start: startDate,
+                    end: endDate,
+                    description: description,
+                    itinerary: true
+                };
+
+                $('#calendar').fullCalendar('renderEvent', event);
+
+                $(this).text('Applied').removeClass('btn-primary').addClass('btn-success');
+            }
+        });
+
+        $('.btn-danger').click(function() {
+            // Get the corresponding itinerary data from the table row
+            var row = $(this).closest('tr');
+            var title = row.find('td:eq(0)').text();
+            var startDate = row.find('td:eq(2)').text();
+            var endDate = row.find('td:eq(3)').text();
+            var description = row.find('td:eq(0)').text();
+
+            $('#calendar').fullCalendar('removeEvents', function(event) {
+                return (
+                    event.title === title &&
+                    event.start.format('YYYY-MM-DD') === startDate &&
+                    event.end.format('YYYY-MM-DD') === endDate &&
+                    event.description === description &&
+                    event.itinerary === true
+                );
+            });
+
+            row.remove();
+        });
     });
-
-    $('.btn-danger').click(function() {
-      // Get the corresponding itinerary data from the table row
-      var row = $(this).closest('tr');
-      var title = row.find('td:eq(0)').text();
-      var startDate = row.find('td:eq(2)').text();
-      var endDate = row.find('td:eq(3)').text();
-      var description = row.find('td:eq(0)').text();
-
-      $('#calendar').fullCalendar('removeEvents', function(event) {
-        return (
-          event.title === title &&
-          event.start.format('YYYY-MM-DD') === startDate &&
-          event.end.format('YYYY-MM-DD') === moment(endDate).add(1, 'day').format('YYYY-MM-DD') &&
-          event.description === description &&
-          event.itinerary === true
-        );
-      });
-
-      row.remove();
-    });
-  });
 </script>
-
-
 <script>
     /*function removeCart() {
         var xhr = new XMLHttpRequest();
