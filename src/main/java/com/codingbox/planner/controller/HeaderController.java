@@ -72,7 +72,7 @@ public class  HeaderController {
     }
 
     @GetMapping("/blog")
-    public String blog(@RequestParam ("shareData") String shareData , @RequestParam ("Id") String Id) {;
+    public String blog(@RequestParam ("shareData") String shareData , @RequestParam ("Id") String Id) {
         try {
             JSONParser parser = new JSONParser();
             JSONObject obj = (JSONObject) parser.parse(shareData);
@@ -85,9 +85,7 @@ public class  HeaderController {
             for (int i = 0 ; i < jsonArray.size() ; i++) {
                 JSONObject data = (JSONObject) jsonArray.get(i);
                 System.out.println(data);
-
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,8 +119,9 @@ public class  HeaderController {
             default:
                 System.out.println("잘못된 값입니다.");
         }
-
+        System.out.println(httpSession.getAttribute("CartArrSec")+"!!");
         List<ScheduleCartDTO> CartArr;
+//
         if (httpSession.getAttribute("CartArrSec")!= null &&
                 !String.valueOf(httpSession.getAttribute("CartArrSec")).equals("[]")){
             String SessionString =  String.valueOf(httpSession.getAttribute("CartArrSec"));
