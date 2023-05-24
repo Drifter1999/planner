@@ -63,16 +63,9 @@
       function validcheck() {
         var pw = document.getElementById('pw').value;
         var pw_chk = document.getElementById('pw_chk').value;
-        var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,24}$/; // 비밀번호 정규식
+        var reg = /^(?=.*[a-z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,24}$/; // 비밀번호 정규식
 
-        // 만들어 놓은거라 주석 풀고 사용하면 됨.
-        // if (!reg.test(pw.value)) {
-        //   document.getElementById("error1").innerText = "비밀번호는 8~24자 사이의 영문소문자, 숫자, 특수문자 조합을 사용하세요.";
-        //   return false;
-        // }
-
-        if (pw.length < 8) {
-          // alert('비밀번호는 최소 8자 이상이어야 합니다.');
+        if (!reg.test(pw)) {
           document.getElementById("error1").innerText = "비밀번호는 8~24자 사이의 영문소문자, 숫자, 특수문자 조합을 사용하세요.";
           return false;
         }

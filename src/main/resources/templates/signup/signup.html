@@ -42,18 +42,29 @@
                     if (result) {
                         // alert("사용 가능한 아이디입니다.");
                         document.getElementById("result").innerText = "사용 가능한 아이디입니다.";
+                        document.getElementById("checked_id").value = "y"; // y로 변경
                     } else {
                         // alert("이미 사용 중인 아이디입니다.");
                         document.getElementById("result").innerText = "이미 사용 중인 아이디입니다.";
+                        document.getElementById("checked_id").value = "n"; // n으로 변경
                     }
                 }
             };
             xhr.send();
         }
-    </script>
-    <style>
+        function checkDup() {
+            // 아이디 중복체크 유무에 따른 회원가입 진행 여부
+            var checkedId = document.getElementById("checked_id").value;
 
-    </style>
+            if (checkedId === "n") {
+                alert("아이디 중복 확인을 진행해주세요.");
+                return false;
+
+            } else if (checkedId === "y") {
+                return true
+            }
+        }
+    </script>
 </head>
 <body>
 <!-- Preloader Start -->
@@ -90,17 +101,18 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <h3 class="mb-20" style="text-align: center">Sign up</h3>
-                    <form name="signupform" method="post" action="/signup" >
+                    <form name="signupform" method="post" action="/signup" onsubmit="return checkDup()">
                         <div class="mt-10">
                             <input type="text" id="Id" name="userId" placeholder="Please enter a ID"
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a ID'"
-                                   class="single-input" style="width: 680px; float:left;"
+                                   class="single-input" style="width: 700px; float:left;"
                                    minlength="4" maxlength="12"
                                    required
-                                   pattern="[a-z0-9]{4,12}" title="4~12자 영어소문자, 숫자만 가능합니다.">
+                                   pattern="[a-z0-9]{4,20}" title="아이디는 4~20자 사이의 영문소문자, 숫자의 조합을 이용하세요.">
                             <input type="button" class="button rounded-0 primary-bg text-white w-15 btn_1 boxed-btn"
                                    id="userId" onclick="checkUserId(this)" value="Check"
                                    style="float: right; height: 40px; text-align: center; padding: unset;">
+                            <input type="hidden" name="checked_id" id="checked_id" value="n">
                         </div>
                         </br>
                         <span id="result" style="height: 25px; font-size: 15px; color: red; text-align: center"></span>
@@ -110,8 +122,8 @@
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a password'"
                                    required
                                    class="single-input"
-                                   pattern="(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,24}$"
-                                   title="8~24자 영문대소문자, 숫자, 특수문자 혼합해서 넣어주세요">
+                                   pattern="(?=.*[a-z])(?=.*[^a-zA-Z0-9]|.*[0-9]).{8,24}$"
+                                   title="비밀번호는 8~24자 사이의 영문소문자, 숫자, 특수문자 조합을 사용하세요.">
                         </div>
                         </br>
                         <div class="mt-10 " >
@@ -127,7 +139,7 @@
                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Please enter a name'"
                                    required
                                    class="single-input"
-                                   maxlength="8" title="8자까지 가능합니다.">
+                                   maxlength="8" title="8자 이내로 이름을 입력하세요.">
                         </div>
                         </br>
                         <div class="mt-10">
@@ -143,7 +155,7 @@
                                    placeholder="Please enter a contact number without -" onfocus="this.placeholder = ''"
                                    onblur="this.placeholder = 'Please enter a contact number without - '" required
                                    class="single-input"
-                                   pattern="[0-9]{11}" title="11자 이내 숫자만 가능합니다">
+                                   pattern="[0-9]{2,3}[0-9]{3,4}[0-9]{4}$" title="휴대전화 형식에 맞춰 입력하세요.">
                         </div>
                         </br></br>
                         <div class="">

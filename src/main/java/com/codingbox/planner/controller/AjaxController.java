@@ -1,5 +1,6 @@
 package com.codingbox.planner.controller;
 
+import com.codingbox.planner.domain.DTO.ResponseDTO;
 import com.codingbox.planner.domain.DTO.ScheduleCartDTO;
 import com.codingbox.planner.domain.Members;
 import com.codingbox.planner.parser.ParsingToList;
@@ -12,11 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
-import java.net.http.HttpRequest;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +86,14 @@ public class AjaxController {
         response.put("success", true); // 또는 false
         response.put("CartArr", cartArrSec);
         return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/member")
+    public ResponseDTO<Integer> updatePassword(@RequestBody Members member) {
+        memberService.memberModify(member);
+
+        // 세션값을 바꿔줘야 함
+        return new ResponseDTO<>(String.valueOf(HttpStatus.OK.value()), Arrays.asList(1));
     }
 }
 
