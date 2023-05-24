@@ -9,6 +9,9 @@ import com.codingbox.planner.service.MultiSelectService;
 import com.codingbox.planner.service.ScheduleCartService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +72,25 @@ public class  HeaderController {
     }
 
     @GetMapping("/blog")
-    public String blog() {
+    public String blog(@RequestParam ("shareData") String shareData , @RequestParam ("Id") String Id) {;
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject obj = (JSONObject) parser.parse(shareData);
+            JSONArray jsonArray = (JSONArray) obj.get("scheduleData");
+
+            List<String> shareDTOArr = new ArrayList<>();
+
+            System.out.println("Id : " + Id);
+
+            for (int i = 0 ; i < jsonArray.size() ; i++) {
+                JSONObject data = (JSONObject) jsonArray.get(i);
+                System.out.println(data);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "blog";
     }
 
@@ -100,9 +121,8 @@ public class  HeaderController {
             default:
                 System.out.println("잘못된 값입니다.");
         }
-        System.out.println(httpSession.getAttribute("CartArrSec")+"!!");
+
         List<ScheduleCartDTO> CartArr;
-//
         if (httpSession.getAttribute("CartArrSec")!= null &&
                 !String.valueOf(httpSession.getAttribute("CartArrSec")).equals("[]")){
             String SessionString =  String.valueOf(httpSession.getAttribute("CartArrSec"));

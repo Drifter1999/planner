@@ -276,28 +276,7 @@
 <!--    });-->
 <!--</script>-->
 <!--<script>-->
-<!--    function removeCart(selector) {-->
 
-<!--        var id = selector.value;-->
-<!--        var xhr = new XMLHttpRequest();-->
-<!--        xhr.open("POST", "/remove");-->
-<!--        xhr.setRequestHeader("Content-Type", "application/json");-->
-<!--        xhr.send(JSON.stringify({ id: id }));-->
-<!--        xhr.onreadystatechange = function() {-->
-<!--            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {-->
-<!--                // 응답 처리 로직-->
-<!--                var response = JSON.parse(xhr.responseText);-->
-<!--                console.log(response)-->
-<!--                // 성공적으로 삭제된 경우-->
-<!--                if (response.success) {-->
-<!--                    alert("삭제 성공");-->
-<!--                } else {-->
-<!--                    // 삭제 실패 시 처리 로직-->
-<!--                    alert("삭제 실패");-->
-<!--                }-->
-<!--            }-->
-<!--        };-->
-<!--    }-->
 <!--</script>-->
 <!--<script>-->
 <!--    function saveSchedule() {-->
@@ -403,7 +382,7 @@
             row.remove();
         });
 
-        function removeCart(selector) {
+        /*function removeCart(selector) {
             var id = selector.value;
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/remove");
@@ -420,7 +399,7 @@
                     }
                 }
             };
-        }
+        }*/
 
         function saveSchedule() {
             var fc_content = document.getElementsByClassName('fc-content');
@@ -457,11 +436,11 @@
             });
             // Encode the shareData object as a query parameter
                 var encodedData = encodeURIComponent(JSON.stringify(shareData));
-
+                let Id = /*[[]]*/'';
             // Redirect to the blog page with the shareData query parameter
-                window.location.href = "/header/blog?shareData=" + encodedData;
+                window.location.href = "/header/blog?shareData=" + encodedData +"&Id="+Id;
 
-<!--            // Send the AJAX request to the calendar controller-->
+          // Send the AJAX request to the calendar controller
 <!--            $.ajax({-->
 <!--                type: "POST",-->
 <!--                url: "/header/blog",-->
@@ -472,15 +451,40 @@
 <!--                contentType: "application/json",-->
 <!--                success: function(response) {-->
 <!--                    console.log("Shared itinerary successfully:", response);-->
-<!--                    // Handle success response-->
+                   // Handle success response-->
 <!--                },-->
 <!--                error: function(error) {-->
 <!--                    console.log("Error sharing itinerary:", error);-->
-<!--                    // Handle error response-->
+                    // Handle error response-->
 <!--                }-->
 <!--            });-->
         });
     });
+</script>
+
+<script>
+    function removeCart(selector) {
+
+        var id = selector.value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/remove");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify({ id: id }));
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                // 응답 처리 로직
+                var response = JSON.parse(xhr.responseText);
+                console.log(response)
+                // 성공적으로 삭제된 경우
+                if (response.success) {
+                    alert("삭제 성공");
+                } else {
+                    // 삭제 실패 시 처리 로직
+                    alert("삭제 실패");
+                }
+            }
+        };
+    }
 </script>
 
 </body>

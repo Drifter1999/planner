@@ -36,8 +36,8 @@ public class Schedule {
     @Column(name = "SCHEDULE_END")
     private LocalDateTime endDate;
 
-    @Column(name = "SCHEDULE_NAME")
-    private LocalDateTime name;
+    /*@Column(name = "SCHEDULE_NAME")
+    private LocalDateTime name;*/
 
     @Column(name = "SCHEDULE_DEST")
     private LocalDateTime destination;
