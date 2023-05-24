@@ -58,14 +58,13 @@
         <div class="col-lg-8 mb-5 mb-lg-0">
           <div class="blog_left_sidebar">
             <article class="blog_item" th:each="data : ${ShareScheduleList}">
-              <div class="blog_item_img">
+              <div class="blog_item_img" >
                 <img class="card-img rounded-0" src="/assets/img/blog/single_blog_5.png" alt="">
               </div>
 
               <div class="blog_details">
-                <a class="d-inline-block"
-                   onclick="goDetails(this)" th:value="${data.scheduleToShare.id}">
-                  <!--th:href="@{/header/sharedetails/{scheduleId}(scheduleId=${data.scheduleToShare.id})}"-->
+                <input type="hidden" id="shareSchedule" th:value="${data.scheduleToShare.Id}">
+                <a class="d-inline-block" onclick="goDetails()">
                   <h2 th:text="${data.title}"></h2>
                 </a>
                 <p th:text="${data.strDate} + ' 부터 ' + ${data.endDate} + '까지 입니다.'"></p>
@@ -105,8 +104,9 @@
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/daterangepicker.js"></script>
 <script th:inline="javascript">
-    function goDetails(selector) {
-        var url = '/header/sharedetails?scheduleId=' + selector.value;
+    function goDetails() {
+        let SharedScheduleId = document.getElementById("shareSchedule").value;
+        let url = '/header/sharedetails?scheduleId=' + SharedScheduleId;
         location.href = url;
     }
 </script>

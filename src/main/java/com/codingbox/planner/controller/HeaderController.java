@@ -64,6 +64,7 @@ public class  HeaderController {
     @GetMapping("/schedule")
     public String scheduleView (Model model, HttpSession httpSession){
         List<ShareSchedule> ShareScheduleList = (List<ShareSchedule>) httpSession.getAttribute("ShareScheduleList");
+        System.out.println("/schedule : GET = " + ShareScheduleList);
         model.addAttribute("ShareScheduleList", ShareScheduleList);
         String scheduleUrl = "schedule"; // 전환할 페이지의 URL
         return scheduleUrl;
@@ -72,6 +73,7 @@ public class  HeaderController {
     @PostMapping("/sharedPlanner")
     public ResponseEntity<String> schedulePlanner(@RequestParam("userId") String userId,
                                                   Model model, HttpSession httpSession) {
+        System.out.println("userId : " + userId);
         List<Schedule> cntUserSchedule = scheduleService.cntUserSchedule(userId);
 
         List<ShareSchedule> shareScheduleList = new ArrayList<>();
