@@ -2,8 +2,7 @@
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Directory HTML-5 Template</title>
+    <title>Travel in korea</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -40,6 +39,7 @@
     .select-itms select2 {
     width: 120%; /* 가로 길이를 원하는 값으로 조정하세요 */
     }
+
     </style>
 </head>
 
@@ -71,7 +71,7 @@
                             <!-- Hero Caption -->
                             <div class="hero__caption">
                                 <span>Travel in korea</span>
-                                <h1>Discover Great Places In Korea</h1>
+                                <h1>Discover Great Places</h1>
                             </div>
                             <!--Hero form -->
 <!--                            <form action="#" class="search-box">-->
@@ -143,26 +143,22 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-location mb-30">
                             <div class="location-img">
-                                <img
-                                    src="assets/img/gallery/location1.jpg"
-                                    alt="">
+                                <img src="assets/img/gallery/location1.jpg" alt="">
                             </div>
                             <div class="location-details">
                                 <p>YEOSU</p>
-                                <a href="#" th:href="@{/header/listing}" class="location-btn">65 <i class="ti-plus"></i> Location</a>
+                                <a href="#" th:href="@{/header/listing?area=여수&content=관광지}" class="location-btn"> 관광지 보기</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-location mb-30">
                             <div class="location-img">
-                                <img
-                                    src="assets/img/gallery/location2.jpg"
-                                    alt="">
+                                <img src="assets/img/gallery/location2.jpg" alt="">
                             </div>
                             <div class="location-details">
                                 <p>BUSAN</p>
-                                <a href="#" th:href="@{/header/listing}" class="location-btn">60 <i class="ti-plus"></i> Location</a>
+                                <a href="#" th:href="@{/header/listing?area=부산&content=관광지}" class="location-btn">관광지 보기</a>
                             </div>
                         </div>
                     </div>
@@ -174,50 +170,12 @@
                             </div>
                             <div class="location-details">
                                 <p>GYEONGJU</p>
-                                <a href="#" th:href="@{/header/listing}" class="location-btn">50 <i class="ti-plus"></i> Location</a>
+                                <a href="#" th:href="@{listing?area=경주&content=관광지}" class="location-btn">관광지 보기</a>
                             </div>
                         </div>
                     </div>
-<!--                    <div class="col-lg-4 col-md-6 col-sm-6">-->
-<!--                        <div class="single-location mb-30">-->
-<!--                            <div class="location-img">-->
-<!--                                <img-->
-<!--                                    src="assets/img/gallery/location4.png"-->
-<!--                                    alt="">-->
-<!--                            </div>-->
-<!--                            <div class="location-details">-->
-<!--                                <p>Italy</p>-->
-<!--                                <a href="#" class="location-btn">28 <i class="ti-plus"></i> Location</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-4 col-md-6 col-sm-6">-->
-<!--                        <div class="single-location mb-30">-->
-<!--                            <div class="location-img">-->
-<!--                                <img-->
-<!--                                        src="assets/img/gallery/location5.png"-->
-<!--                                        alt="">-->
-<!--                            </div>-->
-<!--                            <div class="location-details">-->
-<!--                                <p>Nepal</p>-->
-<!--                                <a href="#" class="location-btn">99 <i class="ti-plus"></i> Location</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-4 col-md-6 col-sm-6">-->
-<!--                        <div class="single-location mb-30">-->
-<!--                            <div class="location-img">-->
-<!--                                <img-->
-<!--                                        src="assets/img/gallery/location6.png"-->
-<!--                                        alt="">-->
-<!--                            </div>-->
-<!--                            <div class="location-details">-->
-<!--                                <p>indonesia</p>-->
-<!--                                <a href="#" class="location-btn">78 <i class="ti-plus"></i> Location</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
+
 <!--                &lt;!&ndash; More Btn &ndash;&gt;-->
                 <div class="row justify-content-center">
                     <div class="room-btn pt-20">
@@ -247,7 +205,7 @@
                             </div>
                             <div class="services-cap">
                                 <h5><a href="#">1. Choose a Category</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
+                                <p>원하는 지역을 선택해요</p>
                             </div>
                             <!-- Shpape -->
                             <img class="shape1 d-none d-lg-block"
@@ -262,7 +220,7 @@
                             </div>
                             <div class="services-cap">
                                 <h5><a href="#">2. what you want</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
+                                <p>원하는 일정을 계획에 담아요 </p>
                             </div>
                         <img class="shape2 d-none d-lg-block"
                              src="assets/img/icon/serices2.png"
@@ -275,8 +233,8 @@
                                 <span class="flaticon-respect"></span>
                             </div>
                             <div class="services-cap">
-                                <h5><a href="#">3. Go out & Explore</a></h5>
-                                <p>incidid labore lore magna aliqua uisipsum suspendis loris.</p>
+                                <h5><a href="#">3. Share your plan</a></h5>
+                                <p>내가 짠 일정을 친구들과 공유해요</p>
                             </div>
                         </div>
                     </div>
