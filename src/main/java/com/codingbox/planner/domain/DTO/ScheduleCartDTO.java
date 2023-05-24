@@ -12,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ScheduleCartDTO {
 
+    //추가
     private int ScheduleCartId;
     private String strDate;
     private String endDate;
