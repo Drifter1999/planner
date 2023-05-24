@@ -22,9 +22,9 @@
 <header>
     <div th:insert="~{fragment/header :: header}"></div>
 </header>
-<!--  sec:authorize="isAuthenticated()" -->
-<main>
-    <!-- Hero Start-->
+
+<main sec:authorize="isAuthenticated()">
+
     <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
         <div class="container">
             <div class="row">
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <!--Hero End -->
+
     <hr>
     <!-- Shopping Cart Table Start -->
     <div class="container">
@@ -99,7 +99,7 @@
                     <ul id="addedColleagues"></ul>
                 </div>
                 <div class="text-center mt-3">
-                    <button id="shareButton" style="">Share</button>
+                    <button id="shareButton" class="btn btn-primary apply-btn" style="">Share</button>
                 </div>
             </div>
         </div>
@@ -291,7 +291,7 @@
     };
 </script>-->
 
-<script>
+<script th:inline="javascript">
     $(document).ready(function() {
         var colleagues = [];
 
@@ -325,10 +325,11 @@
             var description = row.find('td:eq(0)').text();
 
             var isEventApplied = $('#calendar').fullCalendar('clientEvents', function(event) {
+
                 return (
                     event.title === title &&
-                    event.start.format('YYYY-MM-DD') === startDate &&
-                    event.end.format('YYYY-MM-DD') === endDate &&
+                    event.start.format('YYYY.MM.DD') === startDate.replaceAll("-",".") &&
+                    event.end.format('YYYY.MM.DD') === endDate.replaceAll("-",".") &&
                     event.description === description &&
                     event.itinerary === true
                 );
@@ -372,8 +373,8 @@
             $('#calendar').fullCalendar('removeEvents', function(event) {
                 return (
                     event.title === title &&
-                    event.start.format('YYYY-MM-DD') === startDate &&
-                    event.end.format('YYYY-MM-DD') === endDate &&
+                    event.start.format("\'YYYY-MM-DD\'") === startDate &&
+                    event.end.format("\'YYYY-MM-DD\'") === endDate &&
                     event.description === description &&
                     event.itinerary === true
                 );
@@ -381,25 +382,6 @@
 
             row.remove();
         });
-
-        /*function removeCart(selector) {
-            var id = selector.value;
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/remove");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify({ id: id }));
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    console.log(response);
-                    if (response.success) {
-                        alert("Deletion successful");
-                    } else {
-                        alert("Deletion failed");
-                    }
-                }
-            };
-        }*/
 
         // Handle the button click event
         $('#shareButton').click(function() {
@@ -421,34 +403,43 @@
                 shareData.scheduleData.push({
                     destination: event.title,
                     category: event.category,
-                    startDate: event.start.format('YYYY-MM-DD'),
-                    endDate: event.end.format('YYYY-MM-DD')
+                    startDate: event.start.format("\'YYYY.MM.DD\'"),
+                    endDate: event.end.format("\'YYYY.MM.DD\'")
                 });
             });
             // Encode the shareData object as a query parameter
-                var encodedData = encodeURIComponent(JSON.stringify(shareData));
+                let encodedData = JSON.stringify(shareData);
+                console.log(encodedData);
                 let Id = /*[[${session.memberinfo.userId}]]*/ '';
-            // Redirect to the blog page with the shareData query parameter
-                window.location.href = "/header/blog?shareData=" + encodedData +"&Id="+Id;
+                let addedColleagues = document.getElementById('addedColleagues').querySelectorAll("li");
+                let Members="";
+                for (var i = 0 ; i < addedColleagues.length ; i++) {
+                    Members+=addedColleagues[i].textContent+",";
+                }
 
-          // Send the AJAX request to the calendar controller
-<!--            $.ajax({-->
-<!--                type: "POST",-->
-<!--                url: "/header/blog",-->
-<!--                data: JSON.stringify({-->
-<!--                    userId: userId,-->
-<!--                    shareData: shareData-->
-<!--                }),-->
-<!--                contentType: "application/json",-->
-<!--                success: function(response) {-->
-<!--                    console.log("Shared itinerary successfully:", response);-->
-                   // Handle success response-->
-<!--                },-->
-<!--                error: function(error) {-->
-<!--                    console.log("Error sharing itinerary:", error);-->
-                    // Handle error response-->
-<!--                }-->
-<!--            });-->
+            var requestData = 'ShareData=' + encodeURIComponent(encodedData) +
+                '&Id=' + encodeURIComponent(Id) +
+                '&Members=' + encodeURIComponent(Members);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/header/blog');
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+            xhr.send(requestData);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                       var forwardUrl = xhr.getResponseHeader('Forward-Url');
+                       if (forwardUrl) {
+                           window.location.href = forwardUrl;
+                       }else {
+                           alert("포워드된 URL이가 없어영");
+                       }
+                    } else {
+                        // 오류 처리 로직
+                    }
+                }
+            };
+
         });
     });
 </script>

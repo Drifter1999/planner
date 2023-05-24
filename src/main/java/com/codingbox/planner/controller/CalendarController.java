@@ -49,12 +49,12 @@ public class CalendarController {
         return scheduleService.getScheduleByMembers(members);
     }
 
-    @PostMapping("/share")
+    /*@PostMapping("/share")
     public void shareScheduleWithColleague(@RequestBody ShareScheduleDTO request) {
         logger.info("Received share request for schedule with ID: {}", request.getScheduleId());
         logger.debug("Shared schedule details: {}", request);
         logger.info("ValueCheck : ", request.toString());
         // Log a confirmation message
         logger.info("Schedule shared successfully with colleague: {}", request.getColleagueId());
-    }
+    }*/
 }

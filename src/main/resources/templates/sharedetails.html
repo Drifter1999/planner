@@ -58,24 +58,11 @@
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Colleagues</h4>
-                            <ul class="list cat-list">
+                            <ul class="list cat-list" th:each="data : ${shareScheduleList}">
                                 <li>
-                                    <p>test 1<p>
-                                </li>
-                                <li>
-                                    <p>test 2<p>
-                                </li>
-                                <li>
-                                    <p>test 3<p>
-                                </li>
-                                <li>
-                                    <p>test 4</p>
-                                </li>
-                                <li>
-                                    <p>test 5</p>
-                                </li>
-                                <li>
-                                    <p>test 6</p>
+                                    <p th:text="${data.title}">test 1<p>
+                                    <p id="TestStrDate"></p>
+                                    <p id="TestEndDate"></p>
                                 </li>
                             </ul>
                         </aside>
@@ -96,10 +83,9 @@
 
 
 
-<script>
+<script th:inline="javascript">
     $(document).ready(function() {
-
-        var eventsData = [
+        /*var eventsData = [
             {
                 title: '그랜마스 서귀포직영점',
                 start: '2023-05-24',
@@ -112,7 +98,9 @@
                 end: '2023-05-28',
                 itinerary: true
             }
-        ];
+        ];*/
+        let eventsData = decodeURIComponent(/*[[${jsonArr}]]*/ '[]');
+        eventsData = JSON.parse(eventsData);
 
         $('#calendar').fullCalendar({
             // Set the calendar options
@@ -129,8 +117,10 @@
 
         });
     });
-</script>
 
+
+
+</script>
 
 </body>
 </html>

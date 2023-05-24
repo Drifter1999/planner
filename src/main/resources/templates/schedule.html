@@ -1,17 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>상세 일정</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+
+  <!-- CSS here -->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/assets/css/slicknav.css">
+  <link rel="stylesheet" href="/assets/css/animate.min.css">
+  <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="/assets/css/themify-icons.css">
+  <link rel="stylesheet" href="/assets/css/slick.css">
+  <link rel="stylesheet" href="/assets/css/nice-select.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
 <body>
-<h1>상세 일정</h1>
+<div id="preloader-active">
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-inner position-relative">
+      <div class="preloader-circle"></div>
+      <div class="preloader-img pere-text">
 
+        <img src="assets/img/logo/loder.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div th:insert="~{fragment/header :: header}"></div>
+</header>
+
+<main sec:authorize="isAuthenticated()">
+  <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="hero-cap text-center pt-50">
+            <h2>공유된 플래너</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <section class="blog_area section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mb-5 mb-lg-0">
+          <div class="blog_left_sidebar">
+            <article class="blog_item" th:each="data : ${ShareScheduleList}">
+              <div class="blog_item_img">
+                <img class="card-img rounded-0" src="/assets/img/blog/single_blog_5.png" alt="">
+              </div>
+
+              <div class="blog_details">
+                <a class="d-inline-block"
+                   onclick="goDetails(this)" th:value="${data.scheduleToShare.id}">
+                  <!--th:href="@{/header/sharedetails/{scheduleId}(scheduleId=${data.scheduleToShare.id})}"-->
+                  <h2 th:text="${data.title}"></h2>
+                </a>
+                <p th:text="${data.strDate} + ' 부터 ' + ${data.endDate} + '까지 입니다.'"></p>
+                <ul class="blog-info-link">
+                  <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                  <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div th:insert="~{fragment/footer1 :: footer1}"></div>
+</footer>
+<!-- JS here -->
+<!-- All JS Custom Plugins Link Here -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.slicknav.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/wow.min.js"></script>
+<script src="/assets/js/animated.headline.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+<script src="/assets/js/jquery.nice-select.min.js"></script>
+<script src="/assets/js/jquery.sticky.js"></script>
+<script src="/assets/js/contact.js"></script>
+<script src="/assets/js/jquery.form.js"></script>
+<script src="/assets/js/jquery.validate.min.js"></script>
+<script src="/assets/js/mail-script.js"></script>
+<script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/daterangepicker.js"></script>
+<script th:inline="javascript">
+    function goDetails(selector) {
+        var url = '/header/sharedetails?scheduleId=' + selector.value;
+        location.href = url;
+    }
+</script>
+<!--
 <div id="schedule-container">
-  <!-- 상세 일정 내용을 동적으로 추가할 영역 -->
+  &lt;!&ndash; 상세 일정 내용을 동적으로 추가할 영역 &ndash;&gt;
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -60,6 +161,7 @@ $(document).ready(function() {
   });
 });
 </script>
+-->
 
 </body>
 </html>

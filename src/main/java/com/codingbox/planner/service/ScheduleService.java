@@ -3,6 +3,7 @@ package com.codingbox.planner.service;
 import com.codingbox.planner.domain.Members;
 import com.codingbox.planner.domain.Schedule;
 import com.codingbox.planner.repository.ScheduleRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,10 @@ public class ScheduleService {
 
     public ScheduleService(ScheduleRepository scheduleRepository) {
         this.scheduleRepository = scheduleRepository;
+    }
+
+    public List<Schedule> cntUserSchedule (String userId) {
+        return scheduleRepository.cntUserSchedule(userId);
     }
 
     public Schedule createSchedule(Schedule schedule) {

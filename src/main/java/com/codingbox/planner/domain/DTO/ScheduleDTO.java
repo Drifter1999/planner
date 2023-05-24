@@ -11,10 +11,12 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class ScheduleDTO {
-    private LocalDateTime strDate;
-    private LocalDateTime endDate;
-    private String name;
+
+    private String userId;
+    private String strDate;
+    private String endDate;
+    private String title;
     private String destination;
 }

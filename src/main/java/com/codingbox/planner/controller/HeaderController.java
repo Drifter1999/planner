@@ -1,41 +1,39 @@
 package com.codingbox.planner.controller;
 
-import com.codingbox.planner.domain.DTO.AreaDTO;
-import com.codingbox.planner.domain.DTO.ScheduleCartDTO;
-import com.codingbox.planner.domain.DTO.ScheduleDTO;
-import com.codingbox.planner.domain.DTO.SearchKeyWordDTO;
-import com.codingbox.planner.service.ListingService;
-import com.codingbox.planner.service.MultiSelectService;
-import com.codingbox.planner.service.ScheduleCartService;
+import com.codingbox.planner.domain.DTO.*;
+import com.codingbox.planner.domain.Party;
+import com.codingbox.planner.domain.Schedule;
+import com.codingbox.planner.domain.ShareSchedule;
+import com.codingbox.planner.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Controller
-@RequestMapping("/header")
+@RequestMapping(value = "/header")
 @RequiredArgsConstructor
 public class  HeaderController {
     private final ListingService listingService;
     private final MultiSelectService multiSelectService;
 
     private final ScheduleCartService scheduleCartService;
-
+    private final ScheduleService scheduleService;
+    private final MemberService memberService;
+    private final PartyService partyService;
+    private final SharedScheduleService sharedScheduleService;
 
 
     @GetMapping("/about")
@@ -61,35 +59,118 @@ public class  HeaderController {
         return "listing";
     }
 
-    @GetMapping("/contact")
-    public String contact() {
-        return "contact";
+
+
+    @GetMapping("/schedule")
+    public String scheduleView (Model model, HttpSession httpSession){
+        List<ShareSchedule> ShareScheduleList = (List<ShareSchedule>) httpSession.getAttribute("ShareScheduleList");
+        model.addAttribute("ShareScheduleList", ShareScheduleList);
+        String scheduleUrl = "schedule"; // 전환할 페이지의 URL
+        return scheduleUrl;
     }
 
-    @GetMapping("/blogDetails")
-    public String blogDetails() {
-        return "blogdetails";
+    @PostMapping("/sharedPlanner")
+    public ResponseEntity<String> schedulePlanner(@RequestParam("userId") String userId,
+                                                  Model model, HttpSession httpSession) {
+        List<Schedule> cntUserSchedule = scheduleService.cntUserSchedule(userId);
+
+        List<ShareSchedule> shareScheduleList = new ArrayList<>();
+
+        for (int i = 0 ; i < cntUserSchedule.size() ; i++){
+            Long Id = cntUserSchedule.get(i).getId();
+            Optional<ShareSchedule> opt = sharedScheduleService.findByOne(Id);
+            ShareSchedule shareSchedule = opt.get();
+
+            shareScheduleList.add(shareSchedule);
+        }
+        model.addAttribute("ShareScheduleList", shareScheduleList);
+        httpSession.setAttribute("ShareScheduleList", shareScheduleList);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Forward-Url", "/header/schedule");
+        return new ResponseEntity<>("Forward request", headers, HttpStatus.OK);
     }
 
-    @GetMapping("/blog")
-    public String blog(@RequestParam ("shareData") String shareData , @RequestParam ("Id") String Id) {
+    @GetMapping("/sharedetails")
+    public String blogDetails(Model model,@RequestParam("scheduleId") Long scheduleId) {
+        System.out.println("scheduleId" + scheduleId);
+        List<ShareSchedule> shareScheduleList = sharedScheduleService.findScheduleIds(scheduleId);
+        JSONArray jsonArr = new JSONArray();
+
+        for (ShareSchedule shareSchedule : shareScheduleList) {
+            JSONObject jsonObj = new JSONObject();
+            jsonObj.put("title", shareSchedule.getDestination());
+            jsonObj.put("start", shareSchedule.getStrDate().replace(".","-"));
+            jsonObj.put("end", shareSchedule.getEndDate().replace(".","-"));
+            jsonObj.put("itinerary", true);
+            jsonArr.add(jsonObj);
+        }
+
+        model.addAttribute("shareScheduleList", shareScheduleList);
+        model.addAttribute("jsonArr", jsonArr.toJSONString());
+        return "sharedetails";
+    }
+
+    @PostMapping("/blog")
+    public ResponseEntity<String> blog(@RequestParam("ShareData") String shareData,
+                               @RequestParam("Id") String id,
+                               @RequestParam("Members") String members,
+                               Model model
+                    ) {
+        Long SharedScheduleId = 0L;
         try {
+            System.out.println(members);
+            shareData = shareData.replace("'","");
             JSONParser parser = new JSONParser();
             JSONObject obj = (JSONObject) parser.parse(shareData);
             JSONArray jsonArray = (JSONArray) obj.get("scheduleData");
 
-            List<String> shareDTOArr = new ArrayList<>();
+            Schedule schedule = new Schedule();
+            schedule.setMembersToSchedule(memberService.findByUserId(id));
+            scheduleService.createSchedule(schedule);
 
-            System.out.println("Id : " + Id);
+            SharedScheduleId = schedule.getId();
+
+            members+=id;
+            String [] membersList = members.split(",");
+
+            for (int i = 0 ; i < membersList.length ; i++) {
+                membersList[i] = membersList[i].replace(",","");
+                Party data = new Party();
+                Optional<Schedule> OptionalSchedule = scheduleService.getScheduleById(schedule.getId());
+                Schedule scheduleDTO = OptionalSchedule.get();
+                data.setSchedule(scheduleDTO);
+                data.setMembersToParty(memberService.findByUserId(membersList[i]));
+                partyService.createParty(data);
+            }
+
+
 
             for (int i = 0 ; i < jsonArray.size() ; i++) {
-                JSONObject data = (JSONObject) jsonArray.get(i);
-                System.out.println(data);
+                JSONObject jsonObj = (JSONObject) jsonArray.get(i);
+
+                ShareSchedule data= new ShareSchedule();
+
+                Optional<Schedule> OptionalSchedule = scheduleService.getScheduleById(schedule.getId());
+                Schedule scheduleDTO = OptionalSchedule.get();
+
+
+                data.setScheduleToShare(scheduleDTO);
+                data.setStrDate(String.valueOf(jsonObj.get("startDate")));
+                data.setEndDate(String.valueOf(jsonObj.get("endDate")));
+                data.setTitle("임시 값");
+                data.setDestination(String.valueOf(jsonObj.get("destination")));
+
+                sharedScheduleService.createShareSchedule(data);
             }
+            model.addAttribute("scheduleId", String.valueOf(schedule.getId()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "blog";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Forward-Url", "/header/sharedetails?scheduleId="+SharedScheduleId);
+        return new ResponseEntity<>("Forward request", headers, HttpStatus.OK);
     }
 
     @GetMapping("/elements")

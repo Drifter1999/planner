@@ -2,6 +2,7 @@ package com.codingbox.planner.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.util.List;
         , initialValue = 1
         , allocationSize = 1
 )
+@ToString
 public class Schedule {
     @Id
     @GeneratedValue(
@@ -30,17 +32,8 @@ public class Schedule {
     @JoinColumn(name = "MEMBER_ID")
     private Members membersToSchedule;
 
-    @Column(name = "SCHEDULE_START")
-    private LocalDateTime strDate;
-
-    @Column(name = "SCHEDULE_END")
-    private LocalDateTime endDate;
-
-    /*@Column(name = "SCHEDULE_NAME")
-    private LocalDateTime name;*/
-
-    @Column(name = "SCHEDULE_DEST")
-    private LocalDateTime destination;
+    @OneToMany(mappedBy = "scheduleToShare")
+    private List<ShareSchedule> schedules = new ArrayList<>();
 
     @OneToMany(mappedBy = "schedule")
     private List<Party> parties = new ArrayList<>();
