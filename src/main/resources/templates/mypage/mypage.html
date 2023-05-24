@@ -122,9 +122,9 @@
             <div class="mt-10">
               계정 <input class="single-input" id="userId" th:value="${session.memberinfo.userId}" readonly>
               </br>
-              새 비밀번호 <input class="single-input" id="pw" value="">
+              새 비밀번호 <input type="password" class="single-input" id="pw" value="" placeholder="8~24자 사이의 영문소문자, 숫자, 특수문자 조합을 사용하세요.">
               <span id="error1" style="color: red;"></span></br>
-              새 비밀번호 확인 <input class="single-input" id="pw_chk" value="">
+              새 비밀번호 확인 <input type="password" class="single-input" id="pw_chk" value="">
               <span id="error2" style="color: red;"></span></br>
               </br>
               <button class="genric-btn primary small" name="pw" type="submit">비밀번호 변경</button>
