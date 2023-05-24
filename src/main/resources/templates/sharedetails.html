@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar with Itinerary</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/slicknav.css">
+    <link rel="stylesheet" href="/assets/css/flaticon.css">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/nice-select.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{fragment/header :: header}"></div>
+</header>
+<!--  sec:authorize="isAuthenticated()" -->
+<main>
+    <!-- Hero Start-->
+    <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center ">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>일정 공유</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Hero End -->
+
+    <hr>
+
+    <!-- Calendar Start -->
+    <section class="blog_area single-post-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post">
+                        <div class="hero-cap text-center pt-50">
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+    <!-- Calendar End -->
+
+    <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Colleagues</h4>
+                            <ul class="list cat-list">
+                                <li>
+                                    <p>test 1<p>
+                                </li>
+                                <li>
+                                    <p>test 2<p>
+                                </li>
+                                <li>
+                                    <p>test 3<p>
+                                </li>
+                                <li>
+                                    <p>test 4</p>
+                                </li>
+                                <li>
+                                    <p>test 5</p>
+                                </li>
+                                <li>
+                                    <p>test 6</p>
+                                </li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<footer>
+    <div th:insert="~{fragment/footer1 :: footer1}"></div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+
+
+<script>
+    $(document).ready(function() {
+
+        var eventsData = [
+            {
+                title: '그랜마스 서귀포직영점',
+                start: '2023-05-24',
+                end: '2023-05-24',
+                itinerary: true
+            },
+            {
+                title: '너븐 서귀포본점',
+                start: '2023-05-28',
+                end: '2023-05-28',
+                itinerary: true
+            }
+        ];
+
+        $('#calendar').fullCalendar({
+            // Set the calendar options
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultView: 'month',
+            editable: false,
+            eventLimit: true,
+            displayEventTime: false,
+            events: eventsData
+
+        });
+    });
+</script>
+
+
+</body>
+</html>
