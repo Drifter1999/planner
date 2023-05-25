@@ -58,7 +58,6 @@
                             </div>
                             <script th:inline="javascript">
                                 var sessionUserId= 'userId=' + /*[[${session.memberinfo.userId}]]*/ '';
-
                                 function movePlanner(){
                                     var xhr = new XMLHttpRequest();
                                     xhr.open("POST", "/header/sharedPlanner");

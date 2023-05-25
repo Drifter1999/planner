@@ -74,17 +74,17 @@ public class  HeaderController {
     public ResponseEntity<String> schedulePlanner(@RequestParam("userId") String userId,
                                                   Model model, HttpSession httpSession) {
         System.out.println("userId : " + userId);
-        List<Schedule> cntUserSchedule = scheduleService.cntUserSchedule(userId);
-
+        List<Party> shareUserList = partyService.findUserSchedule(userId);
+        System.out.println("shareUserList : " + shareUserList);
         List<ShareSchedule> shareScheduleList = new ArrayList<>();
-
-        for (int i = 0 ; i < cntUserSchedule.size() ; i++){
-            Long Id = cntUserSchedule.get(i).getId();
+        for (int i = 0 ; i < shareUserList.size() ; i++){
+            Long Id = shareUserList.get(i).getSchedule().getId();
             Optional<ShareSchedule> opt = sharedScheduleService.findByOne(Id);
             ShareSchedule shareSchedule = opt.get();
 
             shareScheduleList.add(shareSchedule);
         }
+
         model.addAttribute("ShareScheduleList", shareScheduleList);
         httpSession.setAttribute("ShareScheduleList", shareScheduleList);
         HttpHeaders headers = new HttpHeaders();
@@ -105,6 +105,8 @@ public class  HeaderController {
             jsonObj.put("end", shareSchedule.getEndDate().replace(".","-"));
             jsonObj.put("itinerary", true);
             jsonArr.add(jsonObj);
+
+            shareSchedule.getScheduleToShare().getMembersToSchedule().getUserId();
         }
 
         model.addAttribute("shareScheduleList", shareScheduleList);
@@ -116,8 +118,8 @@ public class  HeaderController {
     public ResponseEntity<String> blog(@RequestParam("ShareData") String shareData,
                                @RequestParam("Id") String id,
                                @RequestParam("Members") String members,
-                               Model model
-                    ) {
+                               @RequestParam("Title") String title,
+                               Model model) {
         Long SharedScheduleId = 0L;
         try {
             System.out.println(members);
@@ -159,7 +161,7 @@ public class  HeaderController {
                 data.setScheduleToShare(scheduleDTO);
                 data.setStrDate(String.valueOf(jsonObj.get("startDate")));
                 data.setEndDate(String.valueOf(jsonObj.get("endDate")));
-                data.setTitle("임시 값");
+                data.setTitle(title);
                 data.setDestination(String.valueOf(jsonObj.get("destination")));
 
                 sharedScheduleService.createShareSchedule(data);

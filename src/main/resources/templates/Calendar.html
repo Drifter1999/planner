@@ -87,7 +87,14 @@
         <div class="row">
             <div class="col">
                 <div class="section-title text-center">
-                    <h2>Share Travel Itinerary with Colleagues</h2>
+                    <h2>공유할 플래너의 제목을 입력해주세요.</h2>
+                </div>
+                <div class="text-center">
+                    <input type="text" id="TitleId" placeholder="Please enter the title">
+                </div>
+                <br>
+                <div class="section-title text-center">
+                    <h2>이 플래너를 공유할 회원아이디를 입력해주세요. 회원이 아닌 아이디는 불가합니다.</h2>
                 </div>
                 <div class="text-center">
                     <input type="text" id="colleagueIdInput" placeholder="Enter User ID">
@@ -409,7 +416,7 @@
             });
             // Encode the shareData object as a query parameter
                 let encodedData = JSON.stringify(shareData);
-                console.log(encodedData);
+                let title = document.getElementById("TitleId").value;
                 let Id = /*[[${session.memberinfo.userId}]]*/ '';
                 let addedColleagues = document.getElementById('addedColleagues').querySelectorAll("li");
                 let Members="";
@@ -419,7 +426,8 @@
 
             var requestData = 'ShareData=' + encodeURIComponent(encodedData) +
                 '&Id=' + encodeURIComponent(Id) +
-                '&Members=' + encodeURIComponent(Members);
+                '&Members=' + encodeURIComponent(Members) +
+                '&Title='  + encodeURIComponent(title);
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', '/header/blog');

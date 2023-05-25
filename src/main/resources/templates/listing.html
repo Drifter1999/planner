@@ -199,7 +199,7 @@
                             </div>
                             <input hidden="hidden" id="hiddenInput" name="contentTitleList"/>
                             <input hidden="hidden" id="hiddenInput-1" name="ContentType" th:value="${ApiArr.get(0).contenttypeid}">
-                            <input type="submit" class="btn list-btn mt-20" value="일정 담기"/>
+                            <input type="submit" class="btn list-btn mt-20" value="일정 담기" onclick="return confirm('일정을 담으시겠습니까?')"/>
                         </form>
 <!--                        <a href="#" class="btn list-btn mt-20">Reset</a>-->
 

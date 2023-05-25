@@ -69,8 +69,7 @@
                 </a>
                 <p th:text="${data.strDate} + ' 부터 ' + ${data.endDate} + '까지 입니다.'"></p>
                 <ul class="blog-info-link">
-                  <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                  <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                  <li th:text="'작성자 : ' + ${data.scheduleToShare.membersToSchedule.UserId}"><i class="fa fa-user"></i> Travel, Lifestyle</li>
                 </ul>
               </div>
             </article>
