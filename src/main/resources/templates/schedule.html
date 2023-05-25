@@ -1,44 +1,43 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
+<html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
   <title>상세 일정</title>
-  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" th:href="@{/assets/img/favicon.ico}">
 
   <!-- CSS here -->
-  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
-  <link rel="stylesheet" href="/assets/css/slicknav.css">
-  <link rel="stylesheet" href="/assets/css/animate.min.css">
-  <link rel="stylesheet" href="/assets/css/magnific-popup.css">
-  <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
-  <link rel="stylesheet" href="/assets/css/themify-icons.css">
-  <link rel="stylesheet" href="/assets/css/slick.css">
-  <link rel="stylesheet" href="/assets/css/nice-select.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" th:href="@{/assets/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="assets/css/owl.carousel.min.css" th:href="@{/assets/css/owl.carousel.min.css}">
+  <link rel="stylesheet" href="assets/css/slicknav.css" th:href="@{/assets/css/slicknav.css}">
+  <link rel="stylesheet" href="assets/css/animate.min.css" th:href="@{/assets/css/animate.min.css}">
+  <link rel="stylesheet" href="assets/css/magnific-popup.css" th:href="@{/assets/css/magnific-popup.css}">
+  <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" th:href="@{/assets/css/fontawesome-all.min.css}">
+  <link rel="stylesheet" href="assets/css/themify-icons.css" th:href="@{/assets/css/themify-icons.css}">
+  <link rel="stylesheet" href="assets/css/slick.css" th:href="@{/assets/css/slick.css}">
+  <link rel="stylesheet" href="assets/css/nice-select.css" th:href="@{/assets/css/nice-select.css}">
+  <link rel="stylesheet" href="assets/css/style.css" th:href="@{/assets/css/style.css}">
+  <title>공유된 플래너</title>
 </head>
 <body>
+<!-- Preloader Start -->
 <div id="preloader-active">
   <div class="preloader d-flex align-items-center justify-content-center">
     <div class="preloader-inner position-relative">
       <div class="preloader-circle"></div>
       <div class="preloader-img pere-text">
-
-        <img src="assets/img/logo/loder.jpg" alt="">
+        <img src="/assets/img/logo/loder.jpg" alt="">
       </div>
     </div>
   </div>
 </div>
-
+<!-- Preloader Start -->
 <header>
   <div th:insert="~{fragment/header :: header}"></div>
 </header>
-
-<main sec:authorize="isAuthenticated()">
+<main>
+  <!-- Hero Start-->
   <div class="hero-area2  slider-height2 hero-overly2 d-flex align-items-center">
     <div class="container">
       <div class="row">
@@ -50,120 +49,112 @@
       </div>
     </div>
   </div>
-
-
-  <section class="blog_area section-padding">
+  <!--Hero End -->
+  <!--================shareplanner Area =================-->
+  <div class="testimonial-area testimonial-padding">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 mb-5 mb-lg-0">
-          <div class="blog_left_sidebar">
-            <article class="blog_item" th:each="data : ${ShareScheduleList}">
-              <div class="blog_item_img" >
-                <img class="card-img rounded-0" src="/assets/img/blog/single_blog_5.png" alt="">
-              </div>
+        <div class="col-lg-12">
 
-              <div class="blog_details">
+          <div class="listing-details-area">
+            <div class="container">
+              <div class="row">
 
-                <a class="d-inline-block"
-                   th:href="@{'/header/sharedetails?scheduleId='+${data.scheduleToShare.Id}}">
-                  <h2 th:text="${data.title} + ' : '+${data.scheduleToShare.Id}"></h2>
-                </a>
-                <p th:text="${data.strDate} + ' 부터 ' + ${data.endDate} + '까지 입니다.'"></p>
-                <ul class="blog-info-link" >
-                  <li th:text="'작성자 : ' + ${data.scheduleToShare.membersToSchedule.UserId}"><i class="fa fa-user"></i> Travel, Lifestyle</li>
-                </ul>
+                <th:block th:each="data : ${ShareScheduleList}">
+                  <div class="col-lg-6">
+                    <div class="single-listing mb-30">
+                      <div class="list-img">
+                        <img src="/assets/img/blog/single_blog_5.png" alt="">
+                      </div>
+                      <div class="list-caption">
+                        <a class="d-inline-block" th:href="@{'/header/sharedetails?scheduleId='+${data.scheduleToShare.Id}}">
+                          <h3 th:text="${data.title} + ' : '+${data.scheduleToShare.Id}">대구</h3></a>
+                        <p th:text="${data.strDate} + ' 부터 ' + ${data.endDate} + '까지 입니다.'"></p>
+                        <ul class="blog-info-link">
+                          <li th:text="'작성자 : ' + ${data.scheduleToShare.membersToSchedule.UserId}"><i class="fa fa-user"></i> Travel, Lifestyle</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </th:block>
+
+
               </div>
-            </article>
+            </div>
           </div>
+
+          <!--          <div class="pagination-area pt-70 text-center">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-xl-12">
+                            <div class="single-wrap d-flex justify-content-center">
+                              <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-start">
+                                  <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                  <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                  <li class="page-item"><a class="page-link" href="#"><span class="ti-angle-right"></span></a></li>
+                                </ul>
+                              </nav>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>-->
+
+
+
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </main>
 <footer>
   <div th:insert="~{fragment/footer1 :: footer1}"></div>
 </footer>
+<!-- Scroll Up -->
+<div id="back-top" >
+  <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+
 <!-- JS here -->
-<!-- All JS Custom Plugins Link Here -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script th:inline="javascript">
+  /*  function goDetails() {
+      let SharedScheduleId = document.getElementById("shareSchedule").value;
+      let url = '/header/sharedetails?scheduleId=' + SharedScheduleId;
+      location.href = url;
+    }*/
+</script>
+<!-- All JS Custom Plugins Link Here here -->
+<script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+<!-- Jquery, Popper, Bootstrap -->
+<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="/assets/js/popper.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
+<!-- Jquery Mobile Menu -->
 <script src="/assets/js/jquery.slicknav.min.js"></script>
+
+<!-- Jquery Slick , Owl-Carousel Plugins -->
 <script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/slick.min.js"></script>
+<!-- One Page, Animated-HeadLin -->
 <script src="/assets/js/wow.min.js"></script>
 <script src="/assets/js/animated.headline.js"></script>
-<script src="/assets/js/jquery.magnific-popup.js"></script>
+
+<!-- Nice-select, sticky -->
 <script src="/assets/js/jquery.nice-select.min.js"></script>
 <script src="/assets/js/jquery.sticky.js"></script>
+<script src="/assets/js/jquery.magnific-popup.js"></script>
+
+<!-- contact js -->
 <script src="/assets/js/contact.js"></script>
 <script src="/assets/js/jquery.form.js"></script>
 <script src="/assets/js/jquery.validate.min.js"></script>
 <script src="/assets/js/mail-script.js"></script>
 <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+
+<!-- Jquery Plugins, main Jquery -->
 <script src="/assets/js/plugins.js"></script>
 <script src="/assets/js/main.js"></script>
-<script src="/assets/js/daterangepicker.js"></script>
-<script th:inline="javascript">
-    /*function goDetails(ScheduleId) {
-      /!*<![CDATA[*!/
-      let url = '/header/sharedetails?scheduleId=' + ScheduleId;
-      alert(url);
-      location.href = url;
-      /!*]]>*!/
-    }*/
-</script>
-<!--
-<div id="schedule-container">
-  &lt;!&ndash; 상세 일정 내용을 동적으로 추가할 영역 &ndash;&gt;
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-  // Get the selected date from the URL query parameter
-  var urlParams = new URLSearchParams(window.location.search);
-  var selectedDate = urlParams.get('selectedDate');
-
-  // AJAX request to retrieve itinerary information
-  $.ajax({
-    url: '/get-schedule', // endpoint URL to retrieve itinerary information
-    type: 'GET',
-    dataType: 'json',
-    success: function(response) {
-      // Callback function that is executed when travel itinerary information is successfully loaded
-      // The response data received from the server is stored in the response variable
-
-      // Filter the itinerary information based on the selected date
-      var filteredData = response.filter(function(schedule) {
-        return schedule.date === selectedDate;
-      });
-
-      // Write the logic to process and display the filtered itinerary information.
-      // Example: Loop through the filtered data and dynamically create HTML and add it to #schedule-container.
-
-      // Example code
-      var scheduleContainer = $('#schedule-container');
-      scheduleContainer.empty(); // Delete the old content
-
-      // Loop through the filtered data and dynamically create HTML
-      for (var i = 0; i < filteredData.length; i++) {
-        var schedule = filteredData[i];
-        var scheduleHTML = '<div class="schedule-item">' +
-          '<h2>' + schedule.title + '</h2>' +
-          '<p>' + schedule.description + '</p>' +
-          '</div>';
-
-        scheduleContainer.append(scheduleHTML);
-      }
-    },
-    error: function(xhr, status, error) {
-      // Callback function to be executed when AJAX request fails
-      console.log('Error:', error);
-    }
-  });
-});
-</script>
--->
-
 </body>
 </html>
