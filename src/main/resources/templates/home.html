@@ -5,9 +5,7 @@
     <title>Travel in korea</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="/assets/css/slicknav.css">
@@ -114,7 +112,7 @@
 <!--                                    </div>-->
 <!--                                </div>-->
                                 <!-- Search box -->
-                                <div class="btn view-btn1" style="border-bottom-left-radius: 50px; border-top-left-radius: 50px; border-bottom-right-radius: 0px; border-top-right-radius: 0px;">
+                                <div class="btn view-btn1" >
                                     <a th:href="@{/header/category}">시작하기</a>
                                 </div>
                             </form>
@@ -521,29 +519,5 @@
     <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
     <script src="/assets/js/plugins.js"></script>
     <script src="/assets/js/main.js"></script>
-    <script src="/assets/js/daterangepicker.js"></script>
-
-    <script>
-    $(function () {
-        // Datepicker 초기화
-        $(".datepicker").datepicker();
-
-        // Search button click event handling
-        $(".form").submit(function (e) {
-            e.preventDefault();
-
-            // Get selected date
-            var selectedDate = $("input[name='daterange']").val();
-
-            // Get other necessary information
-            var destination = $("select[name='destination']").val();
-            var numOfPeople = $("input[name='numOfPeople']").val();
-            var saveSearch = $("input[name='saveSearch']").is(":checked");
-
-            // Perform search
-            performSearch(destination, selectedDate, numOfPeople, saveSearch);
-        });
-    });
-</script>
    </body>
 </html>
