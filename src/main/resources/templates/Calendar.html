@@ -423,6 +423,8 @@
                 for (var i = 0 ; i < addedColleagues.length ; i++) {
                     Members+=addedColleagues[i].textContent+",";
                 }
+            /*session 비우기*/
+            sessionStorage.removeItem("CartArrSec");
 
             var requestData = 'ShareData=' + encodeURIComponent(encodedData) +
                 '&Id=' + encodeURIComponent(Id) +

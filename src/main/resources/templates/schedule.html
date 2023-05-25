@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="no-js" lang="zxx" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -63,12 +63,13 @@
               </div>
 
               <div class="blog_details">
-                <input type="hidden" id="shareSchedule" th:value="${data.scheduleToShare.Id}">
-                <a class="d-inline-block" onclick="goDetails()">
-                  <h2 th:text="${data.title}"></h2>
+
+                <a class="d-inline-block"
+                   th:href="@{'/header/sharedetails?scheduleId='+${data.scheduleToShare.Id}}">
+                  <h2 th:text="${data.title} + ' : '+${data.scheduleToShare.Id}"></h2>
                 </a>
                 <p th:text="${data.strDate} + ' 부터 ' + ${data.endDate} + '까지 입니다.'"></p>
-                <ul class="blog-info-link">
+                <ul class="blog-info-link" >
                   <li th:text="'작성자 : ' + ${data.scheduleToShare.membersToSchedule.UserId}"><i class="fa fa-user"></i> Travel, Lifestyle</li>
                 </ul>
               </div>
@@ -103,11 +104,13 @@
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/daterangepicker.js"></script>
 <script th:inline="javascript">
-    function goDetails() {
-        let SharedScheduleId = document.getElementById("shareSchedule").value;
-        let url = '/header/sharedetails?scheduleId=' + SharedScheduleId;
-        location.href = url;
-    }
+    /*function goDetails(ScheduleId) {
+      /!*<![CDATA[*!/
+      let url = '/header/sharedetails?scheduleId=' + ScheduleId;
+      alert(url);
+      location.href = url;
+      /!*]]>*!/
+    }*/
 </script>
 <!--
 <div id="schedule-container">

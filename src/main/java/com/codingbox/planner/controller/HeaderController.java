@@ -77,13 +77,21 @@ public class  HeaderController {
         List<Party> shareUserList = partyService.findUserSchedule(userId);
         System.out.println("shareUserList : " + shareUserList);
         List<ShareSchedule> shareScheduleList = new ArrayList<>();
+
         for (int i = 0 ; i < shareUserList.size() ; i++){
+            Long ScheduleId = shareUserList.get(i).getSchedule().getId();
+            ShareSchedule shareSchedule = sharedScheduleService.findSchedulesOneByOne(ScheduleId);
+
+            shareScheduleList.add(shareSchedule);
+        }
+
+        /*for (int i = 0 ; i < shareUserList.size() ; i++){
             Long Id = shareUserList.get(i).getSchedule().getId();
             Optional<ShareSchedule> opt = sharedScheduleService.findByOne(Id);
             ShareSchedule shareSchedule = opt.get();
 
             shareScheduleList.add(shareSchedule);
-        }
+        }*/
 
         model.addAttribute("ShareScheduleList", shareScheduleList);
         httpSession.setAttribute("ShareScheduleList", shareScheduleList);
@@ -105,8 +113,6 @@ public class  HeaderController {
             jsonObj.put("end", shareSchedule.getEndDate().replace(".","-"));
             jsonObj.put("itinerary", true);
             jsonArr.add(jsonObj);
-
-            shareSchedule.getScheduleToShare().getMembersToSchedule().getUserId();
         }
 
         model.addAttribute("shareScheduleList", shareScheduleList);
@@ -195,6 +201,7 @@ public class  HeaderController {
                            Model model, HttpSession httpSession) throws ParseException {
         contentTitleList = contentTitleList.substring(0, contentTitleList.length()-2);
         contentTitleList = contentTitleList.replaceAll("\"", "");
+
         String contentName = "";
         switch (ContentType) {
             case "12" : contentName = "관광지"; break;
@@ -204,35 +211,37 @@ public class  HeaderController {
             default:
                 System.out.println("잘못된 값입니다.");
         }
-        System.out.println(httpSession.getAttribute("CartArrSec")+"!!");
         List<ScheduleCartDTO> CartArr;
-//
+        //세션이 있다면
         if (httpSession.getAttribute("CartArrSec")!= null &&
                 !String.valueOf(httpSession.getAttribute("CartArrSec")).equals("[]")){
+
             String SessionString =  String.valueOf(httpSession.getAttribute("CartArrSec"));
+            //기존 세션 값 가져옴
             SessionString = SessionString.replaceAll("\\[|\\]", "");
 
             String[] SessionArrayList = SessionString.split("\\),");
-            ArrayList<ScheduleCartDTO> SessionArr= new ArrayList<>();
+            List<ScheduleCartDTO> SessionArr= new ArrayList<>();
 
-            for (String item : SessionArrayList ) {
+            for (String item : SessionArrayList){
                 item = item.replace("ScheduleCartDTO(", "");
                 item = item.replace(")", "");
                 String [] str = item.split(",");
-                List<String> strData = new ArrayList<String>();
-                for (int i = 0 ; i <  str.length ; i++){
-                    String [] tempStr = str[i].split("=");
-                    strData.add(tempStr[1]);
+                Map<String, String> map = new HashMap<String, String>();
+                for (int i = 0 ; i < str.length ; i++) {
+
+                    String [] tempStr = str[i].trim().split("=");
+                    map.put(tempStr[0], tempStr[1]);
                 }
-                ScheduleCartDTO data = new ScheduleCartDTO();
+                ScheduleCartDTO prevData = new ScheduleCartDTO();
 
-                data.setScheduleCartId(Integer.parseInt(strData.get(0)));
-                data.setStrDate(strData.get(1));
-                data.setEndDate(strData.get(2));
-                data.setContentTitleList(strData.get(3));
-                data.setContentName(strData.get(4));
+                prevData.setScheduleCartId(Integer.parseInt(map.get("ScheduleCartId")));
+                prevData.setContentTitleList(map.get("contentTitleList"));
+                prevData.setContentName(map.get("contentName"));
+                prevData.setStrDate(map.get("strDate"));
+                prevData.setEndDate(map.get("endDate"));
 
-                SessionArr.add(data);
+                SessionArr.add(prevData);
             }
 
             CartArr = scheduleCartService.createCartList(startDate, endDate, contentTitleList, contentName);

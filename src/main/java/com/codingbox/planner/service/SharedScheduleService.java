@@ -24,4 +24,9 @@ public class SharedScheduleService {
     public List<ShareSchedule> findScheduleIds(Long scheduleId) {
         return sharedScheduleRepository.findScheduleIds(scheduleId);
     }
+
+    public ShareSchedule findSchedulesOneByOne (Long ScheduleId) {
+        return sharedScheduleRepository.findScheduleOneByOne(ScheduleId);
+    }
+
 }
