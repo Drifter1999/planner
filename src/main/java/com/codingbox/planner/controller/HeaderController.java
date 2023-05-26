@@ -59,12 +59,9 @@ public class  HeaderController {
         return "listing";
     }
 
-
-
     @GetMapping("/schedule")
     public String scheduleView (Model model, HttpSession httpSession){
         List<ShareSchedule> ShareScheduleList = (List<ShareSchedule>) httpSession.getAttribute("ShareScheduleList");
-        System.out.println("/schedule : GET = " + ShareScheduleList);
         model.addAttribute("ShareScheduleList", ShareScheduleList);
         String scheduleUrl = "schedule"; // 전환할 페이지의 URL
         return scheduleUrl;
@@ -85,14 +82,6 @@ public class  HeaderController {
             shareScheduleList.add(shareSchedule);
         }
 
-        /*for (int i = 0 ; i < shareUserList.size() ; i++){
-            Long Id = shareUserList.get(i).getSchedule().getId();
-            Optional<ShareSchedule> opt = sharedScheduleService.findByOne(Id);
-            ShareSchedule shareSchedule = opt.get();
-
-            shareScheduleList.add(shareSchedule);
-        }*/
-
         model.addAttribute("ShareScheduleList", shareScheduleList);
         httpSession.setAttribute("ShareScheduleList", shareScheduleList);
         HttpHeaders headers = new HttpHeaders();
@@ -102,7 +91,6 @@ public class  HeaderController {
 
     @GetMapping("/sharedetails")
     public String blogDetails(Model model,@RequestParam("scheduleId") Long scheduleId) {
-        System.out.println("scheduleId" + scheduleId);
         List<ShareSchedule> shareScheduleList = sharedScheduleService.findScheduleIds(scheduleId);
         JSONArray jsonArr = new JSONArray();
 
@@ -120,15 +108,14 @@ public class  HeaderController {
         return "sharedetails";
     }
 
-    @PostMapping("/blog")
-    public ResponseEntity<String> blog(@RequestParam("ShareData") String shareData,
+    @PostMapping("/shared")
+    public ResponseEntity<String> shared (@RequestParam("ShareData") String shareData,
                                @RequestParam("Id") String id,
                                @RequestParam("Members") String members,
                                @RequestParam("Title") String title,
                                Model model) {
         Long SharedScheduleId = 0L;
         try {
-            System.out.println(members);
             shareData = shareData.replace("'","");
             JSONParser parser = new JSONParser();
             JSONObject obj = (JSONObject) parser.parse(shareData);
@@ -153,8 +140,6 @@ public class  HeaderController {
                 partyService.createParty(data);
             }
 
-
-
             for (int i = 0 ; i < jsonArray.size() ; i++) {
                 JSONObject jsonObj = (JSONObject) jsonArray.get(i);
 
@@ -162,7 +147,6 @@ public class  HeaderController {
 
                 Optional<Schedule> OptionalSchedule = scheduleService.getScheduleById(schedule.getId());
                 Schedule scheduleDTO = OptionalSchedule.get();
-
 
                 data.setScheduleToShare(scheduleDTO);
                 data.setStrDate(String.valueOf(jsonObj.get("startDate")));
@@ -259,7 +243,6 @@ public class  HeaderController {
         Object value = httpSession.getAttribute("CartArrSec");
 
         model.addAttribute("CartArr", value);
-
 
         return "Calendar";
     }

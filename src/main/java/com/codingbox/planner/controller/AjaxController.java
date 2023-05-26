@@ -26,7 +26,8 @@ public class AjaxController {
     private final HttpSession httpSession;
 
     @GetMapping("/cities")
-    public List<String> findAreaCategory (@RequestParam("province") String province, Model model) {
+    public List<String> findAreaCategory (@RequestParam("province") String province,
+                                          Model model) {
         List<String> AreaList = new ParsingToList().AreaJsonArray(province);
         return AreaList;
     }

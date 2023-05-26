@@ -81,20 +81,6 @@
 
 <script th:inline="javascript">
     $(document).ready(function() {
-        /*var eventsData = [
-            {
-                title: '그랜마스 서귀포직영점',
-                start: '2023-05-24',
-                end: '2023-05-24',
-                itinerary: true
-            },
-            {
-                title: '너븐 서귀포본점',
-                start: '2023-05-28',
-                end: '2023-05-28',
-                itinerary: true
-            }
-        ];*/
         let eventsData = decodeURIComponent(/*[[${jsonArr}]]*/ '[]');
         eventsData = JSON.parse(eventsData);
 
